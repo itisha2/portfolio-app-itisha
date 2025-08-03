@@ -277,7 +277,7 @@ const Portfolio = () => {
       category: "Matchmaking",
       fundingNote: "Looking for external investors to scale this innovative AI assistant platform.",
       interactive: true,
-      url: "https://upagu-itishas-projects-78ee9ee0.vercel.app/"
+      url: "https://upagu.vercel.app/"
     },
     {
       name: "Krishi-App", 
