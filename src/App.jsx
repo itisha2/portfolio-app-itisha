@@ -90,7 +90,7 @@ const Portfolio = () => {
         "Implemented a Retrieval-Augmented Generation (RAG) system; currently working on GraphRAG",
         "Exploring Visual Language Models (VLMs) for parsing complex document layouts",
         "Integration of LLMs and LangChain for Retrieval Augmented Generation (RAG)",
-        "Successfully supervised 3 master's thesis"
+        "Successfully supervised 4 master's thesis"
       ],
       icon: "🚀"
     },
