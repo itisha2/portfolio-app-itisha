@@ -289,7 +289,7 @@ const Portfolio = () => {
       category: "AgTech",
       fundingNote: "Initial phase of development; with a focus on AI-driven agricultural solutions for sustainable farming.",
       interactive: true,
-      url: "https://krishi-app-zhd6.vercel.app/"
+      url: "https://krishi-app-ten.vercel.app/"
     }
     /*,
     
