@@ -275,7 +275,7 @@ const Portfolio = () => {
       status: "Conceptualisation and Development",
       technologies: ["Python", "React", "Natural Language Processing", "Speech Processing", "Emotional AI", "Afftective Computing"],
       category: "Matchmaking",
-      fundingNote: "Initial phase of development; with a focus on cutting-edge AI assistant that enhances user experience through advanced NLP and emotional intelligence.",
+      fundingNote: "Initial phase of development; with a focus on developing an AI assistant that enhances user experience through advanced NLP and emotional intelligence.",
       interactive: true,
       url: "https://upagu.vercel.app/"
     },
