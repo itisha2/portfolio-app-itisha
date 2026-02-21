@@ -89,10 +89,12 @@ const Portfolio = () => {
         "Working on external knowledge integration in LLMs for natural language understanding (NLU)",
         "Implemented a Retrieval-Augmented Generation (RAG) system; currently working on GraphRAG",
         "Exploring Visual Language Models (VLMs) for parsing complex document layouts",
+        "Integration of LLMs and LangChain for Retrieval Augmented Generation (RAG)",
         "Successfully supervised 3 master's thesis"
       ],
       icon: "🚀"
     },
+    /*
     {
       title: "Computational Linguist",
       company: "FactorLab Inc",
@@ -106,7 +108,7 @@ const Portfolio = () => {
         "LLMOps: deployment of Falcon-40B on AWS Sagemaker with 4 seconds inference time"
       ],
       icon: "🛡️"
-    },
+    },*/
     {
       title: "Master Thesis Student and Werkstudium",
       company: "mine&make GmbH",
