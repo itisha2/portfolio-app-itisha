@@ -40,7 +40,7 @@ const Portfolio = () => {
       location: "Bamberg, Germany", 
       description: "Fundamentals of Natural Language Processing",
       supervisor: "Prof. Dr. Roman Klinger",
-      website: "https://www.uni-bamberg.de/en/nlproc/",
+      website: "https://www.uni-bamberg.de/en/nlproc/team/en-itisha-yadav/",
       logo: "🎓"
     }
   ];
