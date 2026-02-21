@@ -21,7 +21,7 @@ const Portfolio = () => {
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'skills', label: 'Skills', icon: Code },
-    { id: 'projects', label: 'Projects', icon: Layers },
+    { id: 'projects', label: 'Personal Projects', icon: Layers },
     { id: 'publications', label: 'Publications', icon: BookOpen }
   ];
 
@@ -272,20 +272,20 @@ const Portfolio = () => {
     {
       name: "Upagu",
       description: "AI-powered personal assistant application focusing on natural language understanding and user interaction optimization.",
-      status: "Seeking External Funding",
+      status: "Conceptualisation and Development",
       technologies: ["Python", "React", "Natural Language Processing", "Speech Processing", "Emotional AI", "Afftective Computing"],
       category: "Matchmaking",
-      fundingNote: "Looking for external investors to scale this innovative AI assistant platform.",
+      fundingNote: "Initial phase of development; with a focus on cutting-edge AI assistant that enhances user experience through advanced NLP and emotional intelligence.",
       interactive: true,
       url: "https://upagu.vercel.app/"
     },
     {
       name: "Krishi-App", 
       description: "Agricultural technology application leveraging AI for crop monitoring, yield prediction, and farming optimization.",
-      status: "Seeking External Funding",
+      status: "Conceptualisation and Development",
       technologies: ["Computer Vision", "IoT", "Machine Learning", "Natural Language Processing", "Mobile App"],
       category: "AgTech",
-      fundingNote: "Seeking investment to bring AI-driven agricultural solutions to farmers worldwide.",
+      fundingNote: "Initial phase of development; with a focus on AI-driven agricultural solutions for sustainable farming.",
       interactive: true,
       url: "https://krishi-app-zhd6.vercel.app/"
     },
@@ -374,9 +374,9 @@ const Portfolio = () => {
         </p>
 
         <p className="text-gray-700 leading-relaxed text-lg">
-          As an entrepreneur, she is actively seeking external funding for innovative AI applications including Upagu (AI-powered personal 
-          assistant) and Krishi-App (agricultural technology platform). She co-founded Yug3DAI with Siddharth Yadav, focusing on the 
-          convergence of AI and 3D printing technologies for next-generation manufacturing solutions.
+        In addition to her research, Itisha is passionate about applying AI to solve real-world problems. She has been working on personal projects
+        such as Upagu (an AI-powered personal relationship assistant), Krishi-App (an agricultural technology platform), and Yug3DAI (exploring the convergence
+        of AI and 3D printing technologies for manufacturing solutions).
         </p>
       </div>
 
