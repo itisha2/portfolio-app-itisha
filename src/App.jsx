@@ -288,7 +288,9 @@ const Portfolio = () => {
       fundingNote: "Initial phase of development; with a focus on AI-driven agricultural solutions for sustainable farming.",
       interactive: true,
       url: "https://krishi-app-zhd6.vercel.app/"
-    },
+    }
+    /*,
+    
     {
       name: "Yug3DAI Projects",
       description: "AI and 3D printing convergence projects developed with co-founder Siddharth Yadav, focusing on innovative manufacturing solutions.",
@@ -299,6 +301,7 @@ const Portfolio = () => {
       interactive: true,
       url: "https://yug3dai.com/"
     }
+    */
   ];
 
   const publications = [
@@ -375,8 +378,7 @@ const Portfolio = () => {
 
         <p className="text-gray-700 leading-relaxed text-lg">
         In addition to her research, Itisha is passionate about applying AI to solve real-world problems. She has been working on personal projects
-        such as Upagu (an AI-powered personal relationship assistant), Krishi-App (an agricultural technology platform), and Yug3DAI (exploring the convergence
-        of AI and 3D printing technologies for manufacturing solutions).
+        such as Upagu (an AI-powered personal relationship assistant) and Krishi-App (an agricultural technology platform for farmers).
         </p>
       </div>
 
