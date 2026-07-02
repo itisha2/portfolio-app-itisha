@@ -200,7 +200,7 @@ const Portfolio = () => {
       degree: "PhD in Computational Linguistics",
       institution: "University of Bamberg",
       location: "Bamberg, Germany",
-      period: "2024-ongoing",
+      period: "2025-ongoing",
       focus: "Constraint-decoding in LLMs using Ontologies",
       details: [
         "Converting semi-structured data from PDF to Knowledge graphs (pdf-to-RDF)",
