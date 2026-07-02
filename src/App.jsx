@@ -73,6 +73,14 @@ const Portfolio = () => {
       icon: <Layers className="w-6 h-6" />,
       color: "orange",
       keywords: ["VLMs", "Document Parsing", "Table Interpretation", "Multi-modal AI", "Layout Analysis"]
+    },
+
+    {
+      title: "Agentic AI Architectures",
+      description: "Exploring LLM-only, visual language model (VLM)-only, and hybrid agentic AI architectures for knowledge engineering and knowledge graph construction.",
+      icon: <Layers className="w-6 h-6" />,
+      color: "orange",
+      keywords: ["VLMs", "LLMs", "Orchestration", "Multi-Agentic Aystems", "LangGraph", "LangChain", "Knowledge Engineering"]
     }
   ];
 
@@ -87,9 +95,9 @@ const Portfolio = () => {
       highlights: [
         "Information extraction pipeline and Knowledge graph creation using LLMs and Ontologies",
         "Working on external knowledge integration in LLMs for natural language understanding (NLU)",
-        "Implemented a Retrieval-Augmented Generation (RAG) system; currently working on GraphRAG",
+        "Implementing Retrieval-Augmented Generation (RAG) methods; baseline RAG, GraphRAG",
         "Exploring Visual Language Models (VLMs) for parsing complex document layouts",
-        "Integration of LLMs and LangChain for Retrieval Augmented Generation (RAG)",
+        "Investigating LLMs vs. VLMs, or both for multi-agentic architectures for knowledge engineering and knowledge graph construction",
         "Successfully supervised 4 master's thesis"
       ],
       icon: "🚀"
@@ -196,9 +204,11 @@ const Portfolio = () => {
       focus: "Constraint-decoding in LLMs using Ontologies",
       details: [
         "Converting semi-structured data from PDF to Knowledge graphs (pdf-to-RDF)",
+        "Ontology ingestion techniques for LLMs",
         "Methods of integrating external knowledge into LLMs",
         "Structured generation in open source and small LLMs",
-        "Visual language models for PDF parsing (VLMs)"
+        "Visual language models for PDF parsing (VLMs)",
+        "Multi-agentic architectures for knowledge engineering"
       ]
     },
     {
@@ -235,17 +245,17 @@ const Portfolio = () => {
         { name: "LLMs & RAG", level: "high", description: "GPT, BERT, Falcon-40B, GraphRAG" },
         { name: "Deep Learning", level: "high", description: "Neural Networks, Transformers" },
         { name: "NLP", level: "high", description: "Entity Recognition, Sentiment Analysis" },
-        { name: "Knowledge Graphs", level: "medium", description: "RDF, Ontologies, Wikidata" }
+        { name: "Knowledge Graphs & Ontologies", level: "medium", description: "RDF, Ontologies, Wikidata" }
       ]
-    },
+    },  
     {
       category: "Programming & Development",
       icon: <Code className="w-6 h-6" />,
       skills: [
         { name: "Python", level: "high", description: "Primary programming language" },
         { name: "Java", level: "medium", description: "Object-oriented development" },
-        { name: "JavaScript", level: "medium", description: "Web development" },
-        { name: "MATLAB", level: "medium", description: "Scientific computing" }
+        { name: "JavaScript", level: "low", description: "Web development" },
+        { name: "MATLAB", level: "low", description: "Scientific computing" }
       ]
     },
     {
@@ -255,6 +265,7 @@ const Portfolio = () => {
         { name: "SQL", level: "medium", description: "Relational databases" },
         { name: "MongoDB", level: "medium", description: "NoSQL databases" },
         { name: "Elasticsearch", level: "medium", description: "Search and analytics" },
+        { name: "ChromaDB", level: "medium", description: "Search and analytics" },
         { name: "AWS", level: "high", description: "SageMaker, EC2, Lambda" }
       ]
     },
@@ -263,7 +274,7 @@ const Portfolio = () => {
       icon: <Activity className="w-6 h-6" />,
       skills: [
         { name: "MLOps", level: "high", description: "Model deployment & monitoring" },
-        { name: "Data Science", level: "high", description: "Statistical analysis, visualization" },
+        { name: "Data Science", level: "medium", description: "Statistical analysis, visualization" },
         { name: "Research", level: "high", description: "Academic research, publications" },
         { name: "Agile", level: "high", description: "Project management" }
       ]
@@ -312,7 +323,7 @@ const Portfolio = () => {
       authors: "Yadav, I., Schindler, S., Peters, D., & Klinger, R.",
       venue: "Semantic Web Journal",
       year: "2026",
-      url: "https:https://journals.sagepub.com/doi/pdf/10.1177/22104968261453132?__cf_chl_f_tk=Gq0O1JLyyu36n1_sQPFLZ9Ei_dr18y6Eqh1GbDUARIA-1782982766-1.0.1.1-ZfBoQJLZqusrCXf2kCKeRXKvqUbpX8R50Ma9km8uWQg"
+      url: "https://doi.org/10.1177/22104968261453132"
     },
     {
       title: "Implementing Semantic Technologies in Materials Science and Engineering",
@@ -381,7 +392,7 @@ const Portfolio = () => {
           Her work spans multiple domains including aerospace, manufacturing, healthcare, legal, and safety sectors. She has extensive 
           experience in developing and deploying Large Language Models, implementing Retrieval-Augmented Generation systems, and creating 
           sophisticated information extraction pipelines. Her upcoming goals are to explore Visual Language Models for document parsing, semantic 
-          table interpretation, and multi-modal AI systems.
+          table interpretation, and multi-modal AI systems, Agentic-AI architectures.
         </p>
 
         <p className="text-gray-700 leading-relaxed text-lg">
