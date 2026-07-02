@@ -637,7 +637,7 @@ const Portfolio = () => {
       <div className="bg-white p-8 rounded-xl shadow-sm border">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 flex items-center">
           <Layers className="w-8 h-8 mr-3 text-blue-600" />
-          Projects & Ventures
+          Personal Projects
         </h2>
         
         <div className="grid gap-8">
