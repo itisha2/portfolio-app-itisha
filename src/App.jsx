@@ -371,8 +371,7 @@ const Portfolio = () => {
         </h2>
         <p className="text-gray-700 leading-relaxed text-lg mb-6">
           <strong>Itisha Yadav</strong> is a <strong>Research Scientist at the German Aerospace Center (DLR)</strong>, 
-          and <strong>Doctoral Researcher at the University of Bamberg, Germany</strong>, pursuing her PhD under the supervision of  
-          <strong> Prof. Dr. Roman Klinger</strong>. She holds a Master's degree in Computational Linguistics from the University of Stuttgart 
+          and <strong>Doctoral Researcher at the University of Bamberg, Germany</strong>, pursuing her PhD at the deparment of Fundamentals of Natural Language Processing. She holds a Master's degree in Computational Linguistics from the University of Stuttgart 
           and a Bachelor's in Electronics and Communication Engineering. Her research lies at the intersection of Natural Language Processing 
           and the Semantic Web, with a particular focus on ontology-guided constraint decoding using Large Language Models for knowledge 
           graph construction.
