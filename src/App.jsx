@@ -316,7 +316,7 @@ const Portfolio = () => {
     },
     {
       title: "Implementing Semantic Technologies in Materials Science and Engineering",
-      authors: "Dembska, Marta, et al.",
+      authors: "Dembska, M., Helle, O., Yadav, I., & Peters, D.",
       venue: "Proceedings of the First International Workshop on Semantic Materials Science (SeMatS 2024)",
       year: "2024",
       url: "https://ceur-ws.org/Vol-3760/paper4.pdf"
