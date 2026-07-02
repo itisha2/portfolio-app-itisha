@@ -308,6 +308,13 @@ const Portfolio = () => {
 
   const publications = [
     {
+      title: "External knowledge integration in large language models: A survey on methods, challenges, and future directions",
+      authors: "Yadav, I., Schindler, S., Peters, D., & Klinger, R.",
+      venue: "Semantic Web Journal",
+      year: "2026",
+      url: "https:https://journals.sagepub.com/doi/pdf/10.1177/22104968261453132?__cf_chl_f_tk=Gq0O1JLyyu36n1_sQPFLZ9Ei_dr18y6Eqh1GbDUARIA-1782982766-1.0.1.1-ZfBoQJLZqusrCXf2kCKeRXKvqUbpX8R50Ma9km8uWQg"
+    },
+    {
       title: "Implementing Semantic Technologies in Materials Science and Engineering",
       authors: "Dembska, Marta, et al.",
       venue: "Proceedings of the First International Workshop on Semantic Materials Science (SeMatS 2024)",
@@ -315,11 +322,11 @@ const Portfolio = () => {
       url: "https://ceur-ws.org/Vol-3760/paper4.pdf"
     },
     {
-      title: "External knowledge integration in large language models: A survey on methods, challenges, and future directions",
-      authors: "Yadav, I., Schindler, S., Peters, D., & Klinger, R.",
-      venue: "arXiv preprint arXiv:2403.11181",
-      year: "2024",
-      url: "https://www.semantic-web-journal.net/system/files/swj3835.pdf"
+      title: "Sequential Domain Adaptation on Heterogeneous Clinical Resources for Biomedical NER",
+      authors: "Jasvinder Singh, Itisha Yadav",
+      venue: "17th International Workshop on Semantic Web Applications and Tools for Health Care and Life Sciences (SWAT4HCLS 2026), Amsterdam, Netherlands",
+      year: "2026",
+      url: "https://www.swat4ls.org/workshops/amsterdam2026/programme/accepted-submissions/#Sequential_Domain_Adaptation_on_Heterogeneous_Clinical_Resources_for_Biomedical_NER"
     }
   ];
 
