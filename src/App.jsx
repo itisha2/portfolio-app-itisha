@@ -326,6 +326,13 @@ const Portfolio = () => {
       url: "https://doi.org/10.1177/22104968261453132"
     },
     {
+      title: "Where, How, and What to Ground: Evaluating Ontology-Guided LLM-based Knowledge Graph Construction",
+      authors: "Itisha Yadav, Roman Klinger, and Diana Peters",
+      venue: "International Semantic Web Conference (ISWC 2026), Bari, Italy",
+      year: "2026",
+      url: "https://5thnlp4kgc-code.github.io/5nlp4kgc/pages/accepted-papers.html"
+    },
+    {
       title: "Implementing Semantic Technologies in Materials Science and Engineering",
       authors: "Dembska, M., Helle, O., Yadav, I., & Peters, D.",
       venue: "Proceedings of the First International Workshop on Semantic Materials Science (SeMatS 2024)",
