@@ -1,0 +1,2250 @@
+{
+ "title": "Safety Data Sheet Ontology",
+ "version": "0.6.0",
+ "stats": {
+  "classes": 92,
+  "objectProperties": 75,
+  "datatypeProperties": 24,
+  "triples": 1171
+ },
+ "classes": [
+  {
+   "id": "sds:AbbreviationGlossary",
+   "label": "Abbreviation Glossary",
+   "comment": "A listing of abbreviations and acronyms used throughout the SDS, typically found in Section 16.",
+   "parents": [
+    "sds:Section16OtherInformation"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AccidentalReleaseMeasure",
+   "label": "Accidental Release Measure",
+   "comment": "An action recommended for safely containing and cleaning up a spill or accidental release of the product.",
+   "parents": [
+    "sds:ControlMeasure"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":measureX a sds:AccidentalReleaseMeasure ; rdfs:label \"Sweep up and place in suitable containers\"@en ."
+  },
+  {
+   "id": "sds:AcuteToxicity",
+   "label": "Acute Toxicity",
+   "comment": "GHS hazard class covering acute toxic effects via oral, dermal, or inhalation routes.",
+   "parents": [
+    "sds:HazardClass"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AcuteToxicityInhalation",
+   "label": "Acute Toxicity - Inhalation",
+   "comment": "Acute toxicity hazard class specifically for the inhalation route of exposure.",
+   "parents": [
+    "sds:AcuteToxicity"
+   ],
+   "disjointWith": [
+    "sds:AcuteToxicityOral"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AcuteToxicityInhalationCategory4",
+   "label": "Acute Toxicity Inhalation Category 4",
+   "comment": "GHS classification for substances harmful if inhaled (inhalation route, category 4, H332, Warning signal word).",
+   "parents": [
+    "sds:GHSClassification"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AcuteToxicityOral",
+   "label": "Acute Toxicity - Oral",
+   "comment": "Acute toxicity hazard class specifically for the oral route of exposure.",
+   "parents": [
+    "sds:AcuteToxicity"
+   ],
+   "disjointWith": [
+    "sds:AcuteToxicityInhalation"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AcuteToxicityOralCategory4",
+   "label": "Acute Toxicity Oral Category 4",
+   "comment": "GHS classification for substances harmful if swallowed (oral route, category 4, H302, Warning signal word).",
+   "parents": [
+    "sds:GHSClassification"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:AdministrativeControl",
+   "label": "Administrative Control",
+   "comment": "A workplace policy or procedure, rather than equipment, used to limit worker exposure to a hazard.",
+   "parents": [
+    "sds:ControlMeasure"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":controlX a sds:AdministrativeControl ; rdfs:label \"Rotate workers to limit exposure time\"@en ."
+  },
+  {
+   "id": "sds:AquaticChronicCategory2",
+   "label": "Aquatic Chronic Category 2",
+   "comment": "GHS classification for substances toxic to aquatic life with long lasting effects (chronic, category 2, H411).",
+   "parents": [
+    "sds:GHSClassification"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:Category1",
+   "label": "GHS Hazard Category 1 — Highest Severity",
+   "comment": "GHS hazard severity category 1 — most severe within a hazard class.",
+   "parents": [
+    "sds:HazardCategory"
+   ],
+   "disjointWith": [
+    "sds:Category2",
+    "sds:Category3",
+    "sds:Category4"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:Category2",
+   "label": "GHS Hazard Category 2 — High Severity",
+   "comment": "GHS hazard severity category 2 — high severity, the second most restrictive tier within a hazard class.",
+   "parents": [
+    "sds:HazardCategory"
+   ],
+   "disjointWith": [
+    "sds:Category3",
+    "sds:Category4",
+    "sds:Category1"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:Category3",
+   "label": "GHS Hazard Category 3 — Moderate Severity",
+   "comment": "GHS hazard severity category 3 — moderate severity, less restrictive than categories 1 and 2.",
+   "parents": [
+    "sds:HazardCategory"
+   ],
+   "disjointWith": [
+    "sds:Category4",
+    "sds:Category1",
+    "sds:Category2"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:Category4",
+   "label": "GHS Hazard Category 4 — Low Severity",
+   "comment": "GHS hazard severity category 4 — least severe in the numbered tier.",
+   "parents": [
+    "sds:HazardCategory"
+   ],
+   "disjointWith": [
+    "sds:Category1",
+    "sds:Category2",
+    "sds:Category3"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:ChemicalComponent",
+   "label": "Chemical Component",
+   "comment": "Any chemical substance that makes up part of a product's composition, whether or not it is classified as hazardous.",
+   "parents": [
+    "sds:ChemicalEntity"
+   ],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:59999"
+   ],
+   "example": ":componentX a sds:ChemicalComponent ; sds:casNumber \"0000-00-0\" ; sds:weightPercent \"1-5\" ."
+  },
+  {
+   "id": "sds:ChemicalEntity",
+   "label": "Chemical Entity",
+   "comment": "A chemical substance, compound, polymer, mixture component, decomposition product, or combustion product mentioned in an SDS.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:24431"
+   ],
+   "example": ":chemicalX a sds:ChemicalEntity ; sds:casNumber \"0000-00-0\" ."
+  },
+  {
+   "id": "sds:CombustionProduct",
+   "label": "Combustion Product",
+   "comment": "A chemical species generated specifically when the product burns in a fire, often hazardous to inhale.",
+   "parents": [
+    "sds:ChemicalEntity"
+   ],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:24431"
+   ],
+   "example": ":substanceX a sds:CombustionProduct ."
+  },
+  {
+   "id": "sds:CommercialProduct",
+   "label": "Commercial Product",
+   "comment": "A finished, market-ready product offering sold under a trademark, as opposed to a raw chemical substance.",
+   "parents": [
+    "sds:Product"
+   ],
+   "disjointWith": [
+    "sds:Mixture",
+    "sds:Substance"
+   ],
+   "alignments": [],
+   "example": ":productX a sds:CommercialProduct ; sds:tradeName \"BrandName\" ."
+  },
+  {
+   "id": "sds:CompositionRecord",
+   "label": "Composition Record",
+   "comment": "A structured record connecting a product to a component, concentration, CAS number, and hazard classification.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":compRecord1 a sds:CompositionRecord ; sds:compositionComponent :componentX ; sds:weightPercent \"0.3-1.0\" ."
+  },
+  {
+   "id": "sds:ControlMeasure",
+   "label": "Control Measure",
+   "comment": "Any engineering, administrative, or personal protective measure used to reduce exposure to a product's hazards.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":controlX a sds:ControlMeasure ."
+  },
+  {
+   "id": "sds:Danger",
+   "label": "Danger",
+   "comment": "GHS signal word for the more severe hazard categories.",
+   "parents": [
+    "sds:SignalWord"
+   ],
+   "disjointWith": [
+    "sds:Warning"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:DecompositionProduct",
+   "label": "Decomposition Product",
+   "comment": "A chemical species formed when the product breaks down under heat or other stress, as opposed to during combustion.",
+   "parents": [
+    "sds:ChemicalEntity"
+   ],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:24431"
+   ],
+   "example": ":substanceX a sds:DecompositionProduct ."
+  },
+  {
+   "id": "sds:EcologicalEffect",
+   "label": "Ecological Effect",
+   "comment": "A documented or expected impact of the product on the environment, such as aquatic toxicity.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":effectX a sds:EcologicalEffect ; rdfs:label \"Toxic to aquatic life\"@en ."
+  },
+  {
+   "id": "sds:EmergencyContact",
+   "label": "Emergency Contact",
+   "comment": "A phone number, email, or organization to contact in case of a chemical emergency or accidental exposure.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":emergencyContactX a sds:EmergencyContact ; sds:phoneNumber \"+1-800-000-0000\" ."
+  },
+  {
+   "id": "sds:EngineeringControl",
+   "label": "Engineering Control",
+   "comment": "A physical or mechanical system, such as ventilation, used to reduce worker exposure at its source.",
+   "parents": [
+    "sds:ControlMeasure"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":controlX a sds:EngineeringControl ; rdfs:label \"Local exhaust ventilation\"@en ."
+  },
+  {
+   "id": "sds:EnvironmentalHazard",
+   "label": "Environmental Hazard",
+   "comment": "A hazard describing the product's or a component's potential to harm aquatic life or the broader environment.",
+   "parents": [
+    "sds:Hazard"
+   ],
+   "disjointWith": [
+    "sds:HealthHazard",
+    "sds:PhysicalHazard",
+    "sds:ProcessHazard"
+   ],
+   "alignments": [],
+   "example": ":hazardX a sds:EnvironmentalHazard ."
+  },
+  {
+   "id": "sds:EvidenceSpan",
+   "label": "Evidence Span",
+   "comment": "The specific span of source text in the original document that supports an extracted fact or relation.",
+   "parents": [
+    "prov:Entity"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":span1 a sds:EvidenceSpan ; sds:sourceText \"...\" ; sds:sourcePage 1 ."
+  },
+  {
+   "id": "sds:ExposureLimit",
+   "label": "Exposure Limit",
+   "comment": "A regulatory or recommended airborne concentration threshold for a chemical, such as an OSHA PEL or ACGIH TWA.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":limitX a sds:ExposureLimit ; rdfs:label \"OSHA PEL TWA 5 mg/m3\"@en ."
+  },
+  {
+   "id": "sds:ExtinguishingMedia",
+   "label": "Extinguishing Media",
+   "comment": "A substance, such as water or foam, recommended for extinguishing a fire involving the product.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":mediaX a sds:ExtinguishingMedia ; rdfs:label \"Water spray\"@en ."
+  },
+  {
+   "id": "sds:ExtractionRecord",
+   "label": "Extraction Record",
+   "comment": "A record of an extracted entity or relation from OCR, NLP, or ontology-based information extraction.",
+   "parents": [
+    "prov:Entity"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":extraction1 a sds:ExtractionRecord ; sds:sourceText \"...\" ; sds:sourcePage 1 ; sds:confidenceScore 0.95 ."
+  },
+  {
+   "id": "sds:EyeProtection",
+   "label": "Eye Protection",
+   "comment": "PPE designed to shield the eyes from splashes, dust, or vapor exposure.",
+   "parents": [
+    "sds:PPE"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ppeX a sds:EyeProtection ; rdfs:label \"Safety glasses with side-shields\"@en ."
+  },
+  {
+   "id": "sds:FireFightingMeasure",
+   "label": "Fire-Fighting Measure",
+   "comment": "Guidance for safely extinguishing or responding to a fire involving the product.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":measureX a sds:FireFightingMeasure ; rdfs:label \"Fight fire from a safe distance\"@en ."
+  },
+  {
+   "id": "sds:FirstAidMeasure",
+   "label": "First Aid Measure",
+   "comment": "A recommended action to take immediately after a person is exposed to or injured by the product.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":measureX a sds:FirstAidMeasure ; rdfs:label \"Flush eyes with water for 15 minutes\"@en ."
+  },
+  {
+   "id": "sds:GHSClassification",
+   "label": "GHS Classification",
+   "comment": "A GHS hazard classification, including hazard class, category, and hazard statement.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":classificationY a sds:AcuteToxicityOralCategory4 . # reasoner infers hasHazardClass/Category/Statement/SignalWord/Pictogram constraints"
+  },
+  {
+   "id": "sds:HandProtection",
+   "label": "Hand Protection",
+   "comment": "PPE specifically intended to protect the hands, such as gloves, during product handling.",
+   "parents": [
+    "sds:PPE"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ppeX a sds:HandProtection ; rdfs:label \"Chemical-resistant gloves\"@en ."
+  },
+  {
+   "id": "sds:HandlingRequirement",
+   "label": "Handling Requirement",
+   "comment": "A practice or precaution recommended for safely working with the product during normal use.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":requirementX a sds:HandlingRequirement ; rdfs:label \"Avoid dust formation\"@en ."
+  },
+  {
+   "id": "sds:Hazard",
+   "label": "Hazard",
+   "comment": "Any potential source of harm associated with the product, encompassing physical, health, environmental, or process hazards.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:50906"
+   ],
+   "example": ":hazardX a sds:Hazard ."
+  },
+  {
+   "id": "sds:HazardCategory",
+   "label": "GHS Hazard Category",
+   "comment": "The numeric severity tier within a GHS hazard class, with lower numbers generally indicating greater severity.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": "sds:Category2 a sds:HazardCategory ; rdfs:label \"Category 2\"@en ."
+  },
+  {
+   "id": "sds:HazardClass",
+   "label": "GHS Hazard Class",
+   "comment": "The GHS category describing the type of hazard a substance poses, such as Acute Toxicity or Aquatic Chronic hazard.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":acuteToxicityOral a sds:HazardClass ; rdfs:label \"Acute Toxicity - Oral\"@en ."
+  },
+  {
+   "id": "sds:HazardStatement",
+   "label": "GHS Hazard Statement",
+   "comment": "A standardized GHS phrase, identified by an H-code, that describes the nature of a substance's hazard.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":h302 a sds:HazardStatement ; sds:ghsCode \"H302\" ; sds:hazardStatementText \"Harmful if swallowed\"@en ."
+  },
+  {
+   "id": "sds:HazardousComponent",
+   "label": "Hazardous Component",
+   "comment": "A chemical component that meets GHS criteria for a hazard classification and must be disclosed in Section 3.",
+   "parents": [
+    "sds:ChemicalComponent"
+   ],
+   "disjointWith": [
+    "sds:NonHazardousComponent"
+   ],
+   "alignments": [
+    "chebi:50903"
+   ],
+   "example": ":componentX a sds:HazardousComponent ; sds:hasGHSClassification :classificationY ."
+  },
+  {
+   "id": "sds:HazardousToAquaticEnvironmentChronic",
+   "label": "Hazardous to the Aquatic Environment - Chronic",
+   "comment": "GHS hazard class for substances with chronic (long-term) aquatic toxicity.",
+   "parents": [
+    "sds:HazardClass"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:HealthHazard",
+   "label": "Health Hazard",
+   "comment": "A hazard that can cause adverse health effects in humans through inhalation, skin contact, eye contact, or ingestion.",
+   "parents": [
+    "sds:Hazard"
+   ],
+   "disjointWith": [
+    "sds:PhysicalHazard",
+    "sds:ProcessHazard",
+    "sds:EnvironmentalHazard"
+   ],
+   "alignments": [],
+   "example": ":hazardX a sds:HealthHazard ; sds:hasRouteOfExposure :inhalation ."
+  },
+  {
+   "id": "sds:Ingredient",
+   "label": "Ingredient",
+   "comment": "A chemical component intentionally added to a formulation, such as a polymer, additive, or colorant.",
+   "parents": [
+    "sds:ChemicalComponent"
+   ],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:59999"
+   ],
+   "example": ":ingredientX a sds:Ingredient ; sds:weightPercent \"0.1-1.0\" ."
+  },
+  {
+   "id": "sds:InventoryStatus",
+   "label": "Chemical Inventory Status",
+   "comment": "The listing status of a chemical on a national or regional chemical inventory, such as TSCA or EINECS.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":inventoryX a sds:InventoryStatus ; rdfs:label \"TSCA: Listed\"@en ."
+  },
+  {
+   "id": "sds:LegalDisclaimer",
+   "label": "Legal Disclaimer",
+   "comment": "A legal notice or limitation-of-liability statement appearing in Section 16 of the SDS.",
+   "parents": [
+    "sds:Section16OtherInformation"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":disclaimer1 a sds:LegalDisclaimer ."
+  },
+  {
+   "id": "sds:Manufacturer",
+   "label": "Manufacturer",
+   "comment": "The organization responsible for producing the product, as distinct from the entity supplying or selling it.",
+   "parents": [
+    "sds:Organization"
+   ],
+   "disjointWith": [
+    "sds:Supplier"
+   ],
+   "alignments": [
+    "oriont:Agent"
+   ],
+   "example": ":manufacturerX a sds:Manufacturer ; sds:address \"Plant Address\" ."
+  },
+  {
+   "id": "sds:Mixture",
+   "label": "Mixture",
+   "comment": "A product composed of two or more substances combined together, such as a polymer blend with additives.",
+   "parents": [
+    "sds:Product"
+   ],
+   "disjointWith": [
+    "sds:Substance",
+    "sds:CommercialProduct"
+   ],
+   "alignments": [
+    "chebi:60004"
+   ],
+   "example": ":productX a sds:Mixture ; sds:hasComponent :componentA, :componentB ."
+  },
+  {
+   "id": "sds:NonHazardousComponent",
+   "label": "Non-Hazardous Component",
+   "comment": "A chemical component present in the product that does not meet GHS hazard classification criteria.",
+   "parents": [
+    "sds:ChemicalComponent"
+   ],
+   "disjointWith": [
+    "sds:HazardousComponent"
+   ],
+   "alignments": [],
+   "example": ":componentX a sds:NonHazardousComponent ."
+  },
+  {
+   "id": "sds:OCRBlock",
+   "label": "OCR Block",
+   "comment": "A contiguous block of text extracted from a scanned or rendered SDS page via optical character recognition.",
+   "parents": [
+    "prov:Entity"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ocrBlock1 a sds:OCRBlock ; sds:sourcePage 1 ; sds:sourceText \"...\" ."
+  },
+  {
+   "id": "sds:Organization",
+   "label": "Organization",
+   "comment": "A company or corporate entity referenced in the SDS, such as the product's manufacturer or supplier.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [
+    "oriont:Agent"
+   ],
+   "example": ":orgX a sds:Organization ; sds:address \"123 Main St, City, Country\" ."
+  },
+  {
+   "id": "sds:PPE",
+   "label": "Personal Protective Equipment",
+   "comment": "Personal protective equipment worn by a worker to reduce exposure to a product's hazards.",
+   "parents": [
+    "sds:ControlMeasure"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ppeX a sds:PPE ; rdfs:label \"Protective gloves\"@en ."
+  },
+  {
+   "id": "sds:PhysicalChemicalProperty",
+   "label": "Physical or Chemical Property",
+   "comment": "A measurable physical or chemical characteristic of the product, such as density, solubility, or vapor pressure.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":propertyX a sds:PhysicalChemicalProperty ; rdfs:label \"Specific gravity\"@en ."
+  },
+  {
+   "id": "sds:PhysicalHazard",
+   "label": "Physical Hazard",
+   "comment": "A hazard arising from the physical or chemical properties of the product, such as flammability or dust explosivity.",
+   "parents": [
+    "sds:Hazard"
+   ],
+   "disjointWith": [
+    "sds:ProcessHazard",
+    "sds:EnvironmentalHazard",
+    "sds:HealthHazard"
+   ],
+   "alignments": [],
+   "example": ":hazardX a sds:PhysicalHazard ."
+  },
+  {
+   "id": "sds:Pictogram",
+   "label": "GHS Pictogram",
+   "comment": "A GHS hazard symbol, such as a flame or exclamation mark, used on labels to visually communicate a hazard type.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":exclamationMark a sds:Pictogram ; rdfs:label \"GHS exclamation mark pictogram\"@en ."
+  },
+  {
+   "id": "sds:Polymer",
+   "label": "Polymer",
+   "comment": "A high molecular weight chemical entity built from repeating monomer units, such as the resin matrix of a plastic product.",
+   "parents": [
+    "sds:ChemicalEntity"
+   ],
+   "disjointWith": [],
+   "alignments": [
+    "chebi:60027"
+   ],
+   "example": ":polymerX a sds:Polymer ; sds:casNumber \"0000-00-0\" ."
+  },
+  {
+   "id": "sds:PrecautionaryStatement",
+   "label": "GHS Precautionary Statement",
+   "comment": "A standardized GHS phrase, identified by a P-code, recommending measures to minimize or prevent exposure to a hazard.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":p264 a sds:PrecautionaryStatement ; sds:ghsCode \"P264\" ; sds:precautionaryStatementText \"Wash hands thoroughly after handling\"@en ."
+  },
+  {
+   "id": "sds:ProcessHazard",
+   "label": "Process Hazard",
+   "comment": "A hazard that arises specifically during industrial processing of the product, such as melt processing or secondary machining.",
+   "parents": [
+    "sds:Hazard"
+   ],
+   "disjointWith": [
+    "sds:EnvironmentalHazard",
+    "sds:HealthHazard",
+    "sds:PhysicalHazard"
+   ],
+   "alignments": [],
+   "example": ":hazardX a sds:ProcessHazard ."
+  },
+  {
+   "id": "sds:Product",
+   "label": "Product",
+   "comment": "A product described by an SDS.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [
+    "oriont:ProductFlow"
+   ],
+   "example": ":productX a sds:Product ; sds:productName \"Product X\" ."
+  },
+  {
+   "id": "sds:ReferenceListing",
+   "label": "Reference Listing",
+   "comment": "A list of standards, regulations, or literature references cited in the SDS, typically found in Section 16.",
+   "parents": [
+    "sds:Section16OtherInformation"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:RegulatoryListing",
+   "label": "Regulatory Listing",
+   "comment": "A statement of the product's or a component's status under a specific law or regulatory program, such as SARA or Proposition 65.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":listingX a sds:RegulatoryListing ; sds:regulatoryStatusText \"Listed: subject to reporting requirements\"@en ."
+  },
+  {
+   "id": "sds:RespiratoryProtection",
+   "label": "Respiratory Protection",
+   "comment": "PPE designed to protect the wearer's airway from inhaling hazardous fumes, dust, or vapors.",
+   "parents": [
+    "sds:PPE"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ppeX a sds:RespiratoryProtection ; rdfs:label \"NIOSH-approved respirator\"@en ."
+  },
+  {
+   "id": "sds:RevisionHistory",
+   "label": "Revision History",
+   "comment": "A structured record of changes made to the SDS across document versions, typically listed in Section 16.",
+   "parents": [
+    "sds:Section16OtherInformation"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":revision1 a sds:RevisionHistory ."
+  },
+  {
+   "id": "sds:RouteOfExposure",
+   "label": "Route of Exposure",
+   "comment": "A pathway by which a hazardous substance can enter the body, such as inhalation, skin contact, or ingestion.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":inhalation a sds:RouteOfExposure ; rdfs:label \"Inhalation\"@en ."
+  },
+  {
+   "id": "sds:SDSDocument",
+   "label": "Safety Data Sheet Document",
+   "comment": "A safety data sheet document describing a product, mixture, substance, hazards, controls, and regulatory information.",
+   "parents": [],
+   "disjointWith": [
+    "sds:SDSSection"
+   ],
+   "alignments": [],
+   "example": ":doc1 a sds:SDSDocument ; sds:revisionDate \"2020-01-15\"^^xsd:date ; sds:describesProduct :productX ."
+  },
+  {
+   "id": "sds:SDSSection",
+   "label": "SDS Section",
+   "comment": "A section of a Safety Data Sheet. An SDS is partitioned into exactly 16 sections as defined by the GHS standard; each section is mutually exclusive and together they cover the complete SDS.",
+   "parents": [],
+   "disjointWith": [
+    "sds:SDSDocument"
+   ],
+   "alignments": [],
+   "example": ":section a sds:SDSSection ; sds:sourcePage 3 ."
+  },
+  {
+   "id": "sds:Section10StabilityReactivity",
+   "label": "Section 10 - Stability and Reactivity",
+   "comment": "The SDS section describing chemical stability, conditions to avoid, and hazardous decomposition products.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec10 a sds:Section10StabilityReactivity ."
+  },
+  {
+   "id": "sds:Section11ToxicologicalInformation",
+   "label": "Section 11 - Toxicological Information",
+   "comment": "The SDS section reporting toxicological data such as LD50 values, routes of exposure, and carcinogenicity findings.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec11 a sds:Section11ToxicologicalInformation ."
+  },
+  {
+   "id": "sds:Section12EcologicalInformation",
+   "label": "Section 12 - Ecological Information",
+   "comment": "The SDS section describing the product's potential ecotoxicity and environmental impact.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec12 a sds:Section12EcologicalInformation ."
+  },
+  {
+   "id": "sds:Section13DisposalConsiderations",
+   "label": "Section 13 - Disposal Considerations",
+   "comment": "The SDS section providing guidance on proper waste disposal of the product and its packaging.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec13 a sds:Section13DisposalConsiderations ."
+  },
+  {
+   "id": "sds:Section14TransportInformation",
+   "label": "Section 14 - Transport Information",
+   "comment": "The SDS section stating the product's regulatory transport classification under DOT, IMDG, IATA, and related modal regulations.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec14 a sds:Section14TransportInformation ."
+  },
+  {
+   "id": "sds:Section15RegulatoryInformation",
+   "label": "Section 15 - Regulatory Information",
+   "comment": "The SDS section listing chemical inventory status (TSCA, DSL, EINECS, etc.) and applicable regulatory programs such as SARA and Prop 65.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec15 a sds:Section15RegulatoryInformation ."
+  },
+  {
+   "id": "sds:Section16OtherInformation",
+   "label": "Section 16 - Other Information",
+   "comment": "The SDS section containing additional information including revision history, legal disclaimers, and preparer details. Per the GHS SDS standard, this section has no mandated sub-structure and intentionally serves as a structured catch-all.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec16 a sds:Section16OtherInformation ."
+  },
+  {
+   "id": "sds:Section1Identification",
+   "label": "Section 1 - Identification",
+   "comment": "The SDS section giving product/trade names, supplier, manufacturer, and emergency contact details.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec1 a sds:Section1Identification ."
+  },
+  {
+   "id": "sds:Section2HazardsIdentification",
+   "label": "Section 2 - Hazards Identification",
+   "comment": "The SDS section summarizing GHS classification, signal word, and the overall hazard/emergency overview of the product.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec2 a sds:Section2HazardsIdentification ."
+  },
+  {
+   "id": "sds:Section3CompositionInformation",
+   "label": "Section 3 - Composition/Information on Ingredients",
+   "comment": "The SDS section listing hazardous and non-hazardous ingredients with CAS numbers, weight percentages, and GHS classifications.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec3 a sds:Section3CompositionInformation ."
+  },
+  {
+   "id": "sds:Section4FirstAidMeasures",
+   "label": "Section 4 - First Aid Measures",
+   "comment": "The SDS section describing recommended first-aid response for inhalation, skin contact, eye contact, and ingestion exposures.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec4 a sds:Section4FirstAidMeasures ."
+  },
+  {
+   "id": "sds:Section5FireFightingMeasures",
+   "label": "Section 5 - Fire-Fighting Measures",
+   "comment": "The SDS section covering suitable/unsuitable extinguishing media, combustion hazards, and firefighter protective equipment.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec5 a sds:Section5FireFightingMeasures ."
+  },
+  {
+   "id": "sds:Section6AccidentalReleaseMeasures",
+   "label": "Section 6 - Accidental Release Measures",
+   "comment": "The SDS section describing clean-up procedures and environmental precautions for spills or releases of the product.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec6 a sds:Section6AccidentalReleaseMeasures ."
+  },
+  {
+   "id": "sds:Section7HandlingStorage",
+   "label": "Section 7 - Handling and Storage",
+   "comment": "The SDS section giving guidance on safe handling practices and proper storage conditions for the product.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec7 a sds:Section7HandlingStorage ."
+  },
+  {
+   "id": "sds:Section8ExposureControlsPPE",
+   "label": "Section 8 - Exposure Controls/Personal Protection",
+   "comment": "The SDS section listing occupational exposure limits and recommended personal protective equipment for handling the product.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec8 a sds:Section8ExposureControlsPPE ."
+  },
+  {
+   "id": "sds:Section9PhysicalChemicalProperties",
+   "label": "Section 9 - Physical and Chemical Properties",
+   "comment": "The SDS section recording measurable physical and chemical properties such as appearance, odor, density, and solubility.",
+   "parents": [
+    "sds:SDSSection"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":sec9 a sds:Section9PhysicalChemicalProperties ."
+  },
+  {
+   "id": "sds:SignalWord",
+   "label": "GHS Signal Word",
+   "comment": "The GHS word ('Danger' or 'Warning') used on a label to indicate the relative severity of a hazard.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": "sds:Warning a sds:SignalWord ; rdfs:label \"Warning\"@en ."
+  },
+  {
+   "id": "sds:SkinProtection",
+   "label": "Skin Protection",
+   "comment": "PPE designed to shield the skin from contact with the product, its dust, or hot/molten material.",
+   "parents": [
+    "sds:PPE"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":ppeX a sds:SkinProtection ; rdfs:label \"Long-sleeved protective clothing\"@en ."
+  },
+  {
+   "id": "sds:StorageRequirement",
+   "label": "Storage Requirement",
+   "comment": "A condition or precaution recommended for safely storing the product when not in use.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":requirementX a sds:StorageRequirement ; rdfs:label \"Store in a dry, cool area\"@en ."
+  },
+  {
+   "id": "sds:Substance",
+   "label": "Substance",
+   "comment": "A single chemical species with one defined composition, as distinct from a multi-ingredient mixture.",
+   "parents": [
+    "sds:Product"
+   ],
+   "disjointWith": [
+    "sds:CommercialProduct",
+    "sds:Mixture"
+   ],
+   "alignments": [
+    "chebi:59999"
+   ],
+   "example": ":substanceX a sds:Substance ; sds:casNumber \"0000-00-0\" ."
+  },
+  {
+   "id": "sds:Supplier",
+   "label": "Supplier",
+   "comment": "The organization that supplies or distributes the product to customers, which may differ from the manufacturer.",
+   "parents": [
+    "sds:Organization"
+   ],
+   "disjointWith": [
+    "sds:Manufacturer"
+   ],
+   "alignments": [
+    "oriont:Agent"
+   ],
+   "example": ":supplierX a sds:Supplier ; sds:phoneNumber \"+1-000-000-0000\" ."
+  },
+  {
+   "id": "sds:TargetOrganSystem",
+   "label": "Target Organ System",
+   "comment": "A body system or organ that a chemical's toxicological effects are known to specifically affect.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":respiratoryTract a sds:TargetOrganSystem ; rdfs:label \"Respiratory tract\"@en ."
+  },
+  {
+   "id": "sds:ToxicologicalEffect",
+   "label": "Toxicological Effect",
+   "comment": "A documented biological effect of the product or a component on living organisms, such as irritation or carcinogenicity.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":effectX a sds:ToxicologicalEffect ; rdfs:label \"Lung tumors observed in animal studies\"@en ."
+  },
+  {
+   "id": "sds:TransportClassification",
+   "label": "Transport Classification",
+   "comment": "The regulatory classification of the product for shipment under transport regulations such as DOT, IMDG, or IATA.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":transportX a sds:TransportClassification ; sds:transportStatusText \"Not regulated as hazardous for shipment\"@en ."
+  },
+  {
+   "id": "sds:UnsuitableExtinguishingMedia",
+   "label": "Unsuitable Extinguishing Media",
+   "comment": "An extinguishing agent that is specifically discouraged because it could worsen the fire or create a hazard.",
+   "parents": [
+    "sds:ExtinguishingMedia"
+   ],
+   "disjointWith": [],
+   "alignments": [],
+   "example": ":mediaX a sds:UnsuitableExtinguishingMedia ; rdfs:label \"Solid water stream\"@en ."
+  },
+  {
+   "id": "sds:Warning",
+   "label": "Warning",
+   "comment": "GHS signal word for less severe hazard categories.",
+   "parents": [
+    "sds:SignalWord"
+   ],
+   "disjointWith": [
+    "sds:Danger"
+   ],
+   "alignments": [],
+   "example": null
+  },
+  {
+   "id": "sds:WasteDisposalMeasure",
+   "label": "Waste Disposal Measure",
+   "comment": "A recommended method for disposing of unused product, residues, or contaminated packaging.",
+   "parents": [],
+   "disjointWith": [],
+   "alignments": [
+    "oriont:WasteFlow"
+   ],
+   "example": ":measureX a sds:WasteDisposalMeasure ; rdfs:label \"Dispose of in accordance with local regulations\"@en ."
+  }
+ ],
+ "objectProperties": [
+  {
+   "id": "sds:appearsInSection",
+   "label": "appears in section",
+   "comment": "Links any extracted fact, statement, or entity to the SDS section in which it was found.",
+   "domain": [
+    "owl:Thing"
+   ],
+   "range": [
+    "sds:SDSSection"
+   ],
+   "inverse": "sds:containsEntity"
+  },
+  {
+   "id": "sds:classifiesComponent",
+   "label": "classifies component",
+   "comment": "Inverse of hasGHSClassification: links a GHS classification to the chemical entity it classifies.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:ChemicalEntity"
+   ],
+   "inverse": "sds:hasGHSClassification"
+  },
+  {
+   "id": "sds:compositionComponent",
+   "label": "composition component",
+   "comment": "Links a composition record to the chemical component it describes.",
+   "domain": [
+    "sds:CompositionRecord"
+   ],
+   "range": [
+    "sds:ChemicalComponent"
+   ],
+   "inverse": "sds:isCompositionComponentIn"
+  },
+  {
+   "id": "sds:containsEntity",
+   "label": "contains entity",
+   "comment": "Inverse of appearsInSection: links an SDS section to entities found within it.",
+   "domain": [
+    "sds:SDSSection"
+   ],
+   "range": [
+    "owl:Thing"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:describesProduct",
+   "label": "describes product",
+   "comment": "Links an SDS document to the product it describes.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": "sds:isDescribedBy"
+  },
+  {
+   "id": "sds:hasComponent",
+   "label": "has component",
+   "comment": "Links a product to a chemical component contained within it.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:ChemicalComponent"
+   ],
+   "inverse": "sds:isComponentOf"
+  },
+  {
+   "id": "sds:hasCompositionRecord",
+   "label": "has composition record",
+   "comment": "Links a product to a structured composition record describing one ingredient's identity and concentration.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:CompositionRecord"
+   ],
+   "inverse": "sds:isCompositionRecordOf"
+  },
+  {
+   "id": "sds:hasEcologicalEffect",
+   "label": "has ecological effect",
+   "comment": "Links a product to a documented ecological or environmental impact.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:EcologicalEffect"
+   ],
+   "inverse": "sds:isEcologicalEffectOf"
+  },
+  {
+   "id": "sds:hasEmergencyContact",
+   "label": "has emergency contact",
+   "comment": "Links an SDS document to an emergency contact phone number or service.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "sds:EmergencyContact"
+   ],
+   "inverse": "sds:isEmergencyContactOf"
+  },
+  {
+   "id": "sds:hasEvidenceSpan",
+   "label": "has evidence span",
+   "comment": "Links an extraction record to the specific source text span that justifies the extracted fact.",
+   "domain": [
+    "sds:ExtractionRecord"
+   ],
+   "range": [
+    "sds:EvidenceSpan"
+   ],
+   "inverse": "sds:isEvidenceSpanOf"
+  },
+  {
+   "id": "sds:hasExposureLimit",
+   "label": "has exposure limit",
+   "comment": "Links a chemical component to an occupational exposure limit value, such as an OSHA PEL or ACGIH TWA.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "sds:ExposureLimit"
+   ],
+   "inverse": "sds:isExposureLimitOf"
+  },
+  {
+   "id": "sds:hasExtinguishingMedia",
+   "label": "has extinguishing media",
+   "comment": "Links a fire-fighting measure to the specific extinguishing agent it recommends.",
+   "domain": [
+    "sds:FireFightingMeasure"
+   ],
+   "range": [
+    "sds:ExtinguishingMedia"
+   ],
+   "inverse": "sds:isExtinguishingMediaFor"
+  },
+  {
+   "id": "sds:hasFireFightingMeasure",
+   "label": "has fire-fighting measure",
+   "comment": "Links a product or fire hazard to the recommended fire-fighting response.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:FireFightingMeasure"
+   ],
+   "inverse": "sds:isFireFightingMeasureOf"
+  },
+  {
+   "id": "sds:hasFirstAidMeasure",
+   "label": "has first aid measure",
+   "comment": "Links a hazard or exposure route to the recommended first-aid response.",
+   "domain": [
+    "sds:Hazard",
+    "sds:RouteOfExposure"
+   ],
+   "range": [
+    "sds:FirstAidMeasure"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:hasGHSClassification",
+   "label": "has GHS classification",
+   "comment": "Links a chemical component to a structured GHS classification consisting of hazard class, category, and statement.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:hasHandlingRequirement",
+   "label": "has handling requirement",
+   "comment": "Links a product to a recommended practice for safely handling it during use or processing.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:HandlingRequirement"
+   ],
+   "inverse": "sds:isHandlingRequirementOf"
+  },
+  {
+   "id": "sds:hasHazard",
+   "label": "has hazard",
+   "comment": "Links a product to a hazard it presents under typical use, processing, or fire conditions.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:Hazard"
+   ],
+   "inverse": "sds:isHazardOf"
+  },
+  {
+   "id": "sds:hasHazardCategory",
+   "label": "has hazard category",
+   "comment": "Links a GHS classification to its severity category, such as Category 2 or Category 4.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:HazardCategory"
+   ],
+   "inverse": "sds:isHazardCategoryOf"
+  },
+  {
+   "id": "sds:hasHazardClass",
+   "label": "has hazard class",
+   "comment": "Links a GHS classification to its hazard class, such as Acute Toxicity or Aquatic Chronic hazard.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:HazardClass"
+   ],
+   "inverse": "sds:isHazardClassOf"
+  },
+  {
+   "id": "sds:hasHazardStatement",
+   "label": "has hazard statement",
+   "comment": "Links a GHS classification to the standardized hazard statement (H-code) it carries.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:HazardStatement"
+   ],
+   "inverse": "sds:isHazardStatementOf"
+  },
+  {
+   "id": "sds:hasInventoryStatus",
+   "label": "has inventory status",
+   "comment": "Links a product or chemical component to its listing status on a national chemical inventory.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "sds:InventoryStatus"
+   ],
+   "inverse": "sds:isInventoryStatusOf"
+  },
+  {
+   "id": "sds:hasManufacturer",
+   "label": "has manufacturer",
+   "comment": "Links a product to the organization that manufactures it.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:Manufacturer"
+   ],
+   "inverse": "sds:manufactures"
+  },
+  {
+   "id": "sds:hasOrganization",
+   "label": "has organization",
+   "comment": "Links an SDS document to any organization (manufacturer, supplier, or other) referenced in it. Specialized by hasManufacturer and hasSupplier.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "sds:Organization"
+   ],
+   "inverse": "sds:isOrganizationOf"
+  },
+  {
+   "id": "sds:hasPhysicalChemicalProperty",
+   "label": "has physical or chemical property",
+   "comment": "Links a product to one of its measured physical or chemical properties.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:PhysicalChemicalProperty"
+   ],
+   "inverse": "sds:isPhysicalChemicalPropertyOf"
+  },
+  {
+   "id": "sds:hasPictogram",
+   "label": "has pictogram",
+   "comment": "Links a GHS classification to the hazard pictogram it displays on a label.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:Pictogram"
+   ],
+   "inverse": "sds:isPictogramOf"
+  },
+  {
+   "id": "sds:hasPrecautionaryStatement",
+   "label": "has precautionary statement",
+   "comment": "Links a GHS classification or hazard to a recommended precautionary statement.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:PrecautionaryStatement"
+   ],
+   "inverse": "sds:isPrecautionaryStatementOf"
+  },
+  {
+   "id": "sds:hasRegulatoryListing",
+   "label": "has regulatory listing",
+   "comment": "Links a product or component to a regulatory program listing, such as SARA 313 or California Proposition 65.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "sds:RegulatoryListing"
+   ],
+   "inverse": "sds:isRegulatoryListingOf"
+  },
+  {
+   "id": "sds:hasRouteOfExposure",
+   "label": "has route of exposure",
+   "comment": "Links a hazard or toxicological effect to the route by which exposure occurs, such as inhalation or skin contact.",
+   "domain": [
+    "sds:Hazard",
+    "sds:ToxicologicalEffect"
+   ],
+   "range": [
+    "sds:RouteOfExposure"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:hasSection",
+   "label": "has section",
+   "comment": "Links an SDS document to one of its constituent sections.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "sds:SDSSection"
+   ],
+   "inverse": "sds:isSectionOf"
+  },
+  {
+   "id": "sds:hasSignalWord",
+   "label": "has signal word",
+   "comment": "Links a GHS classification to its associated signal word, 'Danger' or 'Warning'.",
+   "domain": [
+    "sds:GHSClassification"
+   ],
+   "range": [
+    "sds:SignalWord"
+   ],
+   "inverse": "sds:isSignalWordOf"
+  },
+  {
+   "id": "sds:hasStorageRequirement",
+   "label": "has storage requirement",
+   "comment": "Links a product to a recommended condition for its safe storage.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:StorageRequirement"
+   ],
+   "inverse": "sds:isStorageRequirementOf"
+  },
+  {
+   "id": "sds:hasSupplier",
+   "label": "has supplier",
+   "comment": "Links a product to the organization that supplies or sells it.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:Supplier"
+   ],
+   "inverse": "sds:supplies"
+  },
+  {
+   "id": "sds:hasTargetOrganSystem",
+   "label": "has target organ system",
+   "comment": "Links a toxicological effect to the body system or organ it specifically affects.",
+   "domain": [
+    "sds:ToxicologicalEffect"
+   ],
+   "range": [
+    "sds:TargetOrganSystem"
+   ],
+   "inverse": "sds:isTargetOrganSystemOf"
+  },
+  {
+   "id": "sds:hasToxicologicalEffect",
+   "label": "has toxicological effect",
+   "comment": "Links a product to a documented toxicological effect on humans or animals.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:ToxicologicalEffect"
+   ],
+   "inverse": "sds:isToxicologicalEffectOf"
+  },
+  {
+   "id": "sds:hasTransportClassification",
+   "label": "has transport classification",
+   "comment": "Links a product to its regulatory transport classification.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:TransportClassification"
+   ],
+   "inverse": "sds:isTransportClassificationOf"
+  },
+  {
+   "id": "sds:hasWasteDisposalMeasure",
+   "label": "has waste disposal measure",
+   "comment": "Links a product to a recommended waste disposal method for unused product or residues.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:WasteDisposalMeasure"
+   ],
+   "inverse": "sds:isWasteDisposalMeasureOf"
+  },
+  {
+   "id": "sds:isChEBINormalizationOf",
+   "label": "is ChEBI normalization of",
+   "comment": "Inverse of normalizedToChEBI: links a ChEBI entity to the SDS chemical entity it normalises.",
+   "domain": [
+    "rdfs:Resource"
+   ],
+   "range": [
+    "sds:ChemicalEntity"
+   ],
+   "inverse": "sds:normalizedToChEBI"
+  },
+  {
+   "id": "sds:isCombustionProductOf",
+   "label": "is combustion product of",
+   "comment": "Inverse of mayGenerateOnCombustion: links a combustion product to the substance that may generate it.",
+   "domain": [
+    "sds:CombustionProduct"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": "sds:mayGenerateOnCombustion"
+  },
+  {
+   "id": "sds:isComponentOf",
+   "label": "is component of",
+   "comment": "Inverse of hasComponent: links a chemical component to the product it is part of.",
+   "domain": [
+    "sds:ChemicalComponent"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isCompositionComponentIn",
+   "label": "is composition component in",
+   "comment": "Inverse of compositionComponent: links a chemical component to the composition record it appears in.",
+   "domain": [
+    "sds:ChemicalComponent"
+   ],
+   "range": [
+    "sds:CompositionRecord"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isCompositionRecordOf",
+   "label": "is composition record of",
+   "comment": "Inverse of hasCompositionRecord: links a composition record to the product whose formulation it describes.",
+   "domain": [
+    "sds:CompositionRecord"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isControlMeasureFor",
+   "label": "is control measure for",
+   "comment": "Inverse of requiresControlMeasure: links a control measure to the hazard it mitigates.",
+   "domain": [
+    "sds:ControlMeasure"
+   ],
+   "range": [
+    "sds:Hazard"
+   ],
+   "inverse": "sds:requiresControlMeasure"
+  },
+  {
+   "id": "sds:isDescribedBy",
+   "label": "is described by",
+   "comment": "Inverse of describesProduct: links a product to the SDS document that describes it.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:SDSDocument"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isEcologicalEffectOf",
+   "label": "is ecological effect of",
+   "comment": "Inverse of hasEcologicalEffect: links an ecological effect to the product that causes it.",
+   "domain": [
+    "sds:EcologicalEffect"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isEmergencyContactOf",
+   "label": "is emergency contact of",
+   "comment": "Inverse of hasEmergencyContact: links an emergency contact to the SDS document that references it.",
+   "domain": [
+    "sds:EmergencyContact"
+   ],
+   "range": [
+    "sds:SDSDocument"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isEvidenceSpanOf",
+   "label": "is evidence span of",
+   "comment": "Inverse of hasEvidenceSpan: links an evidence span to the extraction record it supports.",
+   "domain": [
+    "sds:EvidenceSpan"
+   ],
+   "range": [
+    "sds:ExtractionRecord"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isExposureLimitOf",
+   "label": "is exposure limit of",
+   "comment": "Inverse of hasExposureLimit: links an exposure limit to the chemical entity for which it is defined.",
+   "domain": [
+    "sds:ExposureLimit"
+   ],
+   "range": [
+    "sds:ChemicalEntity"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isExtinguishingMediaFor",
+   "label": "is extinguishing media for",
+   "comment": "Inverse of hasExtinguishingMedia: links an extinguishing medium to the fire-fighting measure that recommends it.",
+   "domain": [
+    "sds:ExtinguishingMedia"
+   ],
+   "range": [
+    "sds:FireFightingMeasure"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isFireFightingMeasureOf",
+   "label": "is fire fighting measure of",
+   "comment": "Inverse of hasFireFightingMeasure: links a fire-fighting measure to the product it protects.",
+   "domain": [
+    "sds:FireFightingMeasure"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isHandlingRequirementOf",
+   "label": "is handling requirement of",
+   "comment": "Inverse of hasHandlingRequirement: links a handling requirement to the product it applies to.",
+   "domain": [
+    "sds:HandlingRequirement"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isHazardCategoryOf",
+   "label": "is hazard category of",
+   "comment": "Inverse of hasHazardCategory: links a hazard category to the GHS classification that uses it.",
+   "domain": [
+    "sds:HazardCategory"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isHazardClassOf",
+   "label": "is hazard class of",
+   "comment": "Inverse of hasHazardClass: links a hazard class to the GHS classification that uses it.",
+   "domain": [
+    "sds:HazardClass"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isHazardOf",
+   "label": "is hazard of",
+   "comment": "Inverse of hasHazard: links a hazard to the product that presents it.",
+   "domain": [
+    "sds:Hazard"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isHazardStatementOf",
+   "label": "is hazard statement of",
+   "comment": "Inverse of hasHazardStatement: links a hazard statement (H-code) to the GHS classification that carries it.",
+   "domain": [
+    "sds:HazardStatement"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isInventoryStatusOf",
+   "label": "is inventory status of",
+   "comment": "Inverse of hasInventoryStatus: links an inventory status to the chemical entity that holds it.",
+   "domain": [
+    "sds:InventoryStatus"
+   ],
+   "range": [
+    "sds:ChemicalEntity"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isOrganizationOf",
+   "label": "is organization of",
+   "comment": "Inverse of hasOrganization: links an organization to the SDS document that lists it.",
+   "domain": [
+    "sds:Organization"
+   ],
+   "range": [
+    "sds:SDSDocument"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isPhysicalChemicalPropertyOf",
+   "label": "is physical chemical property of",
+   "comment": "Inverse of hasPhysicalChemicalProperty: links a physical or chemical property to the product it characterises.",
+   "domain": [
+    "sds:PhysicalChemicalProperty"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isPictogramOf",
+   "label": "is pictogram of",
+   "comment": "Inverse of hasPictogram: links a GHS pictogram to the classification that requires it.",
+   "domain": [
+    "sds:Pictogram"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isPrecautionaryStatementOf",
+   "label": "is precautionary statement of",
+   "comment": "Inverse of hasPrecautionaryStatement: links a precautionary statement (P-code) to the GHS classification that carries it.",
+   "domain": [
+    "sds:PrecautionaryStatement"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isRegulatoryListingOf",
+   "label": "is regulatory listing of",
+   "comment": "Inverse of hasRegulatoryListing: links a regulatory listing to the chemical entity it governs.",
+   "domain": [
+    "sds:RegulatoryListing"
+   ],
+   "range": [
+    "sds:ChemicalEntity"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isSectionOf",
+   "label": "is section of",
+   "comment": "Inverse of hasSection: links an SDS section to the document it belongs to.",
+   "domain": [
+    "sds:SDSSection"
+   ],
+   "range": [
+    "sds:SDSDocument"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isSignalWordOf",
+   "label": "is signal word of",
+   "comment": "Inverse of hasSignalWord: links a signal word (Danger or Warning) to the GHS classification that uses it.",
+   "domain": [
+    "sds:SignalWord"
+   ],
+   "range": [
+    "sds:GHSClassification"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isStorageRequirementOf",
+   "label": "is storage requirement of",
+   "comment": "Inverse of hasStorageRequirement: links a storage requirement to the product it applies to.",
+   "domain": [
+    "sds:StorageRequirement"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isTargetOrganSystemOf",
+   "label": "is target organ system of",
+   "comment": "Inverse of hasTargetOrganSystem: links a target organ or system to the toxicological effect that affects it.",
+   "domain": [
+    "sds:TargetOrganSystem"
+   ],
+   "range": [
+    "sds:ToxicologicalEffect"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isThermalDecompositionProductOf",
+   "label": "is thermal decomposition product of",
+   "comment": "Inverse of mayGenerateOnThermalDecomposition: links a decomposition product to the substance that may generate it on heating.",
+   "domain": [
+    "sds:DecompositionProduct"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": "sds:mayGenerateOnThermalDecomposition"
+  },
+  {
+   "id": "sds:isToxicologicalEffectOf",
+   "label": "is toxicological effect of",
+   "comment": "Inverse of hasToxicologicalEffect: links a toxicological effect to the product that causes it.",
+   "domain": [
+    "sds:ToxicologicalEffect"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isTransportClassificationOf",
+   "label": "is transport classification of",
+   "comment": "Inverse of hasTransportClassification: links a transport classification to the product it covers.",
+   "domain": [
+    "sds:TransportClassification"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:isWasteDisposalMeasureOf",
+   "label": "is waste disposal measure of",
+   "comment": "Inverse of hasWasteDisposalMeasure: links a waste disposal measure to the product it applies to.",
+   "domain": [
+    "sds:WasteDisposalMeasure"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:manufactures",
+   "label": "manufactures",
+   "comment": "Inverse of hasManufacturer: links a manufacturer to the products it produces.",
+   "domain": [
+    "sds:Manufacturer"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:mayGenerateOnCombustion",
+   "label": "may generate on combustion",
+   "comment": "Links a product to a chemical species it may release when it burns in a fire.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:CombustionProduct"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:mayGenerateOnThermalDecomposition",
+   "label": "may generate on thermal decomposition",
+   "comment": "Links a product to a chemical species it may release under thermal decomposition short of full combustion.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "sds:DecompositionProduct"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:normalizedToChEBI",
+   "label": "normalized to ChEBI",
+   "comment": "Links a chemical mention or SDS chemical entity to a ChEBI identifier when available.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "rdfs:Resource"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:requiresControlMeasure",
+   "label": "requires control measure",
+   "comment": "Links a hazard to a control measure recommended to mitigate it.",
+   "domain": [
+    "sds:Hazard"
+   ],
+   "range": [
+    "sds:ControlMeasure"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:requiresPPE",
+   "label": "requires PPE",
+   "comment": "Links a hazard, task, or product to the personal protective equipment recommended when handling it.",
+   "domain": [
+    "sds:Hazard",
+    "sds:Product"
+   ],
+   "range": [
+    "sds:PPE"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:supplies",
+   "label": "supplies",
+   "comment": "Inverse of hasSupplier: links a supplier to the products it distributes.",
+   "domain": [
+    "sds:Supplier"
+   ],
+   "range": [
+    "sds:Product"
+   ],
+   "inverse": null
+  }
+ ],
+ "datatypeProperties": [
+  {
+   "id": "sds:address",
+   "label": "address",
+   "comment": "The physical mailing or facility address of an organization mentioned in the SDS.",
+   "domain": [
+    "sds:Organization"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:casNumber",
+   "label": "CAS number",
+   "comment": "The Chemical Abstracts Service registry number uniquely identifying a chemical entity.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:concentrationLowerBound",
+   "label": "concentration lower bound",
+   "comment": "The lower numeric bound of a component's weight-percent concentration range in a composition record.",
+   "domain": [
+    "sds:CompositionRecord"
+   ],
+   "range": [
+    "xsd:decimal"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:concentrationUpperBound",
+   "label": "concentration upper bound",
+   "comment": "The upper numeric bound of a component's weight-percent concentration range in a composition record.",
+   "domain": [
+    "sds:CompositionRecord"
+   ],
+   "range": [
+    "xsd:decimal"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:confidenceScore",
+   "label": "confidence score",
+   "comment": "A numeric score indicating how confident an extraction process is that an extracted fact is correct.",
+   "domain": [
+    "sds:ExtractionRecord"
+   ],
+   "range": [
+    "xsd:decimal"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:ecNumber",
+   "label": "EC number",
+   "comment": "The European Community number that uniquely identifies a chemical substance under EU regulations.",
+   "domain": [
+    "sds:ChemicalEntity"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:emailAddress",
+   "label": "email address",
+   "comment": "An email address associated with an organization or contact mentioned in the SDS.",
+   "domain": [
+    "sds:Organization"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:ghsCode",
+   "label": "GHS code",
+   "comment": "The alphanumeric GHS code identifying a specific hazard (H-code) or precautionary (P-code) statement.",
+   "domain": [
+    "sds:HazardStatement",
+    "sds:PrecautionaryStatement"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:hazardStatementText",
+   "label": "hazard statement text",
+   "comment": "The full text of a GHS hazard statement corresponding to its H-code.",
+   "domain": [
+    "sds:HazardStatement"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:phoneNumber",
+   "label": "phone number",
+   "comment": "A telephone number associated with an organization or emergency contact mentioned in the SDS.",
+   "domain": [
+    "sds:EmergencyContact",
+    "sds:Organization"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:precautionaryStatementText",
+   "label": "precautionary statement text",
+   "comment": "The full text of a GHS precautionary statement describing a recommended risk-reduction action.",
+   "domain": [
+    "sds:PrecautionaryStatement"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:printDate",
+   "label": "print date",
+   "comment": "The date on which the SDS document was printed or generated for distribution.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "xsd:date"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:productCode",
+   "label": "product code",
+   "comment": "The manufacturer's internal code or catalog identifier for the specific product grade.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:productName",
+   "label": "product name",
+   "comment": "The official or display name of the product as stated in the SDS.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:recommendedUse",
+   "label": "recommended use",
+   "comment": "The intended application or use case for the product as stated by the manufacturer.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:regulatoryStatusText",
+   "label": "regulatory status text",
+   "comment": "The free-text description of a product's or component's status under a specific regulatory listing.",
+   "domain": [
+    "sds:RegulatoryListing"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:revisionDate",
+   "label": "revision date",
+   "comment": "The date on which the SDS document was most recently revised.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "xsd:date"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:revisionNumber",
+   "label": "revision number",
+   "comment": "The sequential revision number identifying which version of the SDS document this is.",
+   "domain": [
+    "sds:SDSDocument"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:sourcePage",
+   "label": "source page",
+   "comment": "The page number of the SDS document where a given fact or entity was found.",
+   "domain": [
+    "prov:Entity"
+   ],
+   "range": [
+    "xsd:integer"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:sourceText",
+   "label": "source text",
+   "comment": "The verbatim text segment from the SDS document that an extracted fact or entity was derived from.",
+   "domain": [
+    "prov:Entity"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:tradeName",
+   "label": "trade name",
+   "comment": "The trademarked brand name under which the product is marketed.",
+   "domain": [
+    "sds:Product"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:transportStatusText",
+   "label": "transport status text",
+   "comment": "The free-text description of a product's transport regulatory status as stated in the SDS.",
+   "domain": [
+    "sds:TransportClassification"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:website",
+   "label": "website",
+   "comment": "A web address associated with the manufacturer, supplier, or product mentioned in the SDS.",
+   "domain": [
+    "sds:Organization"
+   ],
+   "range": [
+    "xsd:anyURI"
+   ],
+   "inverse": null
+  },
+  {
+   "id": "sds:weightPercent",
+   "label": "weight percent",
+   "comment": "The concentration of a chemical component in a product, expressed as a percentage by weight (often a range).",
+   "domain": [
+    "sds:ChemicalComponent"
+   ],
+   "range": [
+    "xsd:string"
+   ],
+   "inverse": null
+  }
+ ]
+}

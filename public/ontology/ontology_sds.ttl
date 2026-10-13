@@ -1,0 +1,1778 @@
+@prefix : <https://example.org/sds-ontology/example#> .
+@prefix ghs: <https://pubchem.ncbi.nlm.nih.gov/ghs/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sds: <https://example.org/sds-ontology#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix chebi: <http://purl.obolibrary.org/obo/CHEBI_> .
+@prefix oriont: <https://orienting.eu/oriont#> .
+@prefix schema: <https://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://example.org/sds-ontology#Ontology> .
+
+<https://example.org/sds-ontology#Ontology> rdf:type owl:Ontology ;
+                                          dcterms:description "A reusable ontology for ontology-based information extraction from Safety Data Sheets. It models SDS document sections, products, mixtures, chemical ingredients, GHS classifications, hazard statements, safety controls, toxicology, ecology, transport, regulatory status, and extraction provenance."@en ;
+                                          dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+                                          dcterms:title "Safety Data Sheet Ontology"@en ;
+                                          owl:versionInfo "0.1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+dcterms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+skos:exactMatch rdf:type owl:AnnotationProperty .
+
+
+###  https://example.org/sds-ontology#example
+sds:example rdf:type owl:AnnotationProperty ;
+            rdfs:comment "A generic, reusable example pattern illustrating typical values or usage of this class or property, suitable as a few-shot annotation template."@en ;
+            rdfs:label "example"@en .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.org/sds-ontology#appearsInSection
+sds:appearsInSection rdf:type owl:ObjectProperty ;
+                     owl:inverseOf sds:containsEntity ;
+                     rdfs:domain owl:Thing ;
+                     rdfs:range sds:SDSSection ;
+                     rdfs:comment "Links any extracted fact, statement, or entity to the SDS section in which it was found."@en ;
+                     rdfs:label "appears in section"@en ;
+                     sds:example ":h302 sds:appearsInSection :sec3 ."@en .
+
+
+###  https://example.org/sds-ontology#classifiesComponent
+sds:classifiesComponent rdf:type owl:ObjectProperty ;
+                        owl:inverseOf sds:hasGHSClassification ;
+                        rdfs:domain sds:GHSClassification ;
+                        rdfs:range sds:ChemicalEntity ;
+                        rdfs:comment "Inverse of hasGHSClassification: links a GHS classification to the chemical entity it classifies."@en ;
+                        rdfs:label "classifies component"@en .
+
+
+###  https://example.org/sds-ontology#compositionComponent
+sds:compositionComponent rdf:type owl:ObjectProperty ;
+                         owl:inverseOf sds:isCompositionComponentIn ;
+                         rdfs:domain sds:CompositionRecord ;
+                         rdfs:range sds:ChemicalComponent ;
+                         rdfs:comment "Links a composition record to the chemical component it describes."@en ;
+                         rdfs:label "composition component"@en ;
+                         sds:example ":compRecord1 sds:compositionComponent :componentY ."@en .
+
+
+###  https://example.org/sds-ontology#containsEntity
+sds:containsEntity rdf:type owl:ObjectProperty ;
+                   rdfs:domain sds:SDSSection ;
+                   rdfs:range owl:Thing ;
+                   rdfs:comment "Inverse of appearsInSection: links an SDS section to entities found within it."@en ;
+                   rdfs:label "contains entity"@en .
+
+
+###  https://example.org/sds-ontology#describesProduct
+sds:describesProduct rdf:type owl:ObjectProperty ;
+                     owl:inverseOf sds:isDescribedBy ;
+                     rdfs:domain sds:SDSDocument ;
+                     rdfs:range sds:Product ;
+                     rdfs:comment "Links an SDS document to the product it describes."@en ;
+                     rdfs:label "describes product"@en ;
+                     sds:example ":doc1 sds:describesProduct :productX ."@en .
+
+
+###  https://example.org/sds-ontology#hasComponent
+sds:hasComponent rdf:type owl:ObjectProperty ;
+                 owl:inverseOf sds:isComponentOf ;
+                 rdfs:domain sds:Product ;
+                 rdfs:range sds:ChemicalComponent ;
+                 rdfs:comment "Links a product to a chemical component contained within it."@en ;
+                 rdfs:label "has component"@en ;
+                 sds:example ":productX sds:hasComponent :componentY ."@en .
+
+
+###  https://example.org/sds-ontology#hasCompositionRecord
+sds:hasCompositionRecord rdf:type owl:ObjectProperty ;
+                         owl:inverseOf sds:isCompositionRecordOf ;
+                         rdfs:domain sds:Product ;
+                         rdfs:range sds:CompositionRecord ;
+                         rdfs:comment "Links a product to a structured composition record describing one ingredient's identity and concentration."@en ;
+                         rdfs:label "has composition record"@en ;
+                         sds:example ":productX sds:hasCompositionRecord :compRecord1 ."@en .
+
+
+###  https://example.org/sds-ontology#hasEcologicalEffect
+sds:hasEcologicalEffect rdf:type owl:ObjectProperty ;
+                        owl:inverseOf sds:isEcologicalEffectOf ;
+                        rdfs:domain sds:Product ;
+                        rdfs:range sds:EcologicalEffect ;
+                        rdfs:comment "Links a product to a documented ecological or environmental impact."@en ;
+                        rdfs:label "has ecological effect"@en ;
+                        sds:example ":productX sds:hasEcologicalEffect :effectY ."@en .
+
+
+###  https://example.org/sds-ontology#hasEmergencyContact
+sds:hasEmergencyContact rdf:type owl:ObjectProperty ;
+                        owl:inverseOf sds:isEmergencyContactOf ;
+                        rdfs:domain sds:SDSDocument ;
+                        rdfs:range sds:EmergencyContact ;
+                        rdfs:comment "Links an SDS document to an emergency contact phone number or service."@en ;
+                        rdfs:label "has emergency contact"@en ;
+                        sds:example ":doc1 sds:hasEmergencyContact :emergencyContactX ."@en .
+
+
+###  https://example.org/sds-ontology#hasEvidenceSpan
+sds:hasEvidenceSpan rdf:type owl:ObjectProperty ;
+                    owl:inverseOf sds:isEvidenceSpanOf ;
+                    rdfs:domain sds:ExtractionRecord ;
+                    rdfs:range sds:EvidenceSpan ;
+                    rdfs:comment "Links an extraction record to the specific source text span that justifies the extracted fact."@en ;
+                    rdfs:label "has evidence span"@en ;
+                    sds:example ":extraction1 sds:hasEvidenceSpan :span1 ."@en .
+
+
+###  https://example.org/sds-ontology#hasExposureLimit
+sds:hasExposureLimit rdf:type owl:ObjectProperty ;
+                     owl:inverseOf sds:isExposureLimitOf ;
+                     rdfs:domain sds:ChemicalEntity ;
+                     rdfs:range sds:ExposureLimit ;
+                     rdfs:comment "Links a chemical component to an occupational exposure limit value, such as an OSHA PEL or ACGIH TWA."@en ;
+                     rdfs:label "has exposure limit"@en ;
+                     sds:example ":componentY sds:hasExposureLimit :limitZ ."@en .
+
+
+###  https://example.org/sds-ontology#hasExtinguishingMedia
+sds:hasExtinguishingMedia rdf:type owl:ObjectProperty ;
+                          owl:inverseOf sds:isExtinguishingMediaFor ;
+                          rdfs:domain sds:FireFightingMeasure ;
+                          rdfs:range sds:ExtinguishingMedia ;
+                          rdfs:comment "Links a fire-fighting measure to the specific extinguishing agent it recommends."@en ;
+                          rdfs:label "has extinguishing media"@en ;
+                          sds:example ":measureZ sds:hasExtinguishingMedia :mediaW ."@en .
+
+
+###  https://example.org/sds-ontology#hasFireFightingMeasure
+sds:hasFireFightingMeasure rdf:type owl:ObjectProperty ;
+                           owl:inverseOf sds:isFireFightingMeasureOf ;
+                           rdfs:domain sds:Product ;
+                           rdfs:range sds:FireFightingMeasure ;
+                           rdfs:comment "Links a product or fire hazard to the recommended fire-fighting response."@en ;
+                           rdfs:label "has fire-fighting measure"@en ;
+                           sds:example ":productX sds:hasFireFightingMeasure :measureZ ."@en .
+
+
+###  https://example.org/sds-ontology#hasFirstAidMeasure
+sds:hasFirstAidMeasure rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( sds:Hazard
+                                                   sds:RouteOfExposure
+                                                 )
+                                   ] ;
+                       rdfs:range sds:FirstAidMeasure ;
+                       rdfs:comment "Links a hazard or exposure route to the recommended first-aid response."@en ;
+                       rdfs:label "has first aid measure"@en ;
+                       sds:example ":hazardY sds:hasFirstAidMeasure :measureZ ."@en .
+
+
+###  https://example.org/sds-ontology#hasGHSClassification
+sds:hasGHSClassification rdf:type owl:ObjectProperty ;
+                         rdfs:domain sds:ChemicalEntity ;
+                         rdfs:range sds:GHSClassification ;
+                         rdfs:comment "Links a chemical component to a structured GHS classification consisting of hazard class, category, and statement."@en ;
+                         rdfs:label "has GHS classification"@en ;
+                         sds:example ":componentY sds:hasGHSClassification :classificationZ ."@en .
+
+
+###  https://example.org/sds-ontology#hasHandlingRequirement
+sds:hasHandlingRequirement rdf:type owl:ObjectProperty ;
+                           owl:inverseOf sds:isHandlingRequirementOf ;
+                           rdfs:domain sds:Product ;
+                           rdfs:range sds:HandlingRequirement ;
+                           rdfs:comment "Links a product to a recommended practice for safely handling it during use or processing."@en ;
+                           rdfs:label "has handling requirement"@en ;
+                           sds:example ":productX sds:hasHandlingRequirement :requirementY ."@en .
+
+
+###  https://example.org/sds-ontology#hasHazard
+sds:hasHazard rdf:type owl:ObjectProperty ;
+              owl:inverseOf sds:isHazardOf ;
+              rdfs:domain sds:Product ;
+              rdfs:range sds:Hazard ;
+              rdfs:comment "Links a product to a hazard it presents under typical use, processing, or fire conditions."@en ;
+              rdfs:label "has hazard"@en ;
+              sds:example ":productX sds:hasHazard :hazardY ."@en .
+
+
+###  https://example.org/sds-ontology#hasHazardCategory
+sds:hasHazardCategory rdf:type owl:ObjectProperty ;
+                      owl:inverseOf sds:isHazardCategoryOf ;
+                      rdfs:domain sds:GHSClassification ;
+                      rdfs:range sds:HazardCategory ;
+                      rdfs:comment "Links a GHS classification to its severity category, such as Category 2 or Category 4."@en ;
+                      rdfs:label "has hazard category"@en ;
+                      sds:example ":cat2inst a sds:Category2 . :classificationZ sds:hasHazardCategory :cat2inst ."@en .
+
+
+###  https://example.org/sds-ontology#hasHazardClass
+sds:hasHazardClass rdf:type owl:ObjectProperty ;
+                   owl:inverseOf sds:isHazardClassOf ;
+                   rdfs:domain sds:GHSClassification ;
+                   rdfs:range sds:HazardClass ;
+                   rdfs:comment "Links a GHS classification to its hazard class, such as Acute Toxicity or Aquatic Chronic hazard."@en ;
+                   rdfs:label "has hazard class"@en ;
+                   sds:example ":classificationZ sds:hasHazardClass :acuteToxicityOral ."@en .
+
+
+###  https://example.org/sds-ontology#hasHazardStatement
+sds:hasHazardStatement rdf:type owl:ObjectProperty ;
+                       owl:inverseOf sds:isHazardStatementOf ;
+                       rdfs:domain sds:GHSClassification ;
+                       rdfs:range sds:HazardStatement ;
+                       rdfs:comment "Links a GHS classification to the standardized hazard statement (H-code) it carries."@en ;
+                       rdfs:label "has hazard statement"@en ;
+                       sds:example ":classificationZ sds:hasHazardStatement :h332 ."@en .
+
+
+###  https://example.org/sds-ontology#hasInventoryStatus
+sds:hasInventoryStatus rdf:type owl:ObjectProperty ;
+                       owl:inverseOf sds:isInventoryStatusOf ;
+                       rdfs:domain sds:ChemicalEntity ;
+                       rdfs:range sds:InventoryStatus ;
+                       rdfs:comment "Links a product or chemical component to its listing status on a national chemical inventory."@en ;
+                       rdfs:label "has inventory status"@en ;
+                       sds:example ":productX sds:hasInventoryStatus :inventoryY ."@en .
+
+
+###  https://example.org/sds-ontology#hasManufacturer
+sds:hasManufacturer rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf sds:hasOrganization ;
+                    owl:inverseOf sds:manufactures ;
+                    rdfs:domain sds:Product ;
+                    rdfs:range sds:Manufacturer ;
+                    rdfs:comment "Links a product to the organization that manufactures it."@en ;
+                    rdfs:label "has manufacturer"@en ;
+                    sds:example ":productX sds:hasManufacturer :manufacturerY ."@en .
+
+
+###  https://example.org/sds-ontology#hasOrganization
+sds:hasOrganization rdf:type owl:ObjectProperty ;
+                    owl:inverseOf sds:isOrganizationOf ;
+                    rdfs:domain sds:SDSDocument ;
+                    rdfs:range sds:Organization ;
+                    rdfs:comment "Links an SDS document to any organization (manufacturer, supplier, or other) referenced in it. Specialized by hasManufacturer and hasSupplier."@en ;
+                    rdfs:label "has organization"@en ;
+                    sds:example ":doc1 sds:hasOrganization :orgX ."@en .
+
+
+###  https://example.org/sds-ontology#hasPhysicalChemicalProperty
+sds:hasPhysicalChemicalProperty rdf:type owl:ObjectProperty ;
+                                owl:inverseOf sds:isPhysicalChemicalPropertyOf ;
+                                rdfs:domain sds:Product ;
+                                rdfs:range sds:PhysicalChemicalProperty ;
+                                rdfs:comment "Links a product to one of its measured physical or chemical properties."@en ;
+                                rdfs:label "has physical or chemical property"@en ;
+                                sds:example ":productX sds:hasPhysicalChemicalProperty :propertyY ."@en .
+
+
+###  https://example.org/sds-ontology#hasPictogram
+sds:hasPictogram rdf:type owl:ObjectProperty ;
+                 owl:inverseOf sds:isPictogramOf ;
+                 rdfs:domain sds:GHSClassification ;
+                 rdfs:range sds:Pictogram ;
+                 rdfs:comment "Links a GHS classification to the hazard pictogram it displays on a label."@en ;
+                 rdfs:label "has pictogram"@en ;
+                 sds:example ":classificationZ sds:hasPictogram :exclamationMark ."@en .
+
+
+###  https://example.org/sds-ontology#hasPrecautionaryStatement
+sds:hasPrecautionaryStatement rdf:type owl:ObjectProperty ;
+                              owl:inverseOf sds:isPrecautionaryStatementOf ;
+                              rdfs:domain sds:GHSClassification ;
+                              rdfs:range sds:PrecautionaryStatement ;
+                              rdfs:comment "Links a GHS classification or hazard to a recommended precautionary statement."@en ;
+                              rdfs:label "has precautionary statement"@en ;
+                              sds:example ":classificationZ sds:hasPrecautionaryStatement :p264 ."@en .
+
+
+###  https://example.org/sds-ontology#hasRegulatoryListing
+sds:hasRegulatoryListing rdf:type owl:ObjectProperty ;
+                         owl:inverseOf sds:isRegulatoryListingOf ;
+                         rdfs:domain sds:ChemicalEntity ;
+                         rdfs:range sds:RegulatoryListing ;
+                         rdfs:comment "Links a product or component to a regulatory program listing, such as SARA 313 or California Proposition 65."@en ;
+                         rdfs:label "has regulatory listing"@en ;
+                         sds:example ":componentY sds:hasRegulatoryListing :listingZ ."@en .
+
+
+###  https://example.org/sds-ontology#hasRouteOfExposure
+sds:hasRouteOfExposure rdf:type owl:ObjectProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( sds:Hazard
+                                                   sds:ToxicologicalEffect
+                                                 )
+                                   ] ;
+                       rdfs:range sds:RouteOfExposure ;
+                       rdfs:comment "Links a hazard or toxicological effect to the route by which exposure occurs, such as inhalation or skin contact."@en ;
+                       rdfs:label "has route of exposure"@en ;
+                       sds:example ":hazardY sds:hasRouteOfExposure :inhalation ."@en .
+
+
+###  https://example.org/sds-ontology#hasSection
+sds:hasSection rdf:type owl:ObjectProperty ;
+               owl:inverseOf sds:isSectionOf ;
+               rdfs:domain sds:SDSDocument ;
+               rdfs:range sds:SDSSection ;
+               rdfs:comment "Links an SDS document to one of its constituent sections."@en ;
+               rdfs:label "has section"@en ;
+               sds:example ":doc1 sds:hasSection :sec2 ."@en .
+
+
+###  https://example.org/sds-ontology#hasSignalWord
+sds:hasSignalWord rdf:type owl:ObjectProperty ;
+                  owl:inverseOf sds:isSignalWordOf ;
+                  rdfs:domain sds:GHSClassification ;
+                  rdfs:range sds:SignalWord ;
+                  rdfs:comment "Links a GHS classification to its associated signal word, 'Danger' or 'Warning'."@en ;
+                  rdfs:label "has signal word"@en ;
+                  sds:example ":warnInst a sds:Warning . :classificationZ sds:hasSignalWord :warnInst ."@en .
+
+
+###  https://example.org/sds-ontology#hasStorageRequirement
+sds:hasStorageRequirement rdf:type owl:ObjectProperty ;
+                          owl:inverseOf sds:isStorageRequirementOf ;
+                          rdfs:domain sds:Product ;
+                          rdfs:range sds:StorageRequirement ;
+                          rdfs:comment "Links a product to a recommended condition for its safe storage."@en ;
+                          rdfs:label "has storage requirement"@en ;
+                          sds:example ":productX sds:hasStorageRequirement :requirementY ."@en .
+
+
+###  https://example.org/sds-ontology#hasSupplier
+sds:hasSupplier rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf sds:hasOrganization ;
+                owl:inverseOf sds:supplies ;
+                rdfs:domain sds:Product ;
+                rdfs:range sds:Supplier ;
+                rdfs:comment "Links a product to the organization that supplies or sells it."@en ;
+                rdfs:label "has supplier"@en ;
+                sds:example ":productX sds:hasSupplier :supplierY ."@en .
+
+
+###  https://example.org/sds-ontology#hasTargetOrganSystem
+sds:hasTargetOrganSystem rdf:type owl:ObjectProperty ;
+                         owl:inverseOf sds:isTargetOrganSystemOf ;
+                         rdfs:domain sds:ToxicologicalEffect ;
+                         rdfs:range sds:TargetOrganSystem ;
+                         rdfs:comment "Links a toxicological effect to the body system or organ it specifically affects."@en ;
+                         rdfs:label "has target organ system"@en ;
+                         sds:example ":effectY sds:hasTargetOrganSystem :respiratoryTract ."@en .
+
+
+###  https://example.org/sds-ontology#hasToxicologicalEffect
+sds:hasToxicologicalEffect rdf:type owl:ObjectProperty ;
+                           owl:inverseOf sds:isToxicologicalEffectOf ;
+                           rdfs:domain sds:Product ;
+                           rdfs:range sds:ToxicologicalEffect ;
+                           rdfs:comment "Links a product to a documented toxicological effect on humans or animals."@en ;
+                           rdfs:label "has toxicological effect"@en ;
+                           sds:example ":productX sds:hasToxicologicalEffect :effectY ."@en .
+
+
+###  https://example.org/sds-ontology#hasTransportClassification
+sds:hasTransportClassification rdf:type owl:ObjectProperty ;
+                               owl:inverseOf sds:isTransportClassificationOf ;
+                               rdfs:domain sds:Product ;
+                               rdfs:range sds:TransportClassification ;
+                               rdfs:comment "Links a product to its regulatory transport classification."@en ;
+                               rdfs:label "has transport classification"@en ;
+                               sds:example ":productX sds:hasTransportClassification :transportY ."@en .
+
+
+###  https://example.org/sds-ontology#hasWasteDisposalMeasure
+sds:hasWasteDisposalMeasure rdf:type owl:ObjectProperty ;
+                            owl:inverseOf sds:isWasteDisposalMeasureOf ;
+                            rdfs:domain sds:Product ;
+                            rdfs:range sds:WasteDisposalMeasure ;
+                            rdfs:comment "Links a product to a recommended waste disposal method for unused product or residues."@en ;
+                            rdfs:label "has waste disposal measure"@en ;
+                            sds:example ":productX sds:hasWasteDisposalMeasure :measureY ."@en .
+
+
+###  https://example.org/sds-ontology#isChEBINormalizationOf
+sds:isChEBINormalizationOf rdf:type owl:ObjectProperty ;
+                           owl:inverseOf sds:normalizedToChEBI ;
+                           rdfs:domain rdfs:Resource ;
+                           rdfs:range sds:ChemicalEntity ;
+                           rdfs:comment "Inverse of normalizedToChEBI: links a ChEBI entity to the SDS chemical entity it normalises."@en ;
+                           rdfs:label "is ChEBI normalization of"@en .
+
+
+###  https://example.org/sds-ontology#isCombustionProductOf
+sds:isCombustionProductOf rdf:type owl:ObjectProperty ;
+                          owl:inverseOf sds:mayGenerateOnCombustion ;
+                          rdfs:domain sds:CombustionProduct ;
+                          rdfs:range sds:Product ;
+                          rdfs:comment "Inverse of mayGenerateOnCombustion: links a combustion product to the substance that may generate it."@en ;
+                          rdfs:label "is combustion product of"@en .
+
+
+###  https://example.org/sds-ontology#isComponentOf
+sds:isComponentOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain sds:ChemicalComponent ;
+                  rdfs:range sds:Product ;
+                  rdfs:comment "Inverse of hasComponent: links a chemical component to the product it is part of."@en ;
+                  rdfs:label "is component of"@en .
+
+
+###  https://example.org/sds-ontology#isCompositionComponentIn
+sds:isCompositionComponentIn rdf:type owl:ObjectProperty ;
+                             rdfs:domain sds:ChemicalComponent ;
+                             rdfs:range sds:CompositionRecord ;
+                             rdfs:comment "Inverse of compositionComponent: links a chemical component to the composition record it appears in."@en ;
+                             rdfs:label "is composition component in"@en .
+
+
+###  https://example.org/sds-ontology#isCompositionRecordOf
+sds:isCompositionRecordOf rdf:type owl:ObjectProperty ;
+                          rdfs:domain sds:CompositionRecord ;
+                          rdfs:range sds:Product ;
+                          rdfs:comment "Inverse of hasCompositionRecord: links a composition record to the product whose formulation it describes."@en ;
+                          rdfs:label "is composition record of"@en .
+
+
+###  https://example.org/sds-ontology#isControlMeasureFor
+sds:isControlMeasureFor rdf:type owl:ObjectProperty ;
+                        owl:inverseOf sds:requiresControlMeasure ;
+                        rdfs:domain sds:ControlMeasure ;
+                        rdfs:range sds:Hazard ;
+                        rdfs:comment "Inverse of requiresControlMeasure: links a control measure to the hazard it mitigates."@en ;
+                        rdfs:label "is control measure for"@en .
+
+
+###  https://example.org/sds-ontology#isDescribedBy
+sds:isDescribedBy rdf:type owl:ObjectProperty ;
+                  rdfs:domain sds:Product ;
+                  rdfs:range sds:SDSDocument ;
+                  rdfs:comment "Inverse of describesProduct: links a product to the SDS document that describes it."@en ;
+                  rdfs:label "is described by"@en .
+
+
+###  https://example.org/sds-ontology#isEcologicalEffectOf
+sds:isEcologicalEffectOf rdf:type owl:ObjectProperty ;
+                         rdfs:domain sds:EcologicalEffect ;
+                         rdfs:range sds:Product ;
+                         rdfs:comment "Inverse of hasEcologicalEffect: links an ecological effect to the product that causes it."@en ;
+                         rdfs:label "is ecological effect of"@en .
+
+
+###  https://example.org/sds-ontology#isEmergencyContactOf
+sds:isEmergencyContactOf rdf:type owl:ObjectProperty ;
+                         rdfs:domain sds:EmergencyContact ;
+                         rdfs:range sds:SDSDocument ;
+                         rdfs:comment "Inverse of hasEmergencyContact: links an emergency contact to the SDS document that references it."@en ;
+                         rdfs:label "is emergency contact of"@en .
+
+
+###  https://example.org/sds-ontology#isEvidenceSpanOf
+sds:isEvidenceSpanOf rdf:type owl:ObjectProperty ;
+                     rdfs:domain sds:EvidenceSpan ;
+                     rdfs:range sds:ExtractionRecord ;
+                     rdfs:comment "Inverse of hasEvidenceSpan: links an evidence span to the extraction record it supports."@en ;
+                     rdfs:label "is evidence span of"@en .
+
+
+###  https://example.org/sds-ontology#isExposureLimitOf
+sds:isExposureLimitOf rdf:type owl:ObjectProperty ;
+                      rdfs:domain sds:ExposureLimit ;
+                      rdfs:range sds:ChemicalEntity ;
+                      rdfs:comment "Inverse of hasExposureLimit: links an exposure limit to the chemical entity for which it is defined."@en ;
+                      rdfs:label "is exposure limit of"@en .
+
+
+###  https://example.org/sds-ontology#isExtinguishingMediaFor
+sds:isExtinguishingMediaFor rdf:type owl:ObjectProperty ;
+                            rdfs:domain sds:ExtinguishingMedia ;
+                            rdfs:range sds:FireFightingMeasure ;
+                            rdfs:comment "Inverse of hasExtinguishingMedia: links an extinguishing medium to the fire-fighting measure that recommends it."@en ;
+                            rdfs:label "is extinguishing media for"@en .
+
+
+###  https://example.org/sds-ontology#isFireFightingMeasureOf
+sds:isFireFightingMeasureOf rdf:type owl:ObjectProperty ;
+                            rdfs:domain sds:FireFightingMeasure ;
+                            rdfs:range sds:Product ;
+                            rdfs:comment "Inverse of hasFireFightingMeasure: links a fire-fighting measure to the product it protects."@en ;
+                            rdfs:label "is fire fighting measure of"@en .
+
+
+###  https://example.org/sds-ontology#isHandlingRequirementOf
+sds:isHandlingRequirementOf rdf:type owl:ObjectProperty ;
+                            rdfs:domain sds:HandlingRequirement ;
+                            rdfs:range sds:Product ;
+                            rdfs:comment "Inverse of hasHandlingRequirement: links a handling requirement to the product it applies to."@en ;
+                            rdfs:label "is handling requirement of"@en .
+
+
+###  https://example.org/sds-ontology#isHazardCategoryOf
+sds:isHazardCategoryOf rdf:type owl:ObjectProperty ;
+                       rdfs:domain sds:HazardCategory ;
+                       rdfs:range sds:GHSClassification ;
+                       rdfs:comment "Inverse of hasHazardCategory: links a hazard category to the GHS classification that uses it."@en ;
+                       rdfs:label "is hazard category of"@en .
+
+
+###  https://example.org/sds-ontology#isHazardClassOf
+sds:isHazardClassOf rdf:type owl:ObjectProperty ;
+                    rdfs:domain sds:HazardClass ;
+                    rdfs:range sds:GHSClassification ;
+                    rdfs:comment "Inverse of hasHazardClass: links a hazard class to the GHS classification that uses it."@en ;
+                    rdfs:label "is hazard class of"@en .
+
+
+###  https://example.org/sds-ontology#isHazardOf
+sds:isHazardOf rdf:type owl:ObjectProperty ;
+               rdfs:domain sds:Hazard ;
+               rdfs:range sds:Product ;
+               rdfs:comment "Inverse of hasHazard: links a hazard to the product that presents it."@en ;
+               rdfs:label "is hazard of"@en .
+
+
+###  https://example.org/sds-ontology#isHazardStatementOf
+sds:isHazardStatementOf rdf:type owl:ObjectProperty ;
+                        rdfs:domain sds:HazardStatement ;
+                        rdfs:range sds:GHSClassification ;
+                        rdfs:comment "Inverse of hasHazardStatement: links a hazard statement (H-code) to the GHS classification that carries it."@en ;
+                        rdfs:label "is hazard statement of"@en .
+
+
+###  https://example.org/sds-ontology#isInventoryStatusOf
+sds:isInventoryStatusOf rdf:type owl:ObjectProperty ;
+                        rdfs:domain sds:InventoryStatus ;
+                        rdfs:range sds:ChemicalEntity ;
+                        rdfs:comment "Inverse of hasInventoryStatus: links an inventory status to the chemical entity that holds it."@en ;
+                        rdfs:label "is inventory status of"@en .
+
+
+###  https://example.org/sds-ontology#isOrganizationOf
+sds:isOrganizationOf rdf:type owl:ObjectProperty ;
+                     rdfs:domain sds:Organization ;
+                     rdfs:range sds:SDSDocument ;
+                     rdfs:comment "Inverse of hasOrganization: links an organization to the SDS document that lists it."@en ;
+                     rdfs:label "is organization of"@en .
+
+
+###  https://example.org/sds-ontology#isPhysicalChemicalPropertyOf
+sds:isPhysicalChemicalPropertyOf rdf:type owl:ObjectProperty ;
+                                 rdfs:domain sds:PhysicalChemicalProperty ;
+                                 rdfs:range sds:Product ;
+                                 rdfs:comment "Inverse of hasPhysicalChemicalProperty: links a physical or chemical property to the product it characterises."@en ;
+                                 rdfs:label "is physical chemical property of"@en .
+
+
+###  https://example.org/sds-ontology#isPictogramOf
+sds:isPictogramOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain sds:Pictogram ;
+                  rdfs:range sds:GHSClassification ;
+                  rdfs:comment "Inverse of hasPictogram: links a GHS pictogram to the classification that requires it."@en ;
+                  rdfs:label "is pictogram of"@en .
+
+
+###  https://example.org/sds-ontology#isPrecautionaryStatementOf
+sds:isPrecautionaryStatementOf rdf:type owl:ObjectProperty ;
+                               rdfs:domain sds:PrecautionaryStatement ;
+                               rdfs:range sds:GHSClassification ;
+                               rdfs:comment "Inverse of hasPrecautionaryStatement: links a precautionary statement (P-code) to the GHS classification that carries it."@en ;
+                               rdfs:label "is precautionary statement of"@en .
+
+
+###  https://example.org/sds-ontology#isRegulatoryListingOf
+sds:isRegulatoryListingOf rdf:type owl:ObjectProperty ;
+                          rdfs:domain sds:RegulatoryListing ;
+                          rdfs:range sds:ChemicalEntity ;
+                          rdfs:comment "Inverse of hasRegulatoryListing: links a regulatory listing to the chemical entity it governs."@en ;
+                          rdfs:label "is regulatory listing of"@en .
+
+
+###  https://example.org/sds-ontology#isSectionOf
+sds:isSectionOf rdf:type owl:ObjectProperty ;
+                rdfs:domain sds:SDSSection ;
+                rdfs:range sds:SDSDocument ;
+                rdfs:comment "Inverse of hasSection: links an SDS section to the document it belongs to."@en ;
+                rdfs:label "is section of"@en .
+
+
+###  https://example.org/sds-ontology#isSignalWordOf
+sds:isSignalWordOf rdf:type owl:ObjectProperty ;
+                   rdfs:domain sds:SignalWord ;
+                   rdfs:range sds:GHSClassification ;
+                   rdfs:comment "Inverse of hasSignalWord: links a signal word (Danger or Warning) to the GHS classification that uses it."@en ;
+                   rdfs:label "is signal word of"@en .
+
+
+###  https://example.org/sds-ontology#isStorageRequirementOf
+sds:isStorageRequirementOf rdf:type owl:ObjectProperty ;
+                           rdfs:domain sds:StorageRequirement ;
+                           rdfs:range sds:Product ;
+                           rdfs:comment "Inverse of hasStorageRequirement: links a storage requirement to the product it applies to."@en ;
+                           rdfs:label "is storage requirement of"@en .
+
+
+###  https://example.org/sds-ontology#isTargetOrganSystemOf
+sds:isTargetOrganSystemOf rdf:type owl:ObjectProperty ;
+                          rdfs:domain sds:TargetOrganSystem ;
+                          rdfs:range sds:ToxicologicalEffect ;
+                          rdfs:comment "Inverse of hasTargetOrganSystem: links a target organ or system to the toxicological effect that affects it."@en ;
+                          rdfs:label "is target organ system of"@en .
+
+
+###  https://example.org/sds-ontology#isThermalDecompositionProductOf
+sds:isThermalDecompositionProductOf rdf:type owl:ObjectProperty ;
+                                    owl:inverseOf sds:mayGenerateOnThermalDecomposition ;
+                                    rdfs:domain sds:DecompositionProduct ;
+                                    rdfs:range sds:Product ;
+                                    rdfs:comment "Inverse of mayGenerateOnThermalDecomposition: links a decomposition product to the substance that may generate it on heating."@en ;
+                                    rdfs:label "is thermal decomposition product of"@en .
+
+
+###  https://example.org/sds-ontology#isToxicologicalEffectOf
+sds:isToxicologicalEffectOf rdf:type owl:ObjectProperty ;
+                            rdfs:domain sds:ToxicologicalEffect ;
+                            rdfs:range sds:Product ;
+                            rdfs:comment "Inverse of hasToxicologicalEffect: links a toxicological effect to the product that causes it."@en ;
+                            rdfs:label "is toxicological effect of"@en .
+
+
+###  https://example.org/sds-ontology#isTransportClassificationOf
+sds:isTransportClassificationOf rdf:type owl:ObjectProperty ;
+                                rdfs:domain sds:TransportClassification ;
+                                rdfs:range sds:Product ;
+                                rdfs:comment "Inverse of hasTransportClassification: links a transport classification to the product it covers."@en ;
+                                rdfs:label "is transport classification of"@en .
+
+
+###  https://example.org/sds-ontology#isWasteDisposalMeasureOf
+sds:isWasteDisposalMeasureOf rdf:type owl:ObjectProperty ;
+                             rdfs:domain sds:WasteDisposalMeasure ;
+                             rdfs:range sds:Product ;
+                             rdfs:comment "Inverse of hasWasteDisposalMeasure: links a waste disposal measure to the product it applies to."@en ;
+                             rdfs:label "is waste disposal measure of"@en .
+
+
+###  https://example.org/sds-ontology#manufactures
+sds:manufactures rdf:type owl:ObjectProperty ;
+                 rdfs:domain sds:Manufacturer ;
+                 rdfs:range sds:Product ;
+                 rdfs:comment "Inverse of hasManufacturer: links a manufacturer to the products it produces."@en ;
+                 rdfs:label "manufactures"@en .
+
+
+###  https://example.org/sds-ontology#mayGenerateOnCombustion
+sds:mayGenerateOnCombustion rdf:type owl:ObjectProperty ;
+                            rdfs:domain sds:Product ;
+                            rdfs:range sds:CombustionProduct ;
+                            rdfs:comment "Links a product to a chemical species it may release when it burns in a fire."@en ;
+                            rdfs:label "may generate on combustion"@en ;
+                            sds:example ":productX sds:mayGenerateOnCombustion :combustionProductY ."@en .
+
+
+###  https://example.org/sds-ontology#mayGenerateOnThermalDecomposition
+sds:mayGenerateOnThermalDecomposition rdf:type owl:ObjectProperty ;
+                                      rdfs:domain sds:Product ;
+                                      rdfs:range sds:DecompositionProduct ;
+                                      rdfs:comment "Links a product to a chemical species it may release under thermal decomposition short of full combustion."@en ;
+                                      rdfs:label "may generate on thermal decomposition"@en ;
+                                      sds:example ":productX sds:mayGenerateOnThermalDecomposition :decompositionProductY ."@en .
+
+
+###  https://example.org/sds-ontology#normalizedToChEBI
+sds:normalizedToChEBI rdf:type owl:ObjectProperty ;
+                      rdfs:domain sds:ChemicalEntity ;
+                      rdfs:range rdfs:Resource ;
+                      rdfs:comment "Links a chemical mention or SDS chemical entity to a ChEBI identifier when available."@en ;
+                      rdfs:label "normalized to ChEBI"@en ;
+                      sds:example ":componentY sds:normalizedToChEBI chebi:32234 ."@en .
+
+
+###  https://example.org/sds-ontology#requiresControlMeasure
+sds:requiresControlMeasure rdf:type owl:ObjectProperty ;
+                           rdfs:domain sds:Hazard ;
+                           rdfs:range sds:ControlMeasure ;
+                           rdfs:comment "Links a hazard to a control measure recommended to mitigate it."@en ;
+                           rdfs:label "requires control measure"@en ;
+                           sds:example ":hazardY sds:requiresControlMeasure :controlZ ."@en .
+
+
+###  https://example.org/sds-ontology#requiresPPE
+sds:requiresPPE rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( sds:Hazard
+                                            sds:Product
+                                          )
+                            ] ;
+                rdfs:range sds:PPE ;
+                rdfs:comment "Links a hazard, task, or product to the personal protective equipment recommended when handling it."@en ;
+                rdfs:label "requires PPE"@en ;
+                sds:example ":hazardY sds:requiresPPE :ppeZ ."@en .
+
+
+###  https://example.org/sds-ontology#supplies
+sds:supplies rdf:type owl:ObjectProperty ;
+             rdfs:domain sds:Supplier ;
+             rdfs:range sds:Product ;
+             rdfs:comment "Inverse of hasSupplier: links a supplier to the products it distributes."@en ;
+             rdfs:label "supplies"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://example.org/sds-ontology#address
+sds:address rdf:type owl:DatatypeProperty ;
+            rdfs:domain sds:Organization ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The physical mailing or facility address of an organization mentioned in the SDS."@en ;
+            rdfs:label "address"@en ;
+            rdfs:seeAlso oriont:Location ;
+            sds:example ":orgX sds:address \"123 Main St, City, Country\" ."@en .
+
+
+###  https://example.org/sds-ontology#casNumber
+sds:casNumber rdf:type owl:DatatypeProperty ;
+              rdfs:domain sds:ChemicalEntity ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The Chemical Abstracts Service registry number uniquely identifying a chemical entity."@en ;
+              rdfs:label "CAS number"@en ;
+              sds:example ":componentX sds:casNumber \"0000-00-0\" ."@en .
+
+
+###  https://example.org/sds-ontology#concentrationLowerBound
+sds:concentrationLowerBound rdf:type owl:DatatypeProperty ;
+                            rdfs:domain sds:CompositionRecord ;
+                            rdfs:range xsd:decimal ;
+                            rdfs:comment "The lower numeric bound of a component's weight-percent concentration range in a composition record."@en ;
+                            rdfs:label "concentration lower bound"@en ;
+                            sds:example ":compRecord1 sds:concentrationLowerBound 0.3 ."@en .
+
+
+###  https://example.org/sds-ontology#concentrationUpperBound
+sds:concentrationUpperBound rdf:type owl:DatatypeProperty ;
+                            rdfs:domain sds:CompositionRecord ;
+                            rdfs:range xsd:decimal ;
+                            rdfs:comment "The upper numeric bound of a component's weight-percent concentration range in a composition record."@en ;
+                            rdfs:label "concentration upper bound"@en ;
+                            sds:example ":compRecord1 sds:concentrationUpperBound 1.0 ."@en .
+
+
+###  https://example.org/sds-ontology#confidenceScore
+sds:confidenceScore rdf:type owl:DatatypeProperty ;
+                    rdfs:domain sds:ExtractionRecord ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "A numeric score indicating how confident an extraction process is that an extracted fact is correct."@en ;
+                    rdfs:label "confidence score"@en ;
+                    sds:example ":extraction1 sds:confidenceScore 0.95 ."@en .
+
+
+###  https://example.org/sds-ontology#ecNumber
+sds:ecNumber rdf:type owl:DatatypeProperty ;
+             rdfs:domain sds:ChemicalEntity ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The European Community number that uniquely identifies a chemical substance under EU regulations."@en ;
+             rdfs:label "EC number"@en ;
+             sds:example ":componentX sds:ecNumber \"200-000-0\" ."@en .
+
+
+###  https://example.org/sds-ontology#emailAddress
+sds:emailAddress rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sds:Organization ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "An email address associated with an organization or contact mentioned in the SDS."@en ;
+                 rdfs:label "email address"@en ;
+                 sds:example ":orgX sds:emailAddress \"contact@example.com\" ."@en .
+
+
+###  https://example.org/sds-ontology#ghsCode
+sds:ghsCode rdf:type owl:DatatypeProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( sds:HazardStatement
+                                        sds:PrecautionaryStatement
+                                      )
+                        ] ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The alphanumeric GHS code identifying a specific hazard (H-code) or precautionary (P-code) statement."@en ;
+            rdfs:label "GHS code"@en ;
+            sds:example ":h332 sds:ghsCode \"H332\" ."@en .
+
+
+###  https://example.org/sds-ontology#hazardStatementText
+sds:hazardStatementText rdf:type owl:DatatypeProperty ;
+                        rdfs:domain sds:HazardStatement ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "The full text of a GHS hazard statement corresponding to its H-code."@en ;
+                        rdfs:label "hazard statement text"@en ;
+                        sds:example ":h332 sds:hazardStatementText \"Harmful if inhaled\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#phoneNumber
+sds:phoneNumber rdf:type owl:DatatypeProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( sds:EmergencyContact
+                                            sds:Organization
+                                          )
+                            ] ;
+                rdfs:range xsd:string ;
+                rdfs:comment "A telephone number associated with an organization or emergency contact mentioned in the SDS."@en ;
+                rdfs:label "phone number"@en ;
+                sds:example ":orgX sds:phoneNumber \"+1-000-000-0000\" ."@en .
+
+
+###  https://example.org/sds-ontology#precautionaryStatementText
+sds:precautionaryStatementText rdf:type owl:DatatypeProperty ;
+                               rdfs:domain sds:PrecautionaryStatement ;
+                               rdfs:range xsd:string ;
+                               rdfs:comment "The full text of a GHS precautionary statement describing a recommended risk-reduction action."@en ;
+                               rdfs:label "precautionary statement text"@en ;
+                               sds:example ":p264 sds:precautionaryStatementText \"Wash hands thoroughly after handling\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#printDate
+sds:printDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain sds:SDSDocument ;
+              rdfs:range xsd:date ;
+              rdfs:comment "The date on which the SDS document was printed or generated for distribution."@en ;
+              rdfs:label "print date"@en ;
+              sds:example ":doc1 sds:printDate \"2020-01-15\"^^xsd:date ."@en .
+
+
+###  https://example.org/sds-ontology#productCode
+sds:productCode rdf:type owl:DatatypeProperty ;
+                rdfs:domain sds:Product ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The manufacturer's internal code or catalog identifier for the specific product grade."@en ;
+                rdfs:label "product code"@en ;
+                sds:example ":productX sds:productCode \"ABC123\" ."@en .
+
+
+###  https://example.org/sds-ontology#productName
+sds:productName rdf:type owl:DatatypeProperty ;
+                rdfs:domain sds:Product ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The official or display name of the product as stated in the SDS."@en ;
+                rdfs:label "product name"@en ;
+                sds:example ":productX sds:productName \"Product X\" ."@en .
+
+
+###  https://example.org/sds-ontology#recommendedUse
+sds:recommendedUse rdf:type owl:DatatypeProperty ;
+                   rdfs:domain sds:Product ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "The intended application or use case for the product as stated by the manufacturer."@en ;
+                   rdfs:label "recommended use"@en ;
+                   sds:example ":productX sds:recommendedUse \"For industrial use as a component of other products\" ."@en .
+
+
+###  https://example.org/sds-ontology#regulatoryStatusText
+sds:regulatoryStatusText rdf:type owl:DatatypeProperty ;
+                         rdfs:domain sds:RegulatoryListing ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The free-text description of a product's or component's status under a specific regulatory listing."@en ;
+                         rdfs:label "regulatory status text"@en ;
+                         sds:example ":listingX sds:regulatoryStatusText \"Listed: subject to reporting requirements\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#revisionDate
+sds:revisionDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sds:SDSDocument ;
+                 rdfs:range xsd:date ;
+                 rdfs:comment "The date on which the SDS document was most recently revised."@en ;
+                 rdfs:label "revision date"@en ;
+                 sds:example ":doc1 sds:revisionDate \"2020-01-15\"^^xsd:date ."@en .
+
+
+###  https://example.org/sds-ontology#revisionNumber
+sds:revisionNumber rdf:type owl:DatatypeProperty ;
+                   rdfs:domain sds:SDSDocument ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "The sequential revision number identifying which version of the SDS document this is."@en ;
+                   rdfs:label "revision number"@en ;
+                   sds:example ":doc1 sds:revisionNumber \"2\" ."@en .
+
+
+###  https://example.org/sds-ontology#sourcePage
+sds:sourcePage rdf:type owl:DatatypeProperty ;
+               rdfs:domain prov:Entity ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "The page number of the SDS document where a given fact or entity was found."@en ;
+               rdfs:label "source page"@en ;
+               sds:example ":extraction1 sds:sourcePage 3 ."@en .
+
+
+###  https://example.org/sds-ontology#sourceText
+sds:sourceText rdf:type owl:DatatypeProperty ;
+               rdfs:domain prov:Entity ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The verbatim text segment from the SDS document that an extracted fact or entity was derived from."@en ;
+               rdfs:label "source text"@en ;
+               sds:example ":extraction1 sds:sourceText \"...\" ."@en .
+
+
+###  https://example.org/sds-ontology#tradeName
+sds:tradeName rdf:type owl:DatatypeProperty ;
+              rdfs:domain sds:Product ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The trademarked brand name under which the product is marketed."@en ;
+              rdfs:label "trade name"@en ;
+              sds:example ":productX sds:tradeName \"BrandName\" ."@en .
+
+
+###  https://example.org/sds-ontology#transportStatusText
+sds:transportStatusText rdf:type owl:DatatypeProperty ;
+                        rdfs:domain sds:TransportClassification ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "The free-text description of a product's transport regulatory status as stated in the SDS."@en ;
+                        rdfs:label "transport status text"@en ;
+                        sds:example ":transportX sds:transportStatusText \"Not regulated as hazardous for shipment\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#website
+sds:website rdf:type owl:DatatypeProperty ;
+            rdfs:domain sds:Organization ;
+            rdfs:range xsd:anyURI ;
+            rdfs:comment "A web address associated with the manufacturer, supplier, or product mentioned in the SDS."@en ;
+            rdfs:label "website"@en ;
+            sds:example ":orgX sds:website \"https://www.example.com\" ."@en .
+
+
+###  https://example.org/sds-ontology#weightPercent
+sds:weightPercent rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sds:ChemicalComponent ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "The concentration of a chemical component in a product, expressed as a percentage by weight (often a range)."@en ;
+                  rdfs:label "weight percent"@en ;
+                  sds:example ":componentX sds:weightPercent \"0.3-1.0\" ."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2000/01/rdf-schema#Resource
+rdfs:Resource rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/prov#Entity
+prov:Entity rdf:type owl:Class ;
+            rdfs:comment "A W3C PROV-O entity; the parent class for all SDS extraction provenance records (ExtractionRecord, OCRBlock, EvidenceSpan)."@en ;
+            rdfs:label "PROV Entity"@en .
+
+
+###  https://example.org/sds-ontology#AbbreviationGlossary
+sds:AbbreviationGlossary rdf:type owl:Class ;
+                         rdfs:subClassOf sds:Section16OtherInformation ;
+                         rdfs:comment "A listing of abbreviations and acronyms used throughout the SDS, typically found in Section 16."@en ;
+                         rdfs:label "Abbreviation Glossary"@en .
+
+
+###  https://example.org/sds-ontology#AccidentalReleaseMeasure
+sds:AccidentalReleaseMeasure rdf:type owl:Class ;
+                             rdfs:subClassOf sds:ControlMeasure ;
+                             rdfs:comment "An action recommended for safely containing and cleaning up a spill or accidental release of the product."@en ;
+                             rdfs:label "Accidental Release Measure"@en ;
+                             sds:example ":measureX a sds:AccidentalReleaseMeasure ; rdfs:label \"Sweep up and place in suitable containers\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#AcuteToxicity
+sds:AcuteToxicity rdf:type owl:Class ;
+                  rdfs:subClassOf sds:HazardClass ;
+                  rdfs:comment "GHS hazard class covering acute toxic effects via oral, dermal, or inhalation routes."@en ;
+                  rdfs:label "Acute Toxicity"@en .
+
+
+###  https://example.org/sds-ontology#AcuteToxicityInhalation
+sds:AcuteToxicityInhalation rdf:type owl:Class ;
+                            rdfs:subClassOf sds:AcuteToxicity ;
+                            owl:disjointWith sds:AcuteToxicityOral ;
+                            rdfs:comment "Acute toxicity hazard class specifically for the inhalation route of exposure."@en ;
+                            rdfs:label "Acute Toxicity - Inhalation"@en .
+
+
+###  https://example.org/sds-ontology#AcuteToxicityInhalationCategory4
+sds:AcuteToxicityInhalationCategory4 rdf:type owl:Class ;
+                                     rdfs:subClassOf sds:GHSClassification ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty sds:hasHazardCategory ;
+                                                       owl:someValuesFrom sds:Category4
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty sds:hasHazardClass ;
+                                                       owl:someValuesFrom sds:AcuteToxicityInhalation
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty sds:hasSignalWord ;
+                                                       owl:someValuesFrom sds:Warning
+                                                     ] ;
+                                     rdfs:comment "GHS classification for substances harmful if inhaled (inhalation route, category 4, H332, Warning signal word)."@en ;
+                                     rdfs:label "Acute Toxicity Inhalation Category 4"@en .
+
+
+###  https://example.org/sds-ontology#AcuteToxicityOral
+sds:AcuteToxicityOral rdf:type owl:Class ;
+                      rdfs:subClassOf sds:AcuteToxicity ;
+                      rdfs:comment "Acute toxicity hazard class specifically for the oral route of exposure."@en ;
+                      rdfs:label "Acute Toxicity - Oral"@en .
+
+
+###  https://example.org/sds-ontology#AcuteToxicityOralCategory4
+sds:AcuteToxicityOralCategory4 rdf:type owl:Class ;
+                               rdfs:subClassOf sds:GHSClassification ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty sds:hasHazardCategory ;
+                                                 owl:someValuesFrom sds:Category4
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty sds:hasHazardClass ;
+                                                 owl:someValuesFrom sds:AcuteToxicityOral
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty sds:hasSignalWord ;
+                                                 owl:someValuesFrom sds:Warning
+                                               ] ;
+                               rdfs:comment "GHS classification for substances harmful if swallowed (oral route, category 4, H302, Warning signal word)."@en ;
+                               rdfs:label "Acute Toxicity Oral Category 4"@en .
+
+
+###  https://example.org/sds-ontology#AdministrativeControl
+sds:AdministrativeControl rdf:type owl:Class ;
+                          rdfs:subClassOf sds:ControlMeasure ;
+                          rdfs:comment "A workplace policy or procedure, rather than equipment, used to limit worker exposure to a hazard."@en ;
+                          rdfs:label "Administrative Control"@en ;
+                          sds:example ":controlX a sds:AdministrativeControl ; rdfs:label \"Rotate workers to limit exposure time\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#AquaticChronicCategory2
+sds:AquaticChronicCategory2 rdf:type owl:Class ;
+                            rdfs:subClassOf sds:GHSClassification ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty sds:hasHazardCategory ;
+                                              owl:someValuesFrom sds:Category2
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty sds:hasHazardClass ;
+                                              owl:someValuesFrom sds:HazardousToAquaticEnvironmentChronic
+                                            ] ;
+                            rdfs:comment "GHS classification for substances toxic to aquatic life with long lasting effects (chronic, category 2, H411)."@en ;
+                            rdfs:label "Aquatic Chronic Category 2"@en .
+
+
+###  https://example.org/sds-ontology#Category1
+sds:Category1 rdf:type owl:Class ;
+              rdfs:subClassOf sds:HazardCategory ;
+              owl:disjointWith sds:Category2 ,
+                               sds:Category3 ,
+                               sds:Category4 ;
+              rdfs:comment "GHS hazard severity category 1 — most severe within a hazard class."@en ;
+              rdfs:label "GHS Hazard Category 1 — Highest Severity"@en .
+
+
+###  https://example.org/sds-ontology#Category2
+sds:Category2 rdf:type owl:Class ;
+              rdfs:subClassOf sds:HazardCategory ;
+              owl:disjointWith sds:Category3 ,
+                               sds:Category4 ;
+              rdfs:comment "GHS hazard severity category 2 — high severity, the second most restrictive tier within a hazard class."@en ;
+              rdfs:label "GHS Hazard Category 2 — High Severity"@en .
+
+
+###  https://example.org/sds-ontology#Category3
+sds:Category3 rdf:type owl:Class ;
+              rdfs:subClassOf sds:HazardCategory ;
+              owl:disjointWith sds:Category4 ;
+              rdfs:comment "GHS hazard severity category 3 — moderate severity, less restrictive than categories 1 and 2."@en ;
+              rdfs:label "GHS Hazard Category 3 — Moderate Severity"@en .
+
+
+###  https://example.org/sds-ontology#Category4
+sds:Category4 rdf:type owl:Class ;
+              rdfs:subClassOf sds:HazardCategory ;
+              rdfs:comment "GHS hazard severity category 4 — least severe in the numbered tier."@en ;
+              rdfs:label "GHS Hazard Category 4 — Low Severity"@en .
+
+
+###  https://example.org/sds-ontology#ChemicalComponent
+sds:ChemicalComponent rdf:type owl:Class ;
+                      rdfs:subClassOf sds:ChemicalEntity ;
+                      rdfs:comment "Any chemical substance that makes up part of a product's composition, whether or not it is classified as hazardous."@en ;
+                      rdfs:label "Chemical Component"@en ;
+                      skos:closeMatch <http://purl.obolibrary.org/obo/CHEBI_59999> ;
+                      sds:example ":componentX a sds:ChemicalComponent ; sds:casNumber \"0000-00-0\" ; sds:weightPercent \"1-5\" ."@en .
+
+
+###  https://example.org/sds-ontology#ChemicalEntity
+sds:ChemicalEntity rdf:type owl:Class ;
+                   rdfs:comment "A chemical substance, compound, polymer, mixture component, decomposition product, or combustion product mentioned in an SDS."@en ;
+                   rdfs:label "Chemical Entity"@en ;
+                   skos:exactMatch <http://purl.obolibrary.org/obo/CHEBI_24431> ;
+                   sds:example ":chemicalX a sds:ChemicalEntity ; sds:casNumber \"0000-00-0\" ."@en .
+
+
+###  https://example.org/sds-ontology#CombustionProduct
+sds:CombustionProduct rdf:type owl:Class ;
+                      rdfs:subClassOf sds:ChemicalEntity ;
+                      rdfs:comment "A chemical species generated specifically when the product burns in a fire, often hazardous to inhale."@en ;
+                      rdfs:label "Combustion Product"@en ;
+                      skos:closeMatch <http://purl.obolibrary.org/obo/CHEBI_24431> ;
+                      sds:example ":substanceX a sds:CombustionProduct ."@en .
+
+
+###  https://example.org/sds-ontology#CommercialProduct
+sds:CommercialProduct rdf:type owl:Class ;
+                      rdfs:subClassOf sds:Product ;
+                      owl:disjointWith sds:Mixture ,
+                                       sds:Substance ;
+                      rdfs:comment "A finished, market-ready product offering sold under a trademark, as opposed to a raw chemical substance."@en ;
+                      rdfs:label "Commercial Product"@en ;
+                      sds:example ":productX a sds:CommercialProduct ; sds:tradeName \"BrandName\" ."@en .
+
+
+###  https://example.org/sds-ontology#CompositionRecord
+sds:CompositionRecord rdf:type owl:Class ;
+                      rdfs:comment "A structured record connecting a product to a component, concentration, CAS number, and hazard classification."@en ;
+                      rdfs:label "Composition Record"@en ;
+                      sds:example ":compRecord1 a sds:CompositionRecord ; sds:compositionComponent :componentX ; sds:weightPercent \"0.3-1.0\" ."@en .
+
+
+###  https://example.org/sds-ontology#ControlMeasure
+sds:ControlMeasure rdf:type owl:Class ;
+                   rdfs:comment "Any engineering, administrative, or personal protective measure used to reduce exposure to a product's hazards."@en ;
+                   rdfs:label "Control Measure"@en ;
+                   sds:example ":controlX a sds:ControlMeasure ."@en .
+
+
+###  https://example.org/sds-ontology#Danger
+sds:Danger rdf:type owl:Class ;
+           rdfs:subClassOf sds:SignalWord ;
+           owl:disjointWith sds:Warning ;
+           rdfs:comment "GHS signal word for the more severe hazard categories."@en ;
+           rdfs:label "Danger"@en .
+
+
+###  https://example.org/sds-ontology#DecompositionProduct
+sds:DecompositionProduct rdf:type owl:Class ;
+                         rdfs:subClassOf sds:ChemicalEntity ;
+                         rdfs:comment "A chemical species formed when the product breaks down under heat or other stress, as opposed to during combustion."@en ;
+                         rdfs:label "Decomposition Product"@en ;
+                         skos:closeMatch <http://purl.obolibrary.org/obo/CHEBI_24431> ;
+                         sds:example ":substanceX a sds:DecompositionProduct ."@en .
+
+
+###  https://example.org/sds-ontology#EcologicalEffect
+sds:EcologicalEffect rdf:type owl:Class ;
+                     rdfs:comment "A documented or expected impact of the product on the environment, such as aquatic toxicity."@en ;
+                     rdfs:label "Ecological Effect"@en ;
+                     sds:example ":effectX a sds:EcologicalEffect ; rdfs:label \"Toxic to aquatic life\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#EmergencyContact
+sds:EmergencyContact rdf:type owl:Class ;
+                     rdfs:comment "A phone number, email, or organization to contact in case of a chemical emergency or accidental exposure."@en ;
+                     rdfs:label "Emergency Contact"@en ;
+                     sds:example ":emergencyContactX a sds:EmergencyContact ; sds:phoneNumber \"+1-800-000-0000\" ."@en .
+
+
+###  https://example.org/sds-ontology#EngineeringControl
+sds:EngineeringControl rdf:type owl:Class ;
+                       rdfs:subClassOf sds:ControlMeasure ;
+                       rdfs:comment "A physical or mechanical system, such as ventilation, used to reduce worker exposure at its source."@en ;
+                       rdfs:label "Engineering Control"@en ;
+                       sds:example ":controlX a sds:EngineeringControl ; rdfs:label \"Local exhaust ventilation\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#EnvironmentalHazard
+sds:EnvironmentalHazard rdf:type owl:Class ;
+                        rdfs:subClassOf sds:Hazard ;
+                        owl:disjointWith sds:HealthHazard ,
+                                         sds:PhysicalHazard ,
+                                         sds:ProcessHazard ;
+                        rdfs:comment "A hazard describing the product's or a component's potential to harm aquatic life or the broader environment."@en ;
+                        rdfs:label "Environmental Hazard"@en ;
+                        sds:example ":hazardX a sds:EnvironmentalHazard ."@en .
+
+
+###  https://example.org/sds-ontology#EvidenceSpan
+sds:EvidenceSpan rdf:type owl:Class ;
+                 rdfs:subClassOf prov:Entity ;
+                 rdfs:comment "The specific span of source text in the original document that supports an extracted fact or relation."@en ;
+                 rdfs:label "Evidence Span"@en ;
+                 sds:example ":span1 a sds:EvidenceSpan ; sds:sourceText \"...\" ; sds:sourcePage 1 ."@en .
+
+
+###  https://example.org/sds-ontology#ExposureLimit
+sds:ExposureLimit rdf:type owl:Class ;
+                  rdfs:comment "A regulatory or recommended airborne concentration threshold for a chemical, such as an OSHA PEL or ACGIH TWA."@en ;
+                  rdfs:label "Exposure Limit"@en ;
+                  sds:example ":limitX a sds:ExposureLimit ; rdfs:label \"OSHA PEL TWA 5 mg/m3\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#ExtinguishingMedia
+sds:ExtinguishingMedia rdf:type owl:Class ;
+                       rdfs:comment "A substance, such as water or foam, recommended for extinguishing a fire involving the product."@en ;
+                       rdfs:label "Extinguishing Media"@en ;
+                       sds:example ":mediaX a sds:ExtinguishingMedia ; rdfs:label \"Water spray\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#ExtractionRecord
+sds:ExtractionRecord rdf:type owl:Class ;
+                     rdfs:subClassOf prov:Entity ;
+                     rdfs:comment "A record of an extracted entity or relation from OCR, NLP, or ontology-based information extraction."@en ;
+                     rdfs:label "Extraction Record"@en ;
+                     sds:example ":extraction1 a sds:ExtractionRecord ; sds:sourceText \"...\" ; sds:sourcePage 1 ; sds:confidenceScore 0.95 ."@en .
+
+
+###  https://example.org/sds-ontology#EyeProtection
+sds:EyeProtection rdf:type owl:Class ;
+                  rdfs:subClassOf sds:PPE ;
+                  rdfs:comment "PPE designed to shield the eyes from splashes, dust, or vapor exposure."@en ;
+                  rdfs:label "Eye Protection"@en ;
+                  sds:example ":ppeX a sds:EyeProtection ; rdfs:label \"Safety glasses with side-shields\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#FireFightingMeasure
+sds:FireFightingMeasure rdf:type owl:Class ;
+                        rdfs:comment "Guidance for safely extinguishing or responding to a fire involving the product."@en ;
+                        rdfs:label "Fire-Fighting Measure"@en ;
+                        sds:example ":measureX a sds:FireFightingMeasure ; rdfs:label \"Fight fire from a safe distance\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#FirstAidMeasure
+sds:FirstAidMeasure rdf:type owl:Class ;
+                    rdfs:comment "A recommended action to take immediately after a person is exposed to or injured by the product."@en ;
+                    rdfs:label "First Aid Measure"@en ;
+                    sds:example ":measureX a sds:FirstAidMeasure ; rdfs:label \"Flush eyes with water for 15 minutes\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#GHSClassification
+sds:GHSClassification rdf:type owl:Class ;
+                      rdfs:comment "A GHS hazard classification, including hazard class, category, and hazard statement."@en ;
+                      rdfs:label "GHS Classification"@en ;
+                      sds:example ":classificationY a sds:AcuteToxicityOralCategory4 . # reasoner infers hasHazardClass/Category/Statement/SignalWord/Pictogram constraints"@en .
+
+
+###  https://example.org/sds-ontology#HandProtection
+sds:HandProtection rdf:type owl:Class ;
+                   rdfs:subClassOf sds:PPE ;
+                   rdfs:comment "PPE specifically intended to protect the hands, such as gloves, during product handling."@en ;
+                   rdfs:label "Hand Protection"@en ;
+                   sds:example ":ppeX a sds:HandProtection ; rdfs:label \"Chemical-resistant gloves\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#HandlingRequirement
+sds:HandlingRequirement rdf:type owl:Class ;
+                        rdfs:comment "A practice or precaution recommended for safely working with the product during normal use."@en ;
+                        rdfs:label "Handling Requirement"@en ;
+                        sds:example ":requirementX a sds:HandlingRequirement ; rdfs:label \"Avoid dust formation\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#Hazard
+sds:Hazard rdf:type owl:Class ;
+           rdfs:comment "Any potential source of harm associated with the product, encompassing physical, health, environmental, or process hazards."@en ;
+           rdfs:label "Hazard"@en ;
+           rdfs:seeAlso <http://purl.obolibrary.org/obo/CHEBI_50906> ;
+           sds:example ":hazardX a sds:Hazard ."@en .
+
+
+###  https://example.org/sds-ontology#HazardCategory
+sds:HazardCategory rdf:type owl:Class ;
+                   rdfs:comment "The numeric severity tier within a GHS hazard class, with lower numbers generally indicating greater severity."@en ;
+                   rdfs:label "GHS Hazard Category"@en ;
+                   sds:example "sds:Category2 a sds:HazardCategory ; rdfs:label \"Category 2\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#HazardClass
+sds:HazardClass rdf:type owl:Class ;
+                rdfs:comment "The GHS category describing the type of hazard a substance poses, such as Acute Toxicity or Aquatic Chronic hazard."@en ;
+                rdfs:label "GHS Hazard Class"@en ;
+                sds:example ":acuteToxicityOral a sds:HazardClass ; rdfs:label \"Acute Toxicity - Oral\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#HazardStatement
+sds:HazardStatement rdf:type owl:Class ;
+                    rdfs:comment "A standardized GHS phrase, identified by an H-code, that describes the nature of a substance's hazard."@en ;
+                    rdfs:label "GHS Hazard Statement"@en ;
+                    sds:example ":h302 a sds:HazardStatement ; sds:ghsCode \"H302\" ; sds:hazardStatementText \"Harmful if swallowed\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#HazardousComponent
+sds:HazardousComponent rdf:type owl:Class ;
+                       rdfs:subClassOf sds:ChemicalComponent ;
+                       owl:disjointWith sds:NonHazardousComponent ;
+                       rdfs:comment "A chemical component that meets GHS criteria for a hazard classification and must be disclosed in Section 3."@en ;
+                       rdfs:label "Hazardous Component"@en ;
+                       rdfs:seeAlso <http://purl.obolibrary.org/obo/CHEBI_50903> ;
+                       sds:example ":componentX a sds:HazardousComponent ; sds:hasGHSClassification :classificationY ."@en .
+
+
+###  https://example.org/sds-ontology#HazardousToAquaticEnvironmentChronic
+sds:HazardousToAquaticEnvironmentChronic rdf:type owl:Class ;
+                                         rdfs:subClassOf sds:HazardClass ;
+                                         rdfs:comment "GHS hazard class for substances with chronic (long-term) aquatic toxicity."@en ;
+                                         rdfs:label "Hazardous to the Aquatic Environment - Chronic"@en .
+
+
+###  https://example.org/sds-ontology#HealthHazard
+sds:HealthHazard rdf:type owl:Class ;
+                 rdfs:subClassOf sds:Hazard ;
+                 owl:disjointWith sds:PhysicalHazard ,
+                                  sds:ProcessHazard ;
+                 rdfs:comment "A hazard that can cause adverse health effects in humans through inhalation, skin contact, eye contact, or ingestion."@en ;
+                 rdfs:label "Health Hazard"@en ;
+                 sds:example ":hazardX a sds:HealthHazard ; sds:hasRouteOfExposure :inhalation ."@en .
+
+
+###  https://example.org/sds-ontology#Ingredient
+sds:Ingredient rdf:type owl:Class ;
+               rdfs:subClassOf sds:ChemicalComponent ;
+               rdfs:comment "A chemical component intentionally added to a formulation, such as a polymer, additive, or colorant."@en ;
+               rdfs:label "Ingredient"@en ;
+               skos:closeMatch <http://purl.obolibrary.org/obo/CHEBI_59999> ;
+               sds:example ":ingredientX a sds:Ingredient ; sds:weightPercent \"0.1-1.0\" ."@en .
+
+
+###  https://example.org/sds-ontology#InventoryStatus
+sds:InventoryStatus rdf:type owl:Class ;
+                    rdfs:comment "The listing status of a chemical on a national or regional chemical inventory, such as TSCA or EINECS."@en ;
+                    rdfs:label "Chemical Inventory Status"@en ;
+                    sds:example ":inventoryX a sds:InventoryStatus ; rdfs:label \"TSCA: Listed\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#LegalDisclaimer
+sds:LegalDisclaimer rdf:type owl:Class ;
+                    rdfs:subClassOf sds:Section16OtherInformation ;
+                    rdfs:comment "A legal notice or limitation-of-liability statement appearing in Section 16 of the SDS."@en ;
+                    rdfs:label "Legal Disclaimer"@en ;
+                    sds:example ":disclaimer1 a sds:LegalDisclaimer ."@en .
+
+
+###  https://example.org/sds-ontology#Manufacturer
+sds:Manufacturer rdf:type owl:Class ;
+                 rdfs:subClassOf sds:Organization ;
+                 owl:disjointWith sds:Supplier ;
+                 rdfs:comment "The organization responsible for producing the product, as distinct from the entity supplying or selling it."@en ;
+                 rdfs:label "Manufacturer"@en ;
+                 rdfs:seeAlso oriont:Agent ;
+                 sds:example ":manufacturerX a sds:Manufacturer ; sds:address \"Plant Address\" ."@en .
+
+
+###  https://example.org/sds-ontology#Mixture
+sds:Mixture rdf:type owl:Class ;
+            rdfs:subClassOf sds:Product ;
+            owl:disjointWith sds:Substance ;
+            rdfs:comment "A product composed of two or more substances combined together, such as a polymer blend with additives."@en ;
+            rdfs:label "Mixture"@en ;
+            skos:exactMatch <http://purl.obolibrary.org/obo/CHEBI_60004> ;
+            sds:example ":productX a sds:Mixture ; sds:hasComponent :componentA, :componentB ."@en .
+
+
+###  https://example.org/sds-ontology#NonHazardousComponent
+sds:NonHazardousComponent rdf:type owl:Class ;
+                          rdfs:subClassOf sds:ChemicalComponent ;
+                          rdfs:comment "A chemical component present in the product that does not meet GHS hazard classification criteria."@en ;
+                          rdfs:label "Non-Hazardous Component"@en ;
+                          sds:example ":componentX a sds:NonHazardousComponent ."@en .
+
+
+###  https://example.org/sds-ontology#OCRBlock
+sds:OCRBlock rdf:type owl:Class ;
+             rdfs:subClassOf prov:Entity ;
+             rdfs:comment "A contiguous block of text extracted from a scanned or rendered SDS page via optical character recognition."@en ;
+             rdfs:label "OCR Block"@en ;
+             sds:example ":ocrBlock1 a sds:OCRBlock ; sds:sourcePage 1 ; sds:sourceText \"...\" ."@en .
+
+
+###  https://example.org/sds-ontology#Organization
+sds:Organization rdf:type owl:Class ;
+                 rdfs:comment "A company or corporate entity referenced in the SDS, such as the product's manufacturer or supplier."@en ;
+                 rdfs:label "Organization"@en ;
+                 skos:closeMatch oriont:Agent ;
+                 sds:example ":orgX a sds:Organization ; sds:address \"123 Main St, City, Country\" ."@en .
+
+
+###  https://example.org/sds-ontology#PPE
+sds:PPE rdf:type owl:Class ;
+        rdfs:subClassOf sds:ControlMeasure ;
+        rdfs:comment "Personal protective equipment worn by a worker to reduce exposure to a product's hazards."@en ;
+        rdfs:label "Personal Protective Equipment"@en ;
+        sds:example ":ppeX a sds:PPE ; rdfs:label \"Protective gloves\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#PhysicalChemicalProperty
+sds:PhysicalChemicalProperty rdf:type owl:Class ;
+                             rdfs:comment "A measurable physical or chemical characteristic of the product, such as density, solubility, or vapor pressure."@en ;
+                             rdfs:label "Physical or Chemical Property"@en ;
+                             sds:example ":propertyX a sds:PhysicalChemicalProperty ; rdfs:label \"Specific gravity\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#PhysicalHazard
+sds:PhysicalHazard rdf:type owl:Class ;
+                   rdfs:subClassOf sds:Hazard ;
+                   owl:disjointWith sds:ProcessHazard ;
+                   rdfs:comment "A hazard arising from the physical or chemical properties of the product, such as flammability or dust explosivity."@en ;
+                   rdfs:label "Physical Hazard"@en ;
+                   sds:example ":hazardX a sds:PhysicalHazard ."@en .
+
+
+###  https://example.org/sds-ontology#Pictogram
+sds:Pictogram rdf:type owl:Class ;
+              rdfs:comment "A GHS hazard symbol, such as a flame or exclamation mark, used on labels to visually communicate a hazard type."@en ;
+              rdfs:label "GHS Pictogram"@en ;
+              sds:example ":exclamationMark a sds:Pictogram ; rdfs:label \"GHS exclamation mark pictogram\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#Polymer
+sds:Polymer rdf:type owl:Class ;
+            rdfs:subClassOf sds:ChemicalEntity ;
+            rdfs:comment "A high molecular weight chemical entity built from repeating monomer units, such as the resin matrix of a plastic product."@en ;
+            rdfs:label "Polymer"@en ;
+            skos:exactMatch <http://purl.obolibrary.org/obo/CHEBI_60027> ;
+            sds:example ":polymerX a sds:Polymer ; sds:casNumber \"0000-00-0\" ."@en .
+
+
+###  https://example.org/sds-ontology#PrecautionaryStatement
+sds:PrecautionaryStatement rdf:type owl:Class ;
+                           rdfs:comment "A standardized GHS phrase, identified by a P-code, recommending measures to minimize or prevent exposure to a hazard."@en ;
+                           rdfs:label "GHS Precautionary Statement"@en ;
+                           sds:example ":p264 a sds:PrecautionaryStatement ; sds:ghsCode \"P264\" ; sds:precautionaryStatementText \"Wash hands thoroughly after handling\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#ProcessHazard
+sds:ProcessHazard rdf:type owl:Class ;
+                  rdfs:subClassOf sds:Hazard ;
+                  rdfs:comment "A hazard that arises specifically during industrial processing of the product, such as melt processing or secondary machining."@en ;
+                  rdfs:label "Process Hazard"@en ;
+                  sds:example ":hazardX a sds:ProcessHazard ."@en .
+
+
+###  https://example.org/sds-ontology#Product
+sds:Product rdf:type owl:Class ;
+            rdfs:comment "A product described by an SDS."@en ;
+            rdfs:label "Product"@en ;
+            rdfs:seeAlso oriont:ProductFlow ;
+            sds:example ":productX a sds:Product ; sds:productName \"Product X\" ."@en .
+
+
+###  https://example.org/sds-ontology#ReferenceListing
+sds:ReferenceListing rdf:type owl:Class ;
+                     rdfs:subClassOf sds:Section16OtherInformation ;
+                     rdfs:comment "A list of standards, regulations, or literature references cited in the SDS, typically found in Section 16."@en ;
+                     rdfs:label "Reference Listing"@en .
+
+
+###  https://example.org/sds-ontology#RegulatoryListing
+sds:RegulatoryListing rdf:type owl:Class ;
+                      rdfs:comment "A statement of the product's or a component's status under a specific law or regulatory program, such as SARA or Proposition 65."@en ;
+                      rdfs:label "Regulatory Listing"@en ;
+                      sds:example ":listingX a sds:RegulatoryListing ; sds:regulatoryStatusText \"Listed: subject to reporting requirements\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#RespiratoryProtection
+sds:RespiratoryProtection rdf:type owl:Class ;
+                          rdfs:subClassOf sds:PPE ;
+                          rdfs:comment "PPE designed to protect the wearer's airway from inhaling hazardous fumes, dust, or vapors."@en ;
+                          rdfs:label "Respiratory Protection"@en ;
+                          sds:example ":ppeX a sds:RespiratoryProtection ; rdfs:label \"NIOSH-approved respirator\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#RevisionHistory
+sds:RevisionHistory rdf:type owl:Class ;
+                    rdfs:subClassOf sds:Section16OtherInformation ;
+                    rdfs:comment "A structured record of changes made to the SDS across document versions, typically listed in Section 16."@en ;
+                    rdfs:label "Revision History"@en ;
+                    sds:example ":revision1 a sds:RevisionHistory ."@en .
+
+
+###  https://example.org/sds-ontology#RouteOfExposure
+sds:RouteOfExposure rdf:type owl:Class ;
+                    rdfs:comment "A pathway by which a hazardous substance can enter the body, such as inhalation, skin contact, or ingestion."@en ;
+                    rdfs:label "Route of Exposure"@en ;
+                    sds:example ":inhalation a sds:RouteOfExposure ; rdfs:label \"Inhalation\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#SDSDocument
+sds:SDSDocument rdf:type owl:Class ;
+                owl:disjointWith sds:SDSSection ;
+                rdfs:comment "A safety data sheet document describing a product, mixture, substance, hazards, controls, and regulatory information."@en ;
+                rdfs:label "Safety Data Sheet Document"@en ;
+                sds:example ":doc1 a sds:SDSDocument ; sds:revisionDate \"2020-01-15\"^^xsd:date ; sds:describesProduct :productX ."@en .
+
+
+###  https://example.org/sds-ontology#SDSSection
+sds:SDSSection rdf:type owl:Class ;
+               owl:disjointUnionOf ( sds:Section10StabilityReactivity
+                                     sds:Section11ToxicologicalInformation
+                                     sds:Section12EcologicalInformation
+                                     sds:Section13DisposalConsiderations
+                                     sds:Section14TransportInformation
+                                     sds:Section15RegulatoryInformation
+                                     sds:Section16OtherInformation
+                                     sds:Section1Identification
+                                     sds:Section2HazardsIdentification
+                                     sds:Section3CompositionInformation
+                                     sds:Section4FirstAidMeasures
+                                     sds:Section5FireFightingMeasures
+                                     sds:Section6AccidentalReleaseMeasures
+                                     sds:Section7HandlingStorage
+                                     sds:Section8ExposureControlsPPE
+                                     sds:Section9PhysicalChemicalProperties
+                                   ) ;
+               rdfs:comment "A section of a Safety Data Sheet. An SDS is partitioned into exactly 16 sections as defined by the GHS standard; each section is mutually exclusive and together they cover the complete SDS."@en ;
+               rdfs:label "SDS Section"@en ;
+               sds:example ":section a sds:SDSSection ; sds:sourcePage 3 ."@en .
+
+
+###  https://example.org/sds-ontology#Section10StabilityReactivity
+sds:Section10StabilityReactivity rdf:type owl:Class ;
+                                 rdfs:subClassOf sds:SDSSection ;
+                                 rdfs:comment "The SDS section describing chemical stability, conditions to avoid, and hazardous decomposition products."@en ;
+                                 rdfs:label "Section 10 - Stability and Reactivity"@en ;
+                                 sds:example ":sec10 a sds:Section10StabilityReactivity ."@en .
+
+
+###  https://example.org/sds-ontology#Section11ToxicologicalInformation
+sds:Section11ToxicologicalInformation rdf:type owl:Class ;
+                                      rdfs:subClassOf sds:SDSSection ;
+                                      rdfs:comment "The SDS section reporting toxicological data such as LD50 values, routes of exposure, and carcinogenicity findings."@en ;
+                                      rdfs:label "Section 11 - Toxicological Information"@en ;
+                                      sds:example ":sec11 a sds:Section11ToxicologicalInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section12EcologicalInformation
+sds:Section12EcologicalInformation rdf:type owl:Class ;
+                                   rdfs:subClassOf sds:SDSSection ;
+                                   rdfs:comment "The SDS section describing the product's potential ecotoxicity and environmental impact."@en ;
+                                   rdfs:label "Section 12 - Ecological Information"@en ;
+                                   sds:example ":sec12 a sds:Section12EcologicalInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section13DisposalConsiderations
+sds:Section13DisposalConsiderations rdf:type owl:Class ;
+                                    rdfs:subClassOf sds:SDSSection ;
+                                    rdfs:comment "The SDS section providing guidance on proper waste disposal of the product and its packaging."@en ;
+                                    rdfs:label "Section 13 - Disposal Considerations"@en ;
+                                    sds:example ":sec13 a sds:Section13DisposalConsiderations ."@en .
+
+
+###  https://example.org/sds-ontology#Section14TransportInformation
+sds:Section14TransportInformation rdf:type owl:Class ;
+                                  rdfs:subClassOf sds:SDSSection ;
+                                  rdfs:comment "The SDS section stating the product's regulatory transport classification under DOT, IMDG, IATA, and related modal regulations."@en ;
+                                  rdfs:label "Section 14 - Transport Information"@en ;
+                                  sds:example ":sec14 a sds:Section14TransportInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section15RegulatoryInformation
+sds:Section15RegulatoryInformation rdf:type owl:Class ;
+                                   rdfs:subClassOf sds:SDSSection ;
+                                   rdfs:comment "The SDS section listing chemical inventory status (TSCA, DSL, EINECS, etc.) and applicable regulatory programs such as SARA and Prop 65."@en ;
+                                   rdfs:label "Section 15 - Regulatory Information"@en ;
+                                   sds:example ":sec15 a sds:Section15RegulatoryInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section16OtherInformation
+sds:Section16OtherInformation rdf:type owl:Class ;
+                              owl:equivalentClass [ rdf:type owl:Class ;
+                                                    owl:unionOf ( sds:AbbreviationGlossary
+                                                                  sds:LegalDisclaimer
+                                                                  sds:ReferenceListing
+                                                                  sds:RevisionHistory
+                                                                )
+                                                  ] ;
+                              rdfs:subClassOf sds:SDSSection ;
+                              rdfs:comment "The SDS section containing additional information including revision history, legal disclaimers, and preparer details. Per the GHS SDS standard, this section has no mandated sub-structure and intentionally serves as a structured catch-all."@en ;
+                              rdfs:label "Section 16 - Other Information"@en ;
+                              sds:example ":sec16 a sds:Section16OtherInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section1Identification
+sds:Section1Identification rdf:type owl:Class ;
+                           rdfs:subClassOf sds:SDSSection ;
+                           rdfs:comment "The SDS section giving product/trade names, supplier, manufacturer, and emergency contact details."@en ;
+                           rdfs:label "Section 1 - Identification"@en ;
+                           sds:example ":sec1 a sds:Section1Identification ."@en .
+
+
+###  https://example.org/sds-ontology#Section2HazardsIdentification
+sds:Section2HazardsIdentification rdf:type owl:Class ;
+                                  rdfs:subClassOf sds:SDSSection ;
+                                  rdfs:comment "The SDS section summarizing GHS classification, signal word, and the overall hazard/emergency overview of the product."@en ;
+                                  rdfs:label "Section 2 - Hazards Identification"@en ;
+                                  sds:example ":sec2 a sds:Section2HazardsIdentification ."@en .
+
+
+###  https://example.org/sds-ontology#Section3CompositionInformation
+sds:Section3CompositionInformation rdf:type owl:Class ;
+                                   rdfs:subClassOf sds:SDSSection ;
+                                   rdfs:comment "The SDS section listing hazardous and non-hazardous ingredients with CAS numbers, weight percentages, and GHS classifications."@en ;
+                                   rdfs:label "Section 3 - Composition/Information on Ingredients"@en ;
+                                   sds:example ":sec3 a sds:Section3CompositionInformation ."@en .
+
+
+###  https://example.org/sds-ontology#Section4FirstAidMeasures
+sds:Section4FirstAidMeasures rdf:type owl:Class ;
+                             rdfs:subClassOf sds:SDSSection ;
+                             rdfs:comment "The SDS section describing recommended first-aid response for inhalation, skin contact, eye contact, and ingestion exposures."@en ;
+                             rdfs:label "Section 4 - First Aid Measures"@en ;
+                             sds:example ":sec4 a sds:Section4FirstAidMeasures ."@en .
+
+
+###  https://example.org/sds-ontology#Section5FireFightingMeasures
+sds:Section5FireFightingMeasures rdf:type owl:Class ;
+                                 rdfs:subClassOf sds:SDSSection ;
+                                 rdfs:comment "The SDS section covering suitable/unsuitable extinguishing media, combustion hazards, and firefighter protective equipment."@en ;
+                                 rdfs:label "Section 5 - Fire-Fighting Measures"@en ;
+                                 sds:example ":sec5 a sds:Section5FireFightingMeasures ."@en .
+
+
+###  https://example.org/sds-ontology#Section6AccidentalReleaseMeasures
+sds:Section6AccidentalReleaseMeasures rdf:type owl:Class ;
+                                      rdfs:subClassOf sds:SDSSection ;
+                                      rdfs:comment "The SDS section describing clean-up procedures and environmental precautions for spills or releases of the product."@en ;
+                                      rdfs:label "Section 6 - Accidental Release Measures"@en ;
+                                      sds:example ":sec6 a sds:Section6AccidentalReleaseMeasures ."@en .
+
+
+###  https://example.org/sds-ontology#Section7HandlingStorage
+sds:Section7HandlingStorage rdf:type owl:Class ;
+                            rdfs:subClassOf sds:SDSSection ;
+                            rdfs:comment "The SDS section giving guidance on safe handling practices and proper storage conditions for the product."@en ;
+                            rdfs:label "Section 7 - Handling and Storage"@en ;
+                            sds:example ":sec7 a sds:Section7HandlingStorage ."@en .
+
+
+###  https://example.org/sds-ontology#Section8ExposureControlsPPE
+sds:Section8ExposureControlsPPE rdf:type owl:Class ;
+                                rdfs:subClassOf sds:SDSSection ;
+                                rdfs:comment "The SDS section listing occupational exposure limits and recommended personal protective equipment for handling the product."@en ;
+                                rdfs:label "Section 8 - Exposure Controls/Personal Protection"@en ;
+                                sds:example ":sec8 a sds:Section8ExposureControlsPPE ."@en .
+
+
+###  https://example.org/sds-ontology#Section9PhysicalChemicalProperties
+sds:Section9PhysicalChemicalProperties rdf:type owl:Class ;
+                                       rdfs:subClassOf sds:SDSSection ;
+                                       rdfs:comment "The SDS section recording measurable physical and chemical properties such as appearance, odor, density, and solubility."@en ;
+                                       rdfs:label "Section 9 - Physical and Chemical Properties"@en ;
+                                       sds:example ":sec9 a sds:Section9PhysicalChemicalProperties ."@en .
+
+
+###  https://example.org/sds-ontology#SignalWord
+sds:SignalWord rdf:type owl:Class ;
+               rdfs:comment "The GHS word ('Danger' or 'Warning') used on a label to indicate the relative severity of a hazard."@en ;
+               rdfs:label "GHS Signal Word"@en ;
+               sds:example "sds:Warning a sds:SignalWord ; rdfs:label \"Warning\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#SkinProtection
+sds:SkinProtection rdf:type owl:Class ;
+                   rdfs:subClassOf sds:PPE ;
+                   rdfs:comment "PPE designed to shield the skin from contact with the product, its dust, or hot/molten material."@en ;
+                   rdfs:label "Skin Protection"@en ;
+                   sds:example ":ppeX a sds:SkinProtection ; rdfs:label \"Long-sleeved protective clothing\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#StorageRequirement
+sds:StorageRequirement rdf:type owl:Class ;
+                       rdfs:comment "A condition or precaution recommended for safely storing the product when not in use."@en ;
+                       rdfs:label "Storage Requirement"@en ;
+                       sds:example ":requirementX a sds:StorageRequirement ; rdfs:label \"Store in a dry, cool area\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#Substance
+sds:Substance rdf:type owl:Class ;
+              rdfs:subClassOf sds:Product ;
+              rdfs:comment "A single chemical species with one defined composition, as distinct from a multi-ingredient mixture."@en ;
+              rdfs:label "Substance"@en ;
+              skos:closeMatch <http://purl.obolibrary.org/obo/CHEBI_59999> ;
+              sds:example ":substanceX a sds:Substance ; sds:casNumber \"0000-00-0\" ."@en .
+
+
+###  https://example.org/sds-ontology#Supplier
+sds:Supplier rdf:type owl:Class ;
+             rdfs:subClassOf sds:Organization ;
+             rdfs:comment "The organization that supplies or distributes the product to customers, which may differ from the manufacturer."@en ;
+             rdfs:label "Supplier"@en ;
+             rdfs:seeAlso oriont:Agent ;
+             sds:example ":supplierX a sds:Supplier ; sds:phoneNumber \"+1-000-000-0000\" ."@en .
+
+
+###  https://example.org/sds-ontology#TargetOrganSystem
+sds:TargetOrganSystem rdf:type owl:Class ;
+                      rdfs:comment "A body system or organ that a chemical's toxicological effects are known to specifically affect."@en ;
+                      rdfs:label "Target Organ System"@en ;
+                      sds:example ":respiratoryTract a sds:TargetOrganSystem ; rdfs:label \"Respiratory tract\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#ToxicologicalEffect
+sds:ToxicologicalEffect rdf:type owl:Class ;
+                        rdfs:comment "A documented biological effect of the product or a component on living organisms, such as irritation or carcinogenicity."@en ;
+                        rdfs:label "Toxicological Effect"@en ;
+                        sds:example ":effectX a sds:ToxicologicalEffect ; rdfs:label \"Lung tumors observed in animal studies\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#TransportClassification
+sds:TransportClassification rdf:type owl:Class ;
+                            rdfs:comment "The regulatory classification of the product for shipment under transport regulations such as DOT, IMDG, or IATA."@en ;
+                            rdfs:label "Transport Classification"@en ;
+                            sds:example ":transportX a sds:TransportClassification ; sds:transportStatusText \"Not regulated as hazardous for shipment\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#UnsuitableExtinguishingMedia
+sds:UnsuitableExtinguishingMedia rdf:type owl:Class ;
+                                 rdfs:subClassOf sds:ExtinguishingMedia ;
+                                 rdfs:comment "An extinguishing agent that is specifically discouraged because it could worsen the fire or create a hazard."@en ;
+                                 rdfs:label "Unsuitable Extinguishing Media"@en ;
+                                 sds:example ":mediaX a sds:UnsuitableExtinguishingMedia ; rdfs:label \"Solid water stream\"@en ."@en .
+
+
+###  https://example.org/sds-ontology#Warning
+sds:Warning rdf:type owl:Class ;
+            rdfs:subClassOf sds:SignalWord ;
+            rdfs:comment "GHS signal word for less severe hazard categories."@en ;
+            rdfs:label "Warning"@en .
+
+
+###  https://example.org/sds-ontology#WasteDisposalMeasure
+sds:WasteDisposalMeasure rdf:type owl:Class ;
+                         rdfs:comment "A recommended method for disposing of unused product, residues, or contaminated packaging."@en ;
+                         rdfs:label "Waste Disposal Measure"@en ;
+                         rdfs:seeAlso oriont:WasteFlow ;
+                         sds:example ":measureX a sds:WasteDisposalMeasure ; rdfs:label \"Dispose of in accordance with local regulations\"@en ."@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
