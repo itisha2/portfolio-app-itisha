@@ -33,7 +33,7 @@ const Portfolio = () => {
   const stats = [
     { value: "10", label: "Years in industry" },
     { value: "3", label: "Markets: India, Germany and US clients" },
-    { value: "4", label: "Peer-reviewed papers (1 accepted)" }
+    { value: "4", label: "Accepted papers in peer-reviewed venues" }
   ];
 
   const focusAreas = [
@@ -411,7 +411,7 @@ const Portfolio = () => {
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">Itisha Yadav</h1>
         <p className="text-xl md:text-2xl text-slate-300 font-medium mb-6">
-          Senior Applied AI Engineer · <span className="text-indigo-300">LLMs, Agentic AI & RAG</span>
+          Senior Applied AI Engineer · <span className="text-indigo-300">LLMs, Agentic AI, RAG & Knowledge Engineering</span>
         </p>
         <p className="text-2xl md:text-3xl font-semibold text-white mb-6">
           I turn data into{' '}
@@ -443,7 +443,7 @@ const Portfolio = () => {
             <img
               src="/personal-photo/profile.jpg"
               alt="Itisha Yadav"
-              className="relative w-36 h-36 md:w-64 md:h-64 rounded-full object-cover object-center border-4 border-slate-950"
+              className="relative w-36 h-36 md:w-56 md:h-56 rounded-full object-cover object-center border-4 border-slate-950"
             />
           </div>
         </div>
@@ -469,13 +469,22 @@ const Portfolio = () => {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-3 gap-3 md:gap-4">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 md:p-5">
               <div className="text-2xl md:text-4xl font-bold text-white">{stat.value}<span className="text-indigo-400">+</span></div>
               <div className="mt-1 text-xs md:text-sm text-slate-400">{stat.label}</div>
             </div>
           ))}
+          <a href="https://zenodo.org/records/21511936" target="_blank" rel="noopener noreferrer" className="group rounded-xl border border-slate-800 bg-slate-900/60 p-3 md:p-5 hover:border-emerald-400/50 transition-colors">
+            <div className="flex items-center gap-2 text-2xl md:text-4xl font-bold text-white">
+              <Github className="w-6 h-6 md:w-8 md:h-8 text-emerald-400" /> OSS
+            </div>
+            <div className="mt-1 text-xs md:text-sm text-slate-400">
+              Open-source contributor: code & an OWL ontology (CC BY 4.0)
+              <ExternalLink className="inline w-3 h-3 ml-1 opacity-60 group-hover:opacity-100" />
+            </div>
+          </a>
         </div>
       </div>
     </header>
