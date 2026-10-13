@@ -128,7 +128,7 @@ export const EDGES = [
   ...['upagu', 'krishi'].map((o) => t('me', 'created', o)),
   ...['c-neo4j', 'c-dl', 'c-nlptf', 'c-ml'].map((o) => t('me', 'holds', o)),
 
-  t('dlr', 'inDomain', 'aerospace'), t('dlr', 'inDomain', 'manufacturing'), t('dlr', 'inDomain', 'materials'),
+  t('dlr', 'inDomain', 'aerospace'), t('dlr', 'inDomain', 'manufacturing'), t('dlr', 'inDomain', 'materials'), t('dlr', 'inDomain', 'healthcare'),
   t('fsti', 'inDomain', 'manufacturing'), t('minemake', 'inDomain', 'manufacturing'),
   t('instant', 'inDomain', 'safety'), t('factorlab', 'inDomain', 'safety'),
   t('optum', 'inDomain', 'healthcare'), t('cognizant', 'inDomain', 'healthcare'), t('casemine', 'inDomain', 'legaltech'),

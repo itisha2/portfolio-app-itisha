@@ -7,10 +7,10 @@ const R = 158;
 const OFFSET = 100;
 
 const CIRCLES = [
-  { id: 'kg', x: CX, y: CY - OFFSET, color: '#38bdf8', label: ['Knowledge Graphs &', 'Information Extraction'], ikigai: 'What I love', lx: CX, ly: CY - OFFSET - 88 },
-  { id: 'llm', x: CX + OFFSET, y: CY, color: '#818cf8', label: ['Large Language', 'Models'], ikigai: "What I'm great at", lx: CX + OFFSET + 84, ly: CY },
-  { id: 'agents', x: CX, y: CY + OFFSET, color: '#34d399', label: ['Agent Orchestration', '(LangGraph)'], ikigai: 'What the world needs', lx: CX, ly: CY + OFFSET + 84 },
-  { id: 'sdlc', x: CX - OFFSET, y: CY, color: '#fbbf24', label: ['Agentic', 'SDLC'], ikigai: 'What I ship for clients', lx: CX - OFFSET - 84, ly: CY }
+  { id: 'kg', x: CX, y: CY - OFFSET, color: '#38bdf8', ink: '#0369a1', label: ['Knowledge Graphs &', 'Information Extraction'], ikigai: 'What I love', lx: CX, ly: CY - OFFSET - 88 },
+  { id: 'llm', x: CX + OFFSET, y: CY, color: '#818cf8', ink: '#4338ca', label: ['Large Language', 'Models'], ikigai: "What I'm great at", lx: CX + OFFSET + 84, ly: CY },
+  { id: 'agents', x: CX, y: CY + OFFSET, color: '#34d399', ink: '#047857', label: ['Agent Orchestration', '(LangGraph)'], ikigai: 'What the world needs', lx: CX, ly: CY + OFFSET + 84 },
+  { id: 'sdlc', x: CX - OFFSET, y: CY, color: '#fbbf24', ink: '#b45309', label: ['Agentic', 'SDLC'], ikigai: 'What I ship for clients', lx: CX - OFFSET - 84, ly: CY }
 ];
 
 const OVERLAPS = [
@@ -100,7 +100,8 @@ const DETAILS = {
   }
 };
 
-const TOUR = ['kg', 'llm', 'agents', 'sdlc', 'kg-llm', 'llm-agents', 'agents-sdlc', 'sdlc-kg', 'privacy', 'public', 'center'];
+
+const TOUR = ['center', 'kg', 'llm', 'agents', 'sdlc', 'kg-llm', 'llm-agents', 'agents-sdlc', 'sdlc-kg', 'privacy', 'public'];
 
 const useNarrow = () => {
   const query = '(max-width: 640px)';
@@ -118,146 +119,152 @@ const useNarrow = () => {
 const Ikigai = () => {
   const narrow = useNarrow();
   const [active, setActive] = useState('center');
+  const [hover, setHover] = useState(null);
   const [touring, setTouring] = useState(() => typeof window !== 'undefined' && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
 
+  // Gentle guided tour; any click hands control to the visitor.
   useEffect(() => {
-    if (!touring) return;
-    const id = setInterval(() => setActive((a) => TOUR[(TOUR.indexOf(a) + 1) % TOUR.length]), 3200);
+    if (!touring || hover) return;
+    const id = setInterval(() => setActive((a) => TOUR[(TOUR.indexOf(a) + 1) % TOUR.length]), 3500);
     return () => clearInterval(id);
-  }, [touring]);
+  }, [touring, hover]);
 
-  const pick = (id) => {
-    setActive(id);
-    setTouring(false);
-  };
+  const pick = (id) => { setActive(id); setTouring(false); };
+  const hoverProps = (id) => ({ onMouseEnter: () => setHover(id), onMouseLeave: () => setHover(null) });
 
-  const involved = (circleId) => active === circleId || ['center', 'privacy', 'public'].includes(active) || active.split('-').includes(circleId);
-  const detail = DETAILS[active];
+  const shown = hover || active;
+  const involved = (circleId) => shown === circleId || ['center', 'privacy', 'public'].includes(shown) || shown.split('-').includes(circleId);
+  const detail = DETAILS[shown];
 
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-950 text-white shadow-2xl overflow-hidden">
-      <div>
-        <div className="relative px-2 pt-4 pb-2 sm:p-6 max-w-4xl mx-auto">
-          <svg viewBox={narrow ? '0 0 600 720' : '0 0 800 600'} className="w-full h-auto select-none" role="img" aria-label="Ikigai diagram: knowledge graphs, LLMs, agent orchestration and agentic SDLC meeting inside an on-premises boundary for private data, connected to public models via Ollama">
-            <defs>
-              <radialGradient id="ikigai-core" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#f0abfc" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#a855f7" stopOpacity="0.15" />
-              </radialGradient>
-            </defs>
-
-            {/* Privacy boundary */}
-            <g onClick={() => pick('privacy')} className="cursor-pointer">
-              <rect x="14" y="14" width="572" height="572" rx="48" fill={active === 'privacy' ? 'rgba(244,114,182,0.06)' : 'transparent'} stroke="#f472b6" strokeOpacity={active === 'privacy' ? 0.9 : 0.45} strokeWidth={active === 'privacy' ? 3 : 2} strokeDasharray="10 8" className="transition-all duration-500" />
-              <rect x="180" y="0" width="240" height="30" rx="15" fill="#0f172a" stroke="#f472b6" strokeOpacity="0.6" />
-              <text x="300" y="20" textAnchor="middle" fontSize="15" fontWeight="600" fill="#f9a8d4">🔒 Private data · on-premises</text>
-            </g>
-
-            {/* Public models via Ollama, outside the boundary */}
-            {(() => {
-              const box = narrow ? { x: 190, y: 622, w: 220, h: 88 } : { x: 636, y: 236, w: 156, h: 128 };
-              const link = narrow ? 'M300,588 L300,620' : 'M588,300 L634,300';
-              const on = active === 'public';
-              return (
-                <g onClick={() => pick('public')} className="cursor-pointer" opacity={on || active === 'center' ? 1 : 0.75}>
-                  <path d={link} stroke="#38bdf8" strokeWidth={on ? 3 : 2} strokeDasharray="5 4" fill="none" />
-                  {[0, 1].map((i) => (
-                    <circle key={i} r="3.5" fill="#38bdf8">
-                      <animateMotion dur="2.4s" begin={`${i * 1.2}s`} repeatCount="indefinite" path={link} keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear" />
-                    </circle>
-                  ))}
-                  <rect x={box.x} y={box.y} width={box.w} height={box.h} rx="16" fill={on ? 'rgba(56,189,248,0.14)' : '#0f172a'} stroke="#38bdf8" strokeOpacity={on ? 1 : 0.6} strokeWidth={on ? 2.5 : 1.5} className="transition-all duration-500" />
-                  <text x={box.x + box.w / 2} y={box.y + (narrow ? 30 : 40)} textAnchor="middle" fontSize="16" fontWeight="700" fill="#e0f2fe">{"☁\u00a0\u00a0Public models"}</text>
-                  <text x={box.x + box.w / 2} y={box.y + (narrow ? 52 : 66)} textAnchor="middle" fontSize="14" fontWeight="600" fill="#7dd3fc">via Ollama</text>
-                  <text x={box.x + box.w / 2} y={box.y + (narrow ? 74 : 98)} textAnchor="middle" fontSize="12" fill="#94a3b8" fontStyle="italic">non-sensitive data</text>
-                </g>
-              );
-            })()}
-
-            {/* Data staying inside the boundary */}
-            {[0, 1, 2].map((i) => (
-              <circle key={i} r="4" fill="#f472b6" opacity="0.8">
-                <animateMotion dur="9s" begin={`${i * 3}s`} repeatCount="indefinite" path="M300,40 H520 Q560,40 560,80 V520 Q560,560 520,560 H80 Q40,560 40,520 V80 Q40,40 80,40 Z" />
-              </circle>
-            ))}
-
-            {/* Four circles */}
-            {CIRCLES.map((c) => (
-              <circle
-                key={c.id}
-                cx={c.x}
-                cy={c.y}
-                r={R}
-                fill={c.color}
-                fillOpacity={involved(c.id) ? 0.2 : 0.06}
-                stroke={c.color}
-                strokeOpacity={involved(c.id) ? 0.95 : 0.35}
-                strokeWidth={active === c.id ? 3 : 1.5}
-                className="cursor-pointer transition-all duration-500"
-                style={{ mixBlendMode: 'screen' }}
-                onClick={() => pick(c.id)}
-              />
-            ))}
-
-            {/* Circle labels */}
-            {CIRCLES.map((c) => (
-              <g key={`l-${c.id}`} onClick={() => pick(c.id)} className="cursor-pointer" opacity={involved(c.id) ? 1 : 0.5}>
-                {c.label.map((line, i) => (
-                  <text key={line} x={c.lx} y={c.ly + (i - (c.label.length - 1) / 2) * 20} textAnchor="middle" fontSize="17" fontWeight="700" fill="#f8fafc">{line}</text>
-                ))}
-                <text x={c.lx} y={c.ly + c.label.length * 11 + 10} textAnchor="middle" fontSize="13.5" fill={c.color} fontStyle="italic" fontWeight="600">{c.ikigai}</text>
-              </g>
-            ))}
-
-            {/* Pairwise overlaps */}
-            {OVERLAPS.map((o) => (
-              <g key={o.id} onClick={() => pick(o.id)} className="cursor-pointer">
-                <circle cx={o.x} cy={o.y} r="38" fill={active === o.id ? 'rgba(255,255,255,0.12)' : 'transparent'} stroke={active === o.id ? '#fff' : 'transparent'} strokeDasharray="3 3" className="transition-all duration-300" />
-                {o.label.map((line, i) => (
-                  <text key={line} x={o.x} y={o.y + (i - 0.5) * 16 + 5} textAnchor="middle" fontSize="13.5" fontWeight="600" fill="#e2e8f0">{line}</text>
-                ))}
-              </g>
-            ))}
-
-            {/* Core */}
-            <g onClick={() => pick('center')} className="cursor-pointer">
-              <circle cx={CX} cy={CY} r={active === 'center' ? 50 : 44} fill="url(#ikigai-core)" className="transition-all duration-500">
-                <animate attributeName="opacity" values="0.75;1;0.75" dur="3s" repeatCount="indefinite" />
-              </circle>
-              <text x={CX} y={CY - 1} textAnchor="middle" fontSize="16" fontWeight="800" fill="#1e1b4b">IKIGAI</text>
-              <text x={CX} y={CY + 15} textAnchor="middle" fontSize="11" fontWeight="600" fill="#3b0764">trustworthy AI</text>
-            </g>
-          </svg>
-          <p className="text-center text-xs text-slate-500 -mt-2">Click a circle, an overlap, the centre, the private boundary or the public models</p>
+    <div className="grid lg:grid-cols-[1.85fr_1fr] gap-6 lg:gap-6 items-center">
+      <div className="relative">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-[18%] top-[12%] w-[46%] h-[46%] rounded-full bg-sky-300/25 blur-3xl" />
+          <div className="absolute right-[20%] top-[30%] w-[42%] h-[42%] rounded-full bg-indigo-300/25 blur-3xl" />
+          <div className="absolute left-[30%] bottom-[8%] w-[40%] h-[40%] rounded-full bg-emerald-300/20 blur-3xl" />
+          <div className="absolute left-[5%] top-[35%] w-[30%] h-[30%] rounded-full bg-amber-200/30 blur-3xl" />
         </div>
+        <svg
+          viewBox={narrow ? '0 0 600 720' : '0 0 800 600'}
+          className="w-full h-auto select-none mx-auto"
+          style={{ maxHeight: 'calc(100vh - 90px)' }}
+          role="img"
+          aria-label="Ikigai diagram: knowledge graphs, LLMs, agent orchestration and agentic SDLC meeting inside an on-premises boundary for private data, connected to public models via Ollama"
+        >
+          <defs>
+            <radialGradient id="ikigai-core" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#f0abfc" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#a855f7" stopOpacity="0.25" />
+            </radialGradient>
+          </defs>
 
-        <div className="border-t border-slate-800 p-6 md:p-8 flex flex-col max-w-4xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: detail.color }}>{detail.tag}</span>
-            <button onClick={() => setTouring((t) => !t)} className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-2.5 py-1 text-xs font-semibold text-slate-300 hover:bg-slate-800" aria-label={touring ? 'Pause tour' : 'Play tour'}>
-              {touring ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />} {touring ? 'Pause tour' : 'Play tour'}
-            </button>
-          </div>
-          <div key={active} className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <h3 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              {active === 'center' && <Sparkles className="w-6 h-6 text-fuchsia-300" />}
-              {active === 'privacy' && <Lock className="w-6 h-6 text-pink-300" />}
-              {active === 'public' && <Cloud className="w-6 h-6 text-sky-300" />}
-              {detail.title}
-            </h3>
-            <p className="text-slate-300 leading-relaxed mb-5">{detail.text}</p>
-            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
-              {detail.points.map((point) => (
-                <li key={point} className="flex items-start gap-2 text-sm text-slate-200">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: detail.color }} />
-                  {point}
-                </li>
+          {/* Private-data boundary */}
+          <g onClick={() => pick('privacy')} {...hoverProps('privacy')} className="cursor-pointer">
+            <rect x="14" y="14" width="572" height="572" rx="48" fill={shown === 'privacy' ? 'rgba(244,114,182,0.07)' : 'transparent'} stroke="#ec4899" strokeOpacity={shown === 'privacy' ? 0.85 : 0.35} strokeWidth={shown === 'privacy' ? 2.5 : 1.5} strokeDasharray="10 8" />
+            <rect x="180" y="0" width="240" height="30" rx="15" fill="#fff" stroke="#ec4899" strokeOpacity="0.4" />
+            <text x="300" y="20" textAnchor="middle" fontSize="16" fontWeight="700" fill="#be185d">🔒 Private data · on-premises</text>
+          </g>
+
+          {/* Public models via Ollama */}
+          {(() => {
+            const box = narrow ? { x: 190, y: 622, w: 220, h: 88 } : { x: 636, y: 236, w: 156, h: 128 };
+            const link = narrow ? 'M300,588 L300,620' : 'M588,300 L634,300';
+            const on = shown === 'public';
+            return (
+              <g onClick={() => pick('public')} {...hoverProps('public')} className="cursor-pointer">
+                <path d={link} stroke="#0ea5e9" strokeWidth="2" strokeDasharray="5 4" fill="none" />
+                {[0, 1].map((i) => (
+                  <circle key={i} r="3.5" fill="#0ea5e9">
+                    <animateMotion dur="2.6s" begin={`${i * 1.3}s`} repeatCount="indefinite" path={link} keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear" />
+                  </circle>
+                ))}
+                <rect x={box.x} y={box.y} width={box.w} height={box.h} rx="16" fill={on ? '#e0f2fe' : '#fff'} stroke="#0ea5e9" strokeOpacity={on ? 1 : 0.5} strokeWidth={on ? 2 : 1.2} />
+                <text x={box.x + box.w / 2} y={box.y + (narrow ? 30 : 40)} textAnchor="middle" fontSize="16" fontWeight="700" fill="#0c4a6e">{"☁\u00a0\u00a0Public models"}</text>
+                <text x={box.x + box.w / 2} y={box.y + (narrow ? 52 : 66)} textAnchor="middle" fontSize="14" fontWeight="600" fill="#0369a1">via Ollama</text>
+                <text x={box.x + box.w / 2} y={box.y + (narrow ? 74 : 98)} textAnchor="middle" fontSize="12" fill="#64748b" fontStyle="italic">non-sensitive data</text>
+              </g>
+            );
+          })()}
+
+          {/* Data staying inside the boundary */}
+          {[0, 1, 2].map((i) => (
+            <circle key={`d${i}`} r="3.5" fill="#ec4899" opacity="0.6">
+              <animateMotion dur="10s" begin={`${i * 3.3}s`} repeatCount="indefinite" path="M300,40 H520 Q560,40 560,80 V520 Q560,560 520,560 H80 Q40,560 40,520 V80 Q40,40 80,40 Z" />
+            </circle>
+          ))}
+
+          {/* Four circles */}
+          {CIRCLES.map((c) => (
+            <circle
+              key={c.id}
+              cx={c.x}
+              cy={c.y}
+              r={R}
+              fill={c.color}
+              fillOpacity={involved(c.id) ? 0.16 : 0.05}
+              stroke={c.color}
+              strokeOpacity={involved(c.id) ? 0.9 : 0.35}
+              strokeWidth={shown === c.id ? 2.5 : 1.5}
+              className="cursor-pointer transition-all duration-300"
+              style={{ mixBlendMode: 'multiply', filter: shown === c.id ? `drop-shadow(0 0 14px ${c.color})` : 'none' }}
+              onClick={() => pick(c.id)}
+              {...hoverProps(c.id)}
+            />
+          ))}
+
+          {CIRCLES.map((c) => (
+            <g key={`l-${c.id}`} onClick={() => pick(c.id)} {...hoverProps(c.id)} className="cursor-pointer" opacity={involved(c.id) ? 1 : 0.55}>
+              {c.label.map((line, i) => (
+                <text key={line} x={c.lx} y={c.ly + (i - (c.label.length - 1) / 2) * 22} textAnchor="middle" fontSize="19.5" fontWeight="800" fill="#0f172a">{line}</text>
               ))}
-            </ul>
+              <text x={c.lx} y={c.ly + c.label.length * 12 + 12} textAnchor="middle" fontSize="15.5" fill={c.ink} fontStyle="italic" fontWeight="700">{c.ikigai}</text>
+            </g>
+          ))}
+
+          {OVERLAPS.map((o) => (
+            <g key={o.id} onClick={() => pick(o.id)} {...hoverProps(o.id)} className="cursor-pointer">
+              <circle cx={o.x} cy={o.y} r="38" fill={shown === o.id ? 'rgba(15,23,42,0.06)' : 'transparent'} stroke={shown === o.id ? '#475569' : 'transparent'} strokeDasharray="3 3" />
+              {o.label.map((line, i) => (
+                <text key={line} x={o.x} y={o.y + (i - 0.5) * 18 + 5} textAnchor="middle" fontSize="15" fontWeight="700" fill="#1e293b">{line}</text>
+              ))}
+            </g>
+          ))}
+
+          <g onClick={() => pick('center')} {...hoverProps('center')} className="cursor-pointer">
+            <circle cx={CX} cy={CY} r={shown === 'center' ? 50 : 44} fill="url(#ikigai-core)" className="transition-all duration-300">
+              <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <text x={CX} y={CY - 1} textAnchor="middle" fontSize="18" fontWeight="800" fill="#1e1b4b">IKIGAI</text>
+            <text x={CX} y={CY + 16} textAnchor="middle" fontSize="12" fontWeight="700" fill="#3b0764">trustworthy AI</text>
+          </g>
+        </svg>
+        <p className="text-center text-sm text-slate-500 mt-1">Hover or tap any part of the diagram</p>
+      </div>
+
+      <div className="rounded-3xl border border-white/80 bg-white/60 backdrop-blur-md shadow-[0_8px_40px_-12px_rgba(79,70,229,0.25)] p-6 md:p-7 h-[40rem] sm:h-[33rem] lg:h-[39rem] overflow-hidden flex flex-col">
+        <div className="flex items-center justify-between gap-3 mb-2">
+          <p className="text-xs font-bold uppercase tracking-wider" style={{ color: detail.color === '#fbbf24' ? '#b45309' : detail.color }}>{detail.tag}</p>
+          <button onClick={() => setTouring((t) => !t)} className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-600 hover:border-indigo-300 hover:text-indigo-700" aria-label={touring ? 'Pause the tour' : 'Play the tour'}>
+            {touring ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />} {touring ? 'Pause tour' : 'Play tour'}
+          </button>
+        </div>
+        <div key={shown} className="animate-in fade-in slide-in-from-bottom-1 duration-300">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="w-11 h-11 flex-shrink-0 rounded-2xl flex items-center justify-center text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${detail.color}, #6366f1)` }}>
+              {shown === 'privacy' ? <Lock className="w-5 h-5" /> : shown === 'public' ? <Cloud className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
+            </span>
+            <h3 className="text-2xl md:text-[1.7rem] font-bold leading-tight text-slate-900">{detail.title}</h3>
           </div>
-          <div className="mt-auto pt-6 flex items-center gap-2 text-xs text-slate-500">
-            <Lock className="w-4 h-4 flex-shrink-0" /> Private data stays on self-hosted, open-weights models; public models are reached via Ollama when the data allows.
-          </div>
+          <p className="text-base md:text-lg text-slate-700 leading-relaxed mb-4">{detail.text}</p>
+          <ul className="space-y-2">
+            {detail.points.map((point) => (
+              <li key={point} className="flex items-start gap-2.5 text-[15px] md:text-base text-slate-700">
+                <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ background: detail.color }} />
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

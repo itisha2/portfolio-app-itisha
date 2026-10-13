@@ -24,12 +24,12 @@ const LOGOS = [
 ];
 
 const DOMAINS = [
-  { name: 'Healthcare', where: 'Optum · Cognizant', icon: HeartPulse, color: 'text-rose-600 bg-rose-50 ring-rose-200' },
+  { name: 'Healthcare', where: 'German Aerospace Center (DLR) · Optum · Cognizant', icon: HeartPulse, color: 'text-rose-600 bg-rose-50 ring-rose-200' },
   { name: 'LegalTech', where: 'CaseMine', icon: Scale, color: 'text-amber-700 bg-amber-50 ring-amber-200' },
-  { name: 'Manufacturing', where: 'DLR · mine&make · FSTI', icon: Factory, color: 'text-slate-700 bg-slate-100 ring-slate-300' },
+  { name: 'Manufacturing', where: 'German Aerospace Center (DLR) · mine&make · FSTI', icon: Factory, color: 'text-slate-700 bg-slate-100 ring-slate-300' },
   { name: 'Safety', where: 'Instant Systems · FactorLab', icon: HardHat, color: 'text-orange-700 bg-orange-50 ring-orange-200' },
-  { name: 'Aerospace', where: 'German Aerospace Center', icon: Rocket, color: 'text-indigo-700 bg-indigo-50 ring-indigo-200' },
-  { name: 'Materials science', where: 'DLR', icon: FlaskConical, color: 'text-emerald-700 bg-emerald-50 ring-emerald-200' }
+  { name: 'Aerospace', where: 'German Aerospace Center (DLR)', icon: Rocket, color: 'text-indigo-700 bg-indigo-50 ring-indigo-200' },
+  { name: 'Materials science', where: 'German Aerospace Center (DLR)', icon: FlaskConical, color: 'text-emerald-700 bg-emerald-50 ring-emerald-200' }
 ];
 
 const KIND_STYLES = {

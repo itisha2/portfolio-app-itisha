@@ -34,6 +34,21 @@ const PAPERS = [
     width: 'max-w-3xl',
     tldr: 'An overview of data-management issues in materials science and engineering, the semantic technologies that can address them, and a roadmap for implementing them in the field.',
     url: 'https://ceur-ws.org/Vol-3760/paper4.pdf'
+  },
+  {
+    id: 'iswc-2026',
+    short: 'ISWC 2026',
+    title: 'Where, How, and What to Ground: Evaluating Ontology-Guided LLM-based Knowledge Graph Construction',
+    authors: 'Itisha Yadav, Roman Klinger and Diana Peters',
+    venue: 'NLP4KGC @ ISWC 2026 · accepted, to be presented in Bari, 25–27 Oct',
+    url: 'https://5thnlp4kgc-code.github.io/5nlp4kgc/pages/accepted-papers.html',
+    linkLabel: 'See the accepted papers at NLP4KGC',
+    summaryNote: 'A short summary until the conference; the full paper follows after ISWC 2026.',
+    abstract: [
+      'LLM-based knowledge graph construction usually injects ontologies straight into prompts, but it was unclear whether this works for the large, complex ontologies used in industry.',
+      'This work compares early, prompt-based grounding with late, embedding-based alignment on real safety data sheets, using both a domain-specific and a generic ontology.',
+      'It provides clear guidance on where, how and with which ontology to ground LLM output, showing that early grounding and domain ontologies give richer, more reliable knowledge graphs with negligible ontology hallucinations.'
+    ]
   }
 ];
 
@@ -132,17 +147,28 @@ const PaperPeek = () => {
                   <span className="text-sm font-semibold text-indigo-200">{paper.venue}</span>
                 </div>
                 <h4 className="text-xl md:text-2xl font-bold leading-snug mb-3">{paper.title}</h4>
-                <p className="text-slate-300 leading-relaxed max-w-4xl"><span className="font-semibold text-emerald-300">TL;DR </span>{paper.tldr}</p>
+                {paper.tldr && <p className="text-slate-300 leading-relaxed max-w-4xl"><span className="font-semibold text-emerald-300">TL;DR </span>{paper.tldr}</p>}
               </header>
               <div className="p-4 md:p-8 bg-slate-50">
+                {paper.abstract ? (
+                  <div className="mx-auto max-w-4xl rounded-xl bg-white shadow-sm ring-1 ring-slate-200 px-6 py-7 md:px-10 md:py-9 font-serif text-slate-900">
+                    <p className="text-slate-600 mb-5">{paper.authors}</p>
+                    <p className="font-bold mb-2">In brief</p>
+                    <div className="space-y-3 text-[16px] leading-relaxed">
+                      {paper.abstract.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
+                    </div>
+                    {paper.summaryNote && <p className="mt-6 font-sans text-xs text-slate-500">{paper.summaryNote}</p>}
+                  </div>
+                ) : (
                 <button onClick={() => setZoomed(paper)} className={`group relative block w-full mx-auto rounded-xl bg-white shadow-sm ring-1 ring-slate-200 overflow-hidden ${paper.width}`} aria-label={`Enlarge the abstract of ${paper.title}`}>
                   <img src={paper.image} alt={`Abstract of ${paper.title}`} onLoad={() => i === current && setHeight(slideRefs.current[i]?.offsetHeight ?? null)} className="w-full h-auto" />
                   <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-slate-900/70 px-2.5 py-1 text-xs font-semibold text-white opacity-0 group-hover:opacity-100 transition-opacity">
                     <Maximize2 className="w-3.5 h-3.5" /> Enlarge
                   </span>
                 </button>
+                )}
                 <a href={paper.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-800">
-                  Read the full paper <ExternalLink className="w-3.5 h-3.5" />
+                  {paper.linkLabel || 'Read the full paper'} <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </article>

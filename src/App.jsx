@@ -31,9 +31,9 @@ const Portfolio = () => {
   }, [heroWords.length]);
 
   const stats = [
-    { value: "10", label: "Years in industry" },
-    { value: "3", label: "Markets: India, Germany and US clients" },
-    { value: "4", label: "Accepted papers in peer-reviewed venues" }
+    { value: "10", suffix: "+", label: "Years in industry" },
+    { value: "3", suffix: "+", label: "Markets: India (onsite), Germany (onsite), US (offsite)" },
+    { value: "4", suffix: "", label: "Accepted papers in international, reputed journals and conferences" }
   ];
 
   const focusAreas = [
@@ -472,7 +472,7 @@ const Portfolio = () => {
         <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-3 md:p-5">
-              <div className="text-2xl md:text-4xl font-bold text-white">{stat.value}<span className="text-indigo-400">+</span></div>
+              <div className="text-2xl md:text-4xl font-bold text-white">{stat.value}<span className="text-indigo-400">{stat.suffix}</span></div>
               <div className="mt-1 text-xs md:text-sm text-slate-400">{stat.label}</div>
             </div>
           ))}
@@ -525,7 +525,7 @@ const Portfolio = () => {
   );
 
   const renderIkigai = () => (
-    <section id="ikigai" className="max-w-6xl mx-auto px-4 pt-20">
+    <section id="ikigai" className="max-w-7xl mx-auto px-4 pt-20">
       <div className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-indigo-600 mb-2"><span className="font-mono mr-2 text-indigo-400">Chapter 01 ·</span>Why I do it</p>
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 flex items-center gap-3">
@@ -851,7 +851,7 @@ const Portfolio = () => {
         {[
           ['IF 3.0', 'Semantic Web journal (Web of Science & Scopus)'],
           ['CORE A', 'ISWC, the flagship Semantic Web conference'],
-          ['4', 'peer-reviewed papers, incl. 1 accepted at ISWC 2026']
+          ['4', 'accepted papers in international, reputed journals and conferences']
         ].map(([value, label]) => (
           <div key={value} className="rounded-xl border border-slate-200 bg-white p-4">
             <div className="text-2xl font-bold text-indigo-600">{value}</div>
