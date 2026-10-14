@@ -457,7 +457,7 @@ const Portfolio = () => {
               { href: '#graph', who: 'Have a question?', go: 'Talk to my digital twin' },
               { href: '#impact', who: 'Want results?', go: 'See my impact' },
               { href: '#beliefs', who: 'Culture fit?', go: 'What I believe' },
-              { href: '#experience', who: 'Short on time?', go: 'Jump to my journey' }
+              { href: '#experience', who: 'Short on time?', go: 'Jump to my work experience' }
             ].map((path) => (
               <a key={path.href} href={path.href} className="group rounded-xl border border-slate-800 bg-slate-900/60 p-4 hover:border-indigo-400/60 hover:bg-slate-900 transition-colors">
                 <span className="block text-sm text-slate-400">{path.who}</span>
