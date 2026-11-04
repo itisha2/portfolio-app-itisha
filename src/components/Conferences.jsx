@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Mic, MapPin, Calendar, ExternalLink, X, ZoomIn, Award, FileText } from 'lucide-react';
+import { Mic, MapPin, Calendar, ExternalLink, X, ZoomIn, Award, FileText, Camera } from 'lucide-react';
 
 // Add a participation certificate by putting a preview image in
 // public/conferences_and_presentations/previews/ and setting `certificate`.
+// Without a certificate, a photo from the event (in .../photos/) can be shown via `photo`.
 const CONFERENCES = [
   {
     id: 'iswc-2026',
@@ -12,9 +13,11 @@ const CONFERENCES = [
     track: 'NLP4KGC Workshop',
     location: 'Bari, Italy',
     date: '25–27 Oct 2026',
-    role: 'Upcoming talk · paper accepted',
+    role: 'Presenter',
     talk: 'Where, How, and What to Ground: Evaluating Ontology-Guided LLM-based Knowledge Graph Construction',
     url: 'https://5thnlp4kgc-code.github.io/5nlp4kgc/pages/accepted-papers.html',
+    photo: '/conferences_and_presentations/photos/iswc-2026-badge.webp',
+    photoAlt: 'ISWC 2026 Bari conference badge for Itisha Yadav, German Aerospace Center, in front of the KG and Neurosymbolic AI workshop screen',
     gradient: 'from-indigo-600 to-sky-500'
   },
   {
@@ -87,6 +90,22 @@ const Conferences = () => {
                     </span>
                   </span>
                 </button>
+              ) : conf.photo ? (
+                <button
+                  onClick={() => setOpenCert(conf)}
+                  className="relative aspect-[4/3] md:aspect-auto md:min-h-[260px] overflow-hidden bg-slate-900 border-b md:border-b-0 md:border-r border-slate-200"
+                  aria-label={`View photo from ${conf.acronym} ${conf.year}`}
+                >
+                  <img src={conf.photo} alt={conf.photoAlt} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[50%_45%]" />
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2.5 py-1 text-xs font-semibold text-white shadow">
+                    <Camera className="w-3.5 h-3.5" /> At the venue
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center bg-slate-950/0 group-hover:bg-slate-950/30 transition-colors">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-slate-900">
+                      <ZoomIn className="w-4 h-4" /> View
+                    </span>
+                  </span>
+                </button>
               ) : (
                 <div className={`flex flex-col items-center justify-center bg-gradient-to-br ${conf.gradient} text-white p-8 min-h-[160px]`}>
                   <span className="text-3xl font-black tracking-tight">{conf.acronym}</span>
@@ -131,14 +150,18 @@ const Conferences = () => {
       </div>
 
       {openCert && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setOpenCert(null)} role="dialog" aria-modal="true" aria-label={`${openCert.name} participation certificate`}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setOpenCert(null)} role="dialog" aria-modal="true" aria-label={openCert.certificate ? `${openCert.name} participation certificate` : `Photo from ${openCert.name}`}>
           <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setOpenCert(null)} className="absolute -top-12 right-0 text-white/80 hover:text-white" aria-label="Close">
               <X className="w-8 h-8" />
             </button>
-            <img src={openCert.certificate} alt={`${openCert.name} participation certificate`} className="w-full max-h-[75vh] object-contain rounded-xl bg-white shadow-2xl" />
+            <img
+              src={openCert.certificate || openCert.photo}
+              alt={openCert.certificate ? `${openCert.name} participation certificate` : openCert.photoAlt}
+              className={`w-full max-h-[75vh] object-contain rounded-xl shadow-2xl ${openCert.certificate ? 'bg-white' : 'bg-slate-900'}`}
+            />
             <div className="mt-4 text-white">
-              <h3 className="font-bold text-lg">Certificate of participation · {openCert.name}</h3>
+              <h3 className="font-bold text-lg">{openCert.certificate ? 'Certificate of participation' : 'At the venue'} · {openCert.name}</h3>
               <p className="text-sm text-slate-300">{openCert.location} · {openCert.date}</p>
             </div>
           </div>
