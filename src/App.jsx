@@ -681,7 +681,7 @@ const Portfolio = () => {
           </div>
           {theses.length > 0 && (
             <div className="mt-8">
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-indigo-300 mb-3">Master's theses I supervised · on elib</p>
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-indigo-300 mb-3">Master's theses I supervised</p>
               <div className="grid md:grid-cols-2 gap-3">
                 {theses.map((t) => (
                   <a key={t.title} href={t.url} target="_blank" rel="noopener noreferrer" className="group flex items-start justify-between gap-3 rounded-xl bg-white/5 ring-1 ring-white/10 p-4 hover:bg-white/10">
