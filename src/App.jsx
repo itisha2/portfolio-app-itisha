@@ -129,7 +129,7 @@ const Portfolio = () => {
         "Developed the software backend with REST APIs (Litestar, OpenAPI) in Docker, self-hosted, quantized open-weights LLMs (Ollama, llama.cpp, SGLang, TGI), Git, CI/CD and pytest.",
         "Contributed to open-source code and an OWL ontology for grounding LLM extraction; mentor junior developers and supervised 4 master's theses on agentic AI and LLM-based extraction."
       ],
-      tags: ["LangGraph", "MCP", "GraphRAG", "LoRA", "VLMs", "LLMOps"]
+      tags: ["Agentic AI", "LLMs", "VLMs", "Knowledge graphs", "Ontologies", "Semantic Web", "MCP", "GraphRAG", "RAG"]
     },
     {
       title: "Research Assistant & AI Developer",
