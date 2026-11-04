@@ -157,12 +157,12 @@ const Portfolio = () => {
     {
       title: "Data Scientist",
       company: "Instant Systems Inc",
-      location: "India · US clients",
+      location: "India · US stakeholders",
       period: "Sep 2019 – Oct 2021",
       domain: "Safety · Procurement",
       highlights: [
         "Built a multi-task deep neural network for incident prediction (TensorFlow, Keras), served in real time on AWS EC2 via FastAPI.",
-        "Fine-tuned BERT for multi-class text classification (82% accuracy) and shipped NER and document-classification REST APIs for enterprise integration."
+        "Fine-tuned BERT for multi-class text classification (82% accuracy) and provided NER and document-classification REST APIs for enterprise integration."
       ],
       tags: ["BERT", "TensorFlow", "FastAPI", "AWS"]
     },
@@ -353,7 +353,7 @@ const Portfolio = () => {
   const chapters = [
     { id: 'ikigai', num: '01', label: 'Ikigai', title: 'Why I do it', ids: ['ikigai', 'beliefs'], subs: [['ikigai', 'My Ikigai'], ['beliefs', 'What I believe']] },
     { id: 'how-i-work', num: '02', label: 'What I do', title: 'How I build', ids: ['how-i-work', 'focus', 'skills'], subs: [['how-i-work', 'Walkthrough'], ['focus', 'Core focus'], ['skills', 'Skills']] },
-    { id: 'graph', num: '03', label: 'Knowledge graphs', title: 'Signature expertise', ids: ['graph', 'ontology'], subs: [['graph', 'Graph-based digital twin'], ['ontology', 'SDS ontology explorer']] },
+    { id: 'graph', num: '03', label: 'Knowledge graphs', title: 'Signature expertise', ids: ['graph', 'ontology'], subs: [['graph', 'Graph-based digital twin'], ['ontology', 'Ontology explorer']] },
     { id: 'experience', num: '04', label: 'Journey', title: 'Where I have been', ids: ['experience', 'leadership', 'projects'], subs: [['experience', 'Experience & education'], ['leadership', 'Leadership & mentoring'], ['projects', 'Projects']] },
     { id: 'impact', num: '05', label: 'Impact', title: 'Results and proof', ids: ['impact', 'recommendations', 'certifications'], subs: [['impact', 'Impact'], ['recommendations', 'Recommendations'], ['certifications', 'Certifications']] },
     { id: 'publications', num: '06', label: 'Research', title: 'Papers and talks', ids: ['publications', 'conferences'], subs: [['publications', 'Publications'], ['conferences', 'Conferences']] },
@@ -416,7 +416,7 @@ const Portfolio = () => {
           </span>
         </p>
         <p className="max-w-2xl text-lg text-slate-400 leading-relaxed mb-10">
-          10 years shipping AI, NLP and LLM systems for MNCs, start-ups and research labs in India, Germany and the US.
+          10 years providing AI, NLP and LLM solutions for MNCs, start-ups and research labs in India, Germany and the US.
         </p>
         <div className="flex flex-wrap gap-3">
           <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 rounded-lg bg-indigo-500 px-5 py-3 font-semibold text-white hover:bg-indigo-400 transition-colors">

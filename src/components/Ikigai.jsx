@@ -10,7 +10,7 @@ const CIRCLES = [
   { id: 'kg', x: CX, y: CY - OFFSET, color: '#38bdf8', ink: '#0369a1', label: ['Knowledge Graphs &', 'Information Extraction'], ikigai: 'What I love', lx: CX, ly: CY - OFFSET - 88 },
   { id: 'llm', x: CX + OFFSET, y: CY, color: '#818cf8', ink: '#4338ca', label: ['Large Language', 'Models'], ikigai: "What I'm great at", lx: CX + OFFSET + 84, ly: CY },
   { id: 'agents', x: CX, y: CY + OFFSET, color: '#34d399', ink: '#047857', label: ['Agent Orchestration', '(LangGraph)'], ikigai: 'What the world needs', lx: CX, ly: CY + OFFSET + 84 },
-  { id: 'sdlc', x: CX - OFFSET, y: CY, color: '#fbbf24', ink: '#b45309', label: ['Agentic', 'SDLC'], ikigai: 'What I ship for clients', lx: CX - OFFSET - 84, ly: CY }
+  { id: 'sdlc', x: CX - OFFSET, y: CY, color: '#fbbf24', ink: '#b45309', label: ['Agentic', 'SDLC'], ikigai: 'What I provide for stakeholders', ikigaiLines: ['What I provide', 'for stakeholders'], lx: CX - OFFSET - 84, ly: CY }
 ];
 
 const OVERLAPS = [
@@ -44,7 +44,7 @@ const DETAILS = {
   },
   sdlc: {
     title: 'Agentic SDLC',
-    tag: 'What I ship for clients',
+    tag: 'What I provide for stakeholders',
     color: '#fbbf24',
     text: 'Using AI agents across the software lifecycle so AI products reach production faster, with engineering discipline intact.',
     points: ['Coding agents & spec-driven development', 'Agent-assisted code review and test generation', 'CI/CD, Docker, pytest, REST APIs (Litestar, FastAPI)', 'Research methodologies as one of the group\'s architects']
@@ -218,7 +218,9 @@ const Ikigai = () => {
               {c.label.map((line, i) => (
                 <text key={line} x={c.lx} y={c.ly + (i - (c.label.length - 1) / 2) * 22} textAnchor="middle" fontSize="19.5" fontWeight="800" fill="#0f172a">{line}</text>
               ))}
-              <text x={c.lx} y={c.ly + c.label.length * 12 + 12} textAnchor="middle" fontSize="15.5" fill={c.ink} fontStyle="italic" fontWeight="700">{c.ikigai}</text>
+              {[].concat(c.ikigaiLines || c.ikigai).map((line, i) => (
+                <text key={line} x={c.lx} y={c.ly + c.label.length * 12 + 12 + i * 18} textAnchor="middle" fontSize="15.5" fill={c.ink} fontStyle="italic" fontWeight="700">{line}</text>
+              ))}
             </g>
           ))}
 
