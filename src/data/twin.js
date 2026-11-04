@@ -158,7 +158,7 @@ const RECRUITER_INTENTS = [
   {
     test: /(achievement|proud|accomplish|biggest win|success stor|best work|highlight of your)/,
     answer: () => ({
-      text: "The work that has meant the most to me, all done with wonderful colleagues: helping shape our LLM and knowledge graph platform at DLR as one of its architects and code reviewers; contributing to open-source code and an ontology so others can ground and validate LLM output too; writing four peer-reviewed papers, including a survey in the Semantic Web journal and a paper accepted at ISWC 2026; and helping a Silicon Valley incubator bring three start-up products to life.",
+      text: "The work that has meant the most to me, all done with wonderful colleagues: helping shape our LLM and knowledge graph platform at DLR as one of its architects; contributing to open-source code and an ontology so others can ground and validate LLM output too; writing four peer-reviewed papers, including a survey in the Semantic Web journal and a paper accepted at ISWC 2026; and helping a Silicon Valley incubator bring three start-up products to life.",
       section: 'impact',
       nodes: ['me', 'dlr', 'sds-onto', 'pub-swj', 'v-swj', 'pub-iswc', 'v-iswc', 'pub-swat', 'pub-semats', 'instant'],
       evidence: [...EDGES.filter((e) => e.s === 'me' && ['dlr', 'sds-onto', 'pub-swj', 'pub-iswc', 'instant'].includes(e.o)), ...out('pub-swj', 'publishedIn'), ...out('pub-iswc', 'publishedIn')]

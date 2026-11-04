@@ -47,14 +47,14 @@ const DETAILS = {
     tag: 'What I ship for clients',
     color: '#fbbf24',
     text: 'Using AI agents across the software lifecycle so AI products reach production faster, with engineering discipline intact.',
-    points: ['Coding agents & spec-driven development', 'Agent-assisted code review and test generation', 'CI/CD, Docker, pytest, REST APIs (Litestar, FastAPI)', 'Coding standards and code reviews as one of the group\'s architects']
+    points: ['Coding agents & spec-driven development', 'Agent-assisted code review and test generation', 'CI/CD, Docker, pytest, REST APIs (Litestar, FastAPI)', 'Research methodologies as one of the group\'s architects']
   },
   'kg-llm': {
     title: 'LLM-built knowledge graphs',
     tag: 'Knowledge Graphs × LLMs',
     color: '#60a5fa',
     text: 'LLMs extract the facts and the ontology keeps them accurate: every triple is grounded to a class and validated before it enters the graph.',
-    points: ['Ontology-guided LLM-based KG construction (accepted at ISWC 2026)', 'GraphRAG over enterprise knowledge', 'Hallucination rate as a first-class metric']
+    points: ['Ontology-guided LLM-based KG construction (accepted at ISWC 2026)', 'GraphRAG over structured data', 'Hallucination rate as a first-class metric']
   },
   'llm-agents': {
     title: 'Agentic workflows',

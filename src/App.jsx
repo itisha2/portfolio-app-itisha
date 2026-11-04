@@ -121,12 +121,12 @@ const Portfolio = () => {
       period: "Aug 2023 – Present",
       domain: "Aerospace · Manufacturing · Materials",
       highlights: [
-        "One of the hands-on architects and core code reviewers of the group's LLM-based information extraction and knowledge graph platform: shape the system design, coding standards and best practices together with the team.",
+        "One of the hands-on architects of the group's LLM-based information extraction and knowledge graph platform: shape the system design, research methodologies and best practices together with the team.",
         "Design, build and deploy agentic AI systems (LangGraph, LangChain) for autonomous document workflows, with tool-calling, agent memory, MCP tools connected to existing back-end services, and human-in-the-loop approval.",
-        "Built RAG and GraphRAG over enterprise knowledge repositories using FAISS, ChromaDB, Neo4j, FalkorDB and Apache Jena (Cypher, SPARQL).",
+        "Built RAG and GraphRAG over structured data using FAISS, ChromaDB, Neo4j, FalkorDB and Apache Jena (Cypher, SPARQL).",
         "Architected data pipelines for LLM fine-tuning (LoRA) in PyTorch on GPUs and HPC clusters; built multi-modal document intelligence with vision-language models and benchmarked 3 document parsers (PaddleOCR, Docling, MinerU).",
         "Helped establish the evaluation standard for LLM systems: benchmark datasets, LLM-as-judge, precision, recall, F1, hallucination rate and error analysis, plus guardrails and observability for accuracy, latency and cost.",
-        "Shipped models to production as REST APIs (Litestar, OpenAPI) in Docker with self-hosted, quantized open-weights LLMs (Ollama, llama.cpp, SGLang, TGI), Git, CI/CD and pytest.",
+        "Developed the software backend with REST APIs (Litestar, OpenAPI) in Docker, self-hosted, quantized open-weights LLMs (Ollama, llama.cpp, SGLang, TGI), Git, CI/CD and pytest.",
         "Contributed to open-source code and an OWL ontology for grounding LLM extraction; mentor junior developers and supervised 4 master's theses on agentic AI and LLM-based extraction."
       ],
       tags: ["LangGraph", "MCP", "GraphRAG", "LoRA", "VLMs", "LLMOps"]
@@ -648,7 +648,7 @@ const Portfolio = () => {
   // Leadership signals from my CV. Supervised theses appear here once their elib links are added.
   const leadership = [
     { icon: Mortarboard, title: "Supervised 4 master's theses", text: "Guided master's students from research question to results, on agentic AI and LLM-based information extraction, with German partner universities." },
-    { icon: Crown, title: 'Co-architect and core code reviewer', text: "Shape the system design, coding standards and best practices of my group's LLM-based information extraction and knowledge graph platform, together with the team." },
+    { icon: Crown, title: 'Co-architect', text: "Shape the system design, research methodologies and best practices of my group's LLM-based information extraction and knowledge graph platform, together with the team." },
     { icon: UserCheck, title: 'Mentor to junior developers', text: 'Coach developers and students through real projects, code reviews and reusable engineering patterns.' },
     { icon: ClipboardCheck, title: 'Raise the quality bar', text: 'Helped establish benchmark datasets, LLM-as-judge and error analysis as the way LLM systems are measured in the group.' },
     { icon: Presentation, title: 'Bridge to business and partners', text: 'Work with business users, project partners and leadership to turn requirements into reliable, secure AI solutions.' }
@@ -903,10 +903,7 @@ const Portfolio = () => {
   const renderContact = () => (
     <section id="contact" className="bg-gradient-to-br from-indigo-600 to-violet-700 text-white">
       <div className="max-w-6xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's build reliable AI products together</h2>
-        <p className="text-indigo-100 text-lg max-w-2xl mx-auto mb-10">
-          Open to Senior Applied AI Engineer, LLM Engineer and AI Architect roles.
-        </p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-10">Let's build reliable AI products together</h2>
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-indigo-700 hover:bg-indigo-50 transition-colors">
             <Mail className="w-4 h-4" /> {EMAIL}
