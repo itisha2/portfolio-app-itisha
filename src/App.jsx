@@ -405,10 +405,6 @@ const Portfolio = () => {
       <div className="relative max-w-6xl mx-auto px-4 pt-28 pb-16 md:pt-36 md:pb-20">
         <div className="flex flex-col-reverse md:flex-row md:items-center gap-10 md:gap-14">
         <div className="flex-1">
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-4 py-1.5 text-sm text-indigo-200 mb-6">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          Open to Senior Applied AI roles
-        </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">Itisha Yadav</h1>
         <p className="text-xl md:text-2xl text-slate-300 font-medium mb-6">
           Senior Applied AI Engineer · <span className="text-indigo-300">LLMs, Agentic AI, RAG & Knowledge Engineering</span>
